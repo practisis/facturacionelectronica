@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PractiFactura 1.0</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="cordova.js"></script>
+	</head>
+    <body>      
+<div class="row" style="display:block;" id="fadeRow" >
+        <div class="col-md-3" >
+        </div>
+        <div class="col-md-6">
+        <div class="modal-content text-center" id="contentLogin" style="min-height: 263px;">
+            <div class="modal-header" style="background-image: url(http://www.practipos.com/img/parallax-bg.jpg);padding-top: 35px;
+        padding-bottom: 35px;
+        color: #fff;
+        border-radius: 4px 4px 0 0;
+        background-position: center top;font-size: 40px;    padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+        min-height: 16.42857143px;">
+              NubePOS
+            </div>
+            <div class="modal-body" style="min-height: 266px;">
+             <div id="divdatoslogin" style="overflow:auto;">
+              <h3 style="-webkit-margin-before: 1em;
+        -webkit-margin-after: 1em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;">Ingresa a tu sistema y <span style="color:#0893d2;">Empecemos!</span></h3>
+              <span class="subtitle" style=" margin-bottom: 36px; margin-top: 0;font-size:16px;color:#9a9a9a;">Ingresa tus datos</span><br><br>
+             
+              <form method="post" class="contact-form form-validate4" id="myloginform" novalidate="novalidate">
+                <div class="form-group">
+                  <input class="form-control input-lg" type="text" id="user2" name="usuario" placeholder="Usuario" required="" value="" autocomplete="off" aria-required="true">
+                </div>
+                <div class="form-group">
+                  <input type="password" id="pass2" name="mipass" value="" class="form-control input-lg" placeholder="Password" required="" autocomplete="off" aria-required="true">
+                </div>
+                <div class="form-group">
+                    <a data-toggle="modal" data-target="#recuperarPass" href="">¿Olvidaste tu contraseña?</a><br/>  <a data-toggle="modal" data-target="#recuperarPass" href="javascript:void(0);" onclick="nuevaCuenta()">¿Crear Cuenta NubePOS?</a> 
+                </div>
+               <button class="btn btn-primary"  id="btnvalida2" type="button" onclick="validateToken();">Login</button>
+              </form>
+              </div>
+              
+              <div id="varias">
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-3" >
+        <div id="mensaje2"></div>
+        <input id="user" type="hidden" />
+        <input id="pass" type="hidden" />
+        </div>
+        <br><br><br><br><br><br><br><br><br>
+      </div> <!--End row -->
+	
+	<script>
+	function nuevaCuenta () {
+	location.href="index.html"; 	
+	}
+	
+	// consulta los datos *****************
+	function validateToken () {
+	var usuario=$("#user2").val();
+	var password=$("#pass2").val();
+		$.ajax({
+  method: "POST",
+  url: "http://practisis.net/practifactura/api.php",
+  data: { user: usuario, pass: password,dedonde: "login" }
+})
+  .done(function( msg ) {
+    //alert( "Data Saved: " + msg );
+	if (msg=="si"){
+		location.href="run.html";
+	}else {
+		alert ("no se encontro");
+	}
+	
+	console.log(msg);
+  });	
+	}
+	//***********************************************
+	</script>
+	
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
