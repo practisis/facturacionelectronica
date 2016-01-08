@@ -68,6 +68,13 @@
 	function validateToken () {
 	var usuario=$("#user2").val();
 	var password=$("#pass2").val();
+	
+	
+	if (usuario=="" || password =="" ){
+	alert ("Ingrese el usuario y el password.");
+	return;
+	} 
+	
 		$.ajax({
   method: "POST",
   url: "http://practisis.net/practifactura/api.php",
@@ -75,10 +82,10 @@
 })
   .done(function( msg ) {
     //alert( "Data Saved: " + msg );
-	if (msg=="si"){
-		location.href="run.html";
+	if (msg=="no"){
+		alert ("El usuario o la contraseña están incorrectos. ");
 	}else {
-		alert ("no se encontro");
+		location.href="run.html?id="+msg;
 	}
 	
 	console.log(msg);

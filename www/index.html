@@ -36,43 +36,21 @@
         -webkit-margin-after: 1em;
         -webkit-margin-start: 0px;
         -webkit-margin-end: 0px;">Solicita tu NubePOS  </h3>
-             <!-- <span class="subtitle" style=" margin-bottom: 36px; margin-top: 0;font-size:16px;color:#9a9a9a;">No necesitas tarjeta de crédito</span><br><br>-->
-             
-             <!--  <div class="form-group">
-              <input class="form-control input-lg" type="text" name="nombres" id="nombres" placeholder="Tu nombre completo" required="" autocomplete="off">
-            </div>-->
+
             <div class="form-group">
               <input type="form-control input-lg" name="empresa"  class="form-control input-lg" id="newEmpresa" placeholder="Nombre de tu Negocio" required="" autocomplete="off">
             </div>
 
             <div class="form-group">
               <input class="form-control input-lg" type="email" name="email" id="newEmail" placeholder="E-mail" required="" autocomplete="off">
-            </div>
+            </div>          
 
-           
-
-<!--
-            <div class="form-group">
-              <input type="text" name="telefono" id="telefono" class="form-control input-lg" placeholder="Teléfono" required="" autocomplete="off">
-            </div>
-        -->
          <div class="form-group">
               <input type="password" name="pass" id="newPass"  class="form-control input-lg" placeholder="Ingresa una contraseña" required="" autocomplete="off">
             </div>
              <div class="form-group">
               <input type="password" name="pass" id="newConfirm"  class="form-control input-lg" placeholder="Confirma tu contraseña" required="" autocomplete="off">
             </div>
-            <!--
-            <div class="form-group">
-              <input type="form-control input-lg" name="empresa" id="empresa" class="form-control input-lg" placeholder="Nombre de tu Negocio" required="" autocomplete="off">
-            </div>
-        -->
-
-           <!-- <div class="form-group">
-              <textarea style="height: 80px;" id="observacion" name="observacion" class="form-control input-lg" placeholder="Observaciones" required="" autocomplete="off"></textarea>
-            </div>
-        -->
-            
             
             <div class="form-group">
                     <a data-toggle="modal" data-target="#recuperarPass" onclick="mostrarSignIn();" href="">¿Ya tienes cuenta NubePOS?</a><br/> 
@@ -97,10 +75,41 @@
       </div> <!--End row -->
 	<script>
 	function mostrarSignIn () {
-	location.href="login.html"; 
-	
-	
+	location.href="login.html"; 		
 	}
+	// consulta los datos *****************
+	function registrarUser () {
+	var usuario=$.trim($("#newEmail").val());
+	var password=$.trim($("#newPass").val());
+	var confirm=$.trim($("#newConfirm").val());
+	var laempresa=$.trim($("#newEmail").val());
+	if (usuario=="" || laempresa =="" || password =="" ){
+	alert ("Ingrese todos los datos. Estos son obligatorios.");
+	return;
+	} 
+	
+	if (password!=confirm ){
+	alert ("El password es insorrecto. Confirme que el password sea el mismo  ");
+	return;
+	} 
+	
+		$.ajax({
+  method: "POST",
+  url: "http://practisis.net/practifactura/api.php",
+  data: { user: usuario, pass: password,empresa:laempresa,dedonde: "index" }
+})
+  .done(function( msg ) {
+    //alert( "Data Saved: " + msg );
+	if (msg=="si"){
+		location.href="run.html";
+	}else {
+		alert ("Usted ya tiene una cuenta.");
+	}
+	
+	console.log(msg);
+  });	
+	}
+	//***********************************************
 	</script>
 	
     <script src="js/jquery.min.js"></script>

@@ -7,6 +7,8 @@
     <title>PractiFactura 1.0</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="cordova.js"></script>
+	 <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>	
 	</head>
     <body>      
 <div id="fadeCloud" style="display:none;width:100%;height:100%;position:absolute;left:0px;top:0px;background:rgba(255,255,255,0.7);z-index:90000;"></div>
@@ -49,7 +51,78 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<div id="main2" Align="center" style="width:100%;"> 
-								hola22
+							<!--   Este es el codigo del historial de facturacion  -->	
+							<div id="mainDiv" style="margin: 0px; padding: 0px; width:100%; height: 800px; background-color: #ffffff; font-size:14px; color:#404041;">
+        <table style="width:100%;" border="0" cellpadding="10px" class="table table-striped">
+            <tbody><tr><td colspan="3"><h3>Historial de Facturas</h3></td></tr>
+            <tr>
+                <td style="text-align:center; vertical-align:middle; width: 550px;">
+                    <table align="center" style="text-align:center;margin-left: 0px; margin-right: auto;" border="0" cellpadding="4px" cellspacing="10px">
+                        <tbody><tr>
+                            <td style="vertical-align:middle;">
+                                <input placeholder="Desde" type="text" class="form-control hasDatepicker" id="fechadesde" name="fechadesde" style="margin:5px;" readonly="">
+                            </td>
+                            <!--<td style='vertical-align:middle;'>
+                                <input placeholder='Hasta' type="text" class='form-control' id="fechahasta" name="fechahasta" style='margin:5px;'/>
+                            </td>-->
+                            <td style="vertical-align:middle;">
+                                <button type="button" class="btn btn-primary" onclick="page=0; getSearch(); return false;">Filtrar</button>
+                            </td>
+
+                        </tr>
+                    </tbody></table>
+                </td>
+                <td style="text-align:right; vertical-align:middle; width: 50px;">
+                    <table align="center" style="text-align:center;margin-left: 0px; margin-right: auto;" border="0" cellpadding="4px" cellspacing="10px">
+                        <tbody><tr>
+                            <td style="vertical-align:middle;width: 20%;">
+                            </td>
+                            <!--<td style='vertical-align:middle;'>
+                                <input placeholder='Hasta' type="text" class='form-control' id="fechahasta" name="fechahasta" style='margin:5px;'/>
+                            </td>-->
+                            <td style="vertical-align:middle;">
+                                  <button class="btn btn-primary" style="width:200px;margin-right:15px;" id="imprimirDetalle" type="button">Imprimir Cierre de Caja</button>
+                            </td>
+
+                            <td style="vertical-align:middle;">
+                                <b>TOTAL$</b> <span id="totalencabezado">2.74</span>
+                            </td>
+                            <td style="vertical-align:middle;width: 20%;">
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+			
+            <tr>
+                <td colspan="2">
+                    <div id="detailDiv" style="height:100%; padding-top:20px; margin:0px; font-size:15px;">
+					<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th>Anulada</th><th style="text-align:right;">Total US</th></tr>
+					
+					<tr onclick="EditarFactura(1);"><td>07/01/2016 18:19:50</td><td>Consumidor Final</td><td>9999999999999</td><td>000000001</td><td>No</td><td style="text-align:right;">2.74</td></tr>
+					<tr onclick="EditarFactura(1);"><td>07/01/2016 18:19:50</td><td>Consumidor Final</td><td>9999999999999</td><td>000000001</td><td>No</td><td style="text-align:right;">2.74</td></tr>
+					<tr onclick="EditarFactura(1);"><td>07/01/2016 18:19:50</td><td>Consumidor Final</td><td>9999999999999</td><td>000000001</td><td>No</td><td style="text-align:right;">2.74</td></tr>
+					
+					<tr><td></td><td></td><td></td><td></td><td style="text-align: left;"><b>TOTAL$</b></td><td style="text-align:right;"><b>2.74</b></td></tr></tbody></table></div>
+                </td>
+            </tr>
+			
+            <tr>
+                <td colspan="2" style="background-color: #FFFFFF;">
+                    <div id="detailDiva" style="height:100%;padding-top:20px;font-size:15px;background-color: #FFFFFF;"><div style="background-color: #FFFFFF;"><table align="right" class="table" style="width: 25%;"><tbody><tr><th colspan="2" style="text-align:center;">Formas de Pago</th></tr><tr><td style="text-align: right;">Efectivo$</td><td style="text-align:right;">2.74</td></tr><tr><td style="text-align: right;">Tarjetas$</td><td style="text-align:right;">0.00</td></tr><tr><td style="text-align: right;">Cheques$</td><td style="text-align:right;">0.00</td></tr><tr><td style="text-align: right;">CxC$</td><td style="text-align:right;">0.00</td></tr></tbody></table><div></div></div></div>
+                </td>
+            </tr>
+            <tr style="display: none;">
+                <td colspan="2" style="text-align:center;">
+                    <ul class="pagination paginacion-lg" id="paginacion"><li onclick="CambiarPagina(-1);"><span class="enabled" id="atras">«</span></li><li class="active" onclick="CambiarPagina(0);"><span class="enabled">1</span></li><li onclick="CambiarPagina(-2);"><span class="enabled" id="adelante">»</span></li></ul>
+                    <input id="totalpags" style="display:none;">
+                </td>
+            </tr>
+        </tbody></table>
+</div>
+							<!--  Fin Este es el codigo del historial de facturacion  -->	
+								
+								
 								</div>	
 							</div>
 						</div>
@@ -77,14 +150,40 @@ function envia(donde){
 			}
 			else
 			{
+			$.ajax({
+				  method: "POST",
+				  url: "http://practisis.net/practifactura/api.php",
+				  data: { user: "", pass: "",dedonde: "historial",empresahis: miidempresa }
+				})
+				  .done(function( msg ) {
+					//alert( "Data Saved: " + msg );
+					if (msg=="no"){
+						alert ("El usuario o la contraseña están incorrectos. ");
+					}else {
+					 
+					$('#detailDiv').html('<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th>Anulada</th><th style="text-align:right;">Total US</th></tr>'+msg+'</table>');
+						//location.href="run.html?id="+msg;
+					}
+					
+					console.log(msg);
+				});	
+  
+			
 				$("#facturas").hide();
 				$("#historial").show();
 			}
 			
 }
 	
+	
+	
+		var url=document.URL; 
+		var miidempresa= url.substring(url.indexOf("id=")+3);
+		//$('#detailDiv').html(msg);
+		alert (miidempresa); 
+		
+	
    </script>	
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+   
   </body>
 </html>
