@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PractiFactura 1.0</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="css/jquery.mobile-1.4.2.min.js"></script>
+	<script type="text/javascript" src="css/bootstrap.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	
 	</head>
     <body>      
 
@@ -79,24 +82,29 @@
 	}
 	// consulta los datos *****************
 	function registrarUser () {
-	var usuario=$.trim($("#newEmail").val());
-	var password=$.trim($("#newPass").val());
+	var email=$.trim($("#newEmail").val());
+	var pass=$.trim($("#newPass").val());
 	var confirm=$.trim($("#newConfirm").val());
-	var laempresa=$.trim($("#newEmail").val());
-	if (usuario=="" || laempresa =="" || password =="" ){
+	var empresa=$.trim($("#newEmpresa").val());
+	var nombre='';
+	var celular='';
+	var pais=1;
+	var versiones=9;
+
+	if (email=="" || empresa =="" || pass =="" ){
 	alert ("Ingrese todos los datos. Estos son obligatorios.");
 	return;
 	} 
 	
-	if (password!=confirm ){
-	alert ("El password es insorrecto. Confirme que el password sea el mismo  ");
+	if (pass!=confirm ){
+	alert ("El password es incorrecto. Confirme que el password sea el mismo  ");
 	return;
 	} 
 	
 		$.ajax({
   method: "POST",
-  url: "http://practisis.net/practifactura/api.php",
-  data: { user: usuario, pass: password,empresa:laempresa,dedonde: "index" }
+  url: "http://practifactura.com/registro/registro.php",
+  data: { email: email, pass: pass,empresa:empresa,nombre:nombre,celular:celular,pais:pais,versiones:versiones }
 })
   .done(function( msg ) {
     //alert( "Data Saved: " + msg );
