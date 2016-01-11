@@ -8,57 +8,48 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="cordova.js"></script>
 	</head>
-    <body>      
+      <body style="background-color:#1970AA;">      
+	<br/>
+<div class="container-fluid">
 <div class="row" style="display:block;" id="fadeRow" >
-        <div class="col-md-3" >
+        <div class="col-md-2" >
         </div>
-        <div class="col-md-6">
-        <div class="modal-content text-center" id="contentLogin" style="min-height: 263px;">
-            <div class="modal-header" style="background-image: url(http://www.practipos.com/img/parallax-bg.jpg);padding-top: 35px;
-        padding-bottom: 35px;
-        color: #fff;
-        border-radius: 4px 4px 0 0;
-        background-position: center top;font-size: 40px;    padding: 15px;
-        border-bottom: 1px solid #e5e5e5;
-        min-height: 16.42857143px;">
-              NubePOS
-            </div>
-            <div class="modal-body" style="min-height: 266px;">
-             <div id="divdatoslogin" style="overflow:auto;">
-              <h3 style="-webkit-margin-before: 1em;
-        -webkit-margin-after: 1em;
-        -webkit-margin-start: 0px;
-        -webkit-margin-end: 0px;">Ingresa a tu sistema y <span style="color:#0893d2;">Empecemos!</span></h3>
-              <span class="subtitle" style=" margin-bottom: 36px; margin-top: 0;font-size:16px;color:#9a9a9a;">Ingresa tus datos</span><br><br>
-             
+		
+        <div class="col-md-8">
+		<div style="width:100%; text-align:center;">
+		    <img src="img/practifactura.png" width="220px;"/>
+			</div>
+			<br/>
+		 <h5 style="color:#FEFFFB">Ingresa a tu sistema y empecemos!</h5>            
               <form method="post" class="contact-form form-validate4" id="myloginform" novalidate="novalidate">
                 <div class="form-group">
-                  <input class="form-control input-lg" type="text" id="user2" name="usuario" placeholder="Usuario" required="" value="" autocomplete="off" aria-required="true">
+                  <input class="form-control input" type="text" id="user2" name="usuario" placeholder="Usuario" required="" value="" autocomplete="off" aria-required="true">
                 </div>
                 <div class="form-group">
-                  <input type="password" id="pass2" name="mipass" value="" class="form-control input-lg" placeholder="Password" required="" autocomplete="off" aria-required="true">
+                  <input type="password" id="pass2" name="mipass" value="" class="form-control input" placeholder="Password" required="" autocomplete="off" aria-required="true">
                 </div>
                 <div class="form-group">
-                    <a data-toggle="modal" data-target="#recuperarPass" href="">¿Olvidaste tu contraseña?</a><br/>  <a data-toggle="modal" data-target="#recuperarPass" href="javascript:void(0);" onclick="nuevaCuenta()">¿Crear Cuenta NubePOS?</a> 
+                    <a data-toggle="modal" data-target="#recuperarPass" href="javascript:void(0);" onclick="nuevaCuenta()" style="color:#FBF363">¿Crear Nueva Cuenta PractiFactura?</a> 
                 </div>
-               <button class="btn btn-primary"  id="btnvalida2" type="button" onclick="validateToken();">Login</button>
+               <button class="btn btn-info"  id="btnvalida2" type="button" onclick="validateToken();">Login</button>
               </form>
-              </div>
               
-              <div id="varias">
-              </div>
+              
+              <div id="mensaje2"></div>
+				<input id="user" type="hidden" />
+				<input id="pass" type="hidden" />
             </div>
-          </div>
-        </div>
+			<br/>
+			<br/>
+			<br/>
+		  <div style="color:#FEFFFB; font-size:11px; text-align:center;">Un producto de Practisis S.A. - 2016.</div>     
         
-        <div class="col-md-3" >
-        <div id="mensaje2"></div>
-        <input id="user" type="hidden" />
-        <input id="pass" type="hidden" />
+        
+        <div class="col-md-2" >
+        
         </div>
-        <br><br><br><br><br><br><br><br><br>
       </div> <!--End row -->
-	
+	</div>
 	<script>
 	function nuevaCuenta () {
 	location.href="index.html"; 	
