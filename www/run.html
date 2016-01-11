@@ -49,32 +49,41 @@
 						<div class="row">
 							<div class="col-md-3" >
 							</div>
-							<div class="col-md-6">
-							
+							<div class="col-md-6">						
 								<div id="main" Align="center" style="width:100%;"> 
 								 <div class="form-group">
 									<input class="form-control input-lg" type="cedula" name="cedula" id="cedula" placeholder="Cédula" required="" autocomplete="off">
-								<button type="button" class="btn btn-primary" onclick="envia('factura'); return false;">Consulta</button>
-								</div>     
+									<button type="button" class="btn btn-primary" onclick="envia('factura'); return false;">Consulta</button>
+								</div>  
 								</div>	
 							</div>
 						</div>
+						
+						<div class="row" id="lbldatos">
+							<div class="col-md-3" >
+							</div>
+							<div class="form-group">
+								<a data-toggle="modal" data-target="#recuperarPass" href="javascript:void(0);" onclick="nuevaCuenta()">  Ingrese los Datos para continuar con su factura. </a> 
+							</div>
+						</div>
+							
 						<div class="row">
 							<div class="col-md-3" >
 							</div>
-							<div class="col-md-6">
-							
+							<div class="col-md-6">							
 								<div id="datos" Align="center" style="width:100%;"> 
-								 <div class="form-group">
+									<div class="form-group">
 									<input class="form-control input-lg" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off">
 									<input class="form-control input-lg" type="apellido" name="apellido" id="apellido" placeholder="Apellido" required="" autocomplete="off">
 									<input class="form-control input-lg" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off">
-									<input class="form-control input-lg" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off">								
-								
-								</div> 
-															
-								</div>	
-								<button type="button" class="btn btn-primary" onclick="verfacturas(); return false;">Consulta</button>	
+									<input class="form-control input-lg" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off">															
+									</div> 															
+								</div>														
+								<div id="main" Align="center" style="width:100%;"> 
+									<div class="form-group">
+										<button type="button" class="btn btn-primary" id="btningresadatosc" onclick="envia('factura'); return false;">Continuar</button>
+									</div>  
+								</div>									
 							</div>
 						</div>
 					</div>
@@ -159,10 +168,14 @@ function envia(donde){
 				  .done(function( msg ) {
 					if (msg=="no"){
 						$('#datos').html('<div class="form-group"><input class="form-control input-lg" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"><input class="form-control input-lg" type="apellido" name="apellido" id="apellido" placeholder="Apellido" required="" autocomplete="off"><input class="form-control input-lg" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off" ><input class="form-control input-lg" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div> ');
+						$("#btningresadatosc").show();
+						$("#lbldatos").show();
 						//alert ("Hubo un problema. Recargue la pagina.");
 					}else {
 					 //alert (msg);
 					 $('#datos').html(msg);
+					 $("#btningresadatosc").hide();
+					 $("#lbldatos").hide();
 					//$('#detailDiv').html('<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th>Anulada</th><th style="text-align:right;">Total US</th></tr>'+msg+'</table>');
 					}					
 					console.log(msg);
