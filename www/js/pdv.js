@@ -76,15 +76,21 @@ function validar(){
   var subci = parseFloat(document.getElementById('subci').value);
   var iva = parseFloat(document.getElementById('iva').value);
   var total = parseFloat(document.getElementById('total').value);
-  var idcliente = 77;//document.getElementById('idcliente').value;
- 
+  
+  if ($("#idcliente").length > 0 ){
+  var idcliente = $('#idcliente').val();
+  }else{
+   var idcliente=$('.idcliente').val();
+  }
+
   sutotal = subsi+subci;
   sutotalneto = sutotal;
   var establecimiento ='';// document.getElementById('establecimiento').value;
   var caja = ''; //document.getElementById('caja').value;
-  var factura_no = 885;//document.getElementById('factura_no').value;
+  var factura_no = document.getElementById('factura_no').value;
   facturacion = idcliente+'|'+total+'|'+sutotal+'|'+establecimiento+'|'+caja+'|'+factura_no+'|'+sutotalneto+'|'+subci+'|'+iva;
-
+	
+	
   var d = document.getElementById('tablaconsumos').getElementsByTagName('input');
     var consumos = '';
   	for ( var i = 0; i < d.length; i++ ) {

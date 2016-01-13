@@ -39,6 +39,7 @@
 					<ul class="nav navbar-nav">
 						<li onclick="envia('factura')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-line-chart'></span>&nbsp;Facturar<span class="sr-only">(current)</span></a></li>
 						<li onclick="envia('historial')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-shopping-cart'></span>&nbsp;Historial<span class="sr-only">(current)</span></a></li>
+						<li onclick="envia('configurar')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-shopping-cart'></span>&nbsp;Configurar<span class="sr-only">(current)</span></a></li>
 					</ul>
 			
 				</div>
@@ -70,7 +71,7 @@
 							</div>
 						</div>
 						
-						<input class="idcliente" type="text">
+						<input class="idcliente" type="hidden">
 							
 						<div class="row">
 							<div class="col-md-3" >
@@ -111,7 +112,7 @@
 															<td>
 																<div class="input-group">
 																	<span class="input-group-addon" id="sizing-addon4" style="width: 50%;">Numero de Factura</span>
-																	<input type="text" name="factura_no" id="factura_no" class="form-control" aria-describedby="sizing-addon4" value="001-001-00004587"/>
+																	<input type="text" name="factura_no" id="factura_no" class="form-control" aria-describedby="sizing-addon4" value="0004587"/>
 																</div>
 															</td>										
 														</tr>
@@ -290,8 +291,8 @@ function envia(donde){
 						
 				$("#facturas").show();
 				$("#historial").hide();
-			}
-			else
+			}else if(donde=='configurar'){
+			}else
 			{                         //**********************este corresponde al historial de las facturas*****************************************************//
 			$.ajax({
 				  method: "POST",
