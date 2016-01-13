@@ -38,16 +38,16 @@ function totales(){
     var valoriva = 0.12;
     var valortotaliva = 0;
     var total = 0;
-    var d = document.getElementById('detallefactura').getElementsByTagName('input');
+    var d = document.getElementById('tablaconsumos').getElementsByTagName('input');
     var totciva = 0;
     var totsiva = 0;
   	for ( var i = 0; i < d.length; i++ ) {
       var ww=d[i].id;
       var tiva = ww.substr(0,4);
-      //alert(tiva);
+      
       if(tiva=='subt'){
         var quien = ww.substr(4);
-        //alert(quien)
+        
         if(document.getElementById('subt'+quien).value != ''){
           var permiso = document.getElementById('iva'+quien).checked;
           if(permiso==true){
@@ -68,6 +68,7 @@ function totales(){
 
 }
 function validar(){
+
   var facturacion = '';
   var sutotal = 0;
   var sutotalneto = 0;
@@ -75,15 +76,16 @@ function validar(){
   var subci = parseFloat(document.getElementById('subci').value);
   var iva = parseFloat(document.getElementById('iva').value);
   var total = parseFloat(document.getElementById('total').value);
-  var idcliente = document.getElementById('idcliente').value;
+  var idcliente = 77;//document.getElementById('idcliente').value;
+ 
   sutotal = subsi+subci;
   sutotalneto = sutotal;
-  var establecimiento = document.getElementById('establecimiento').value;
-  var caja = document.getElementById('caja').value;
-  var factura_no = document.getElementById('factura_no').value;
+  var establecimiento ='';// document.getElementById('establecimiento').value;
+  var caja = ''; //document.getElementById('caja').value;
+  var factura_no = 885;//document.getElementById('factura_no').value;
   facturacion = idcliente+'|'+total+'|'+sutotal+'|'+establecimiento+'|'+caja+'|'+factura_no+'|'+sutotalneto+'|'+subci+'|'+iva;
 
-  var d = document.getElementById('detallefactura').getElementsByTagName('input');
+  var d = document.getElementById('tablaconsumos').getElementsByTagName('input');
     var consumos = '';
   	for ( var i = 0; i < d.length; i++ ) {
       var ww=d[i].id;
@@ -91,7 +93,7 @@ function validar(){
       //alert(tiva);
       if(tiva=='subt'){
         var quien = ww.substr(4);
-        //alert(quien)
+        //alert(quien);
         if(document.getElementById('subt'+quien).value != ''){
           var descuento = 0;
           var cantidad = document.getElementById('cant'+quien).value;
@@ -120,7 +122,7 @@ function validar(){
       }
       }
 
-  if(establecimiento == ''){
+  /*if(establecimiento == ''){
       $('.alert-danger').not('#uploaderrors').slideUp();
       $('.alert-danger').html('<b>Parece que te has equivocado!</b><br/>Debe ingresar el establecimiento para la factura.');
       $('.alert-danger').not('#uploaderrors').slideDown();
@@ -136,7 +138,7 @@ function validar(){
       	scrollTop : 0
       });
       setTimeout(function(){ $('.alert-danger').not('#uploaderrors').slideUp(); }, 3000);
-  }else if(factura_no == ''){
+  }else */if(factura_no == ''){
       $('.alert-danger').not('#uploaderrors').slideUp();
       $('.alert-danger').html('<b>Parece que te has equivocado!</b><br/>Debe ingresar el número de factura.');
       $('.alert-danger').not('#uploaderrors').slideDown();
@@ -145,11 +147,11 @@ function validar(){
       });
       setTimeout(function(){ $('.alert-danger').not('#uploaderrors').slideUp(); }, 3000);
   }else{
-
+	
     $.ajax({
 		type: 'POST',
 		url: "http://practisis.net/practifactura/api.php",
-		data: 'que=1&facturacion='+facturacion+'&consumos='+consumos,
+		data: 'empresahis='+miidempresa+'&que=1&facturacion='+facturacion+'&consumos='+consumos,
 		success: function(response){
 		  alert(response);
           var res = response.split("|");
