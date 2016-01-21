@@ -22,7 +22,7 @@
 	 
 	
 	</head>
-    <body>      
+    <body>       
 <div id="fadeCloud" style="display:none;width:100%;height:100%;position:absolute;left:0px;top:0px;background:rgba(255,255,255,0.7);z-index:90000;"></div>
 			<nav class="navbar navbar-inverse" style='position:fixed;width:100%;top:-3px;left:0px;z-index:20000;'>
 			  
@@ -57,7 +57,7 @@
 								<div id="main" Align="center" style="width:100%;"> 
 								 <div class="form-group">
 									<input class="form-control input-lg" type="cedula" name="cedula" id="cedula" placeholder="Cédula" required="" autocomplete="off">
-									<button type="button" class="btn btn-primary" onclick="envia('factura'); return false;">Consulta</button>
+									<button type="button" class="btn btn-info" onclick="envia('factura'); return false;">Consulta</button>
 								</div>  
 								</div>	
 							</div>
@@ -67,7 +67,7 @@
 							<div class="col-md-3" >
 							</div>
 							<div class="form-group">
-								<a data-toggle="modal" data-target="#recuperarPass" style="text-decoration:none !important;">  Ingrese los Datos para continuar con su factura. </a> 
+								<a data-toggle="modal" data-target="#recuperarPass" style=" color:white; text-decoration:none !important;">  Ingrese los Datos para continuar con su factura. </a> 
 							</div>
 						</div>
 						
@@ -186,7 +186,7 @@
 											</div>
 										  </div>
 										</div>
-										<p style="text-align: right"><input type="button" name="pagar" id="pagar" onclick="validar();" class="btn btn-success" value="Pagar"></p>
+										<p style="text-align: right"><input type="button" name="pagar" id="pagar" onclick="validar();" class="btn btn-info" value="Facturar"></p>
 									  </div>
 								</div>
 						</div>
@@ -194,61 +194,81 @@
 					</div>
 		</div>
 		<div class='row' id="historial" style="display:none">
-					<div class='col-lg-12 col-md-12 col-sm-12 ui-mobile'>
-						<div class="row">
-							<div class="col-lg-12">
-								<div id="main2" Align="center" style="width:100%;"> 
+			<div class='col-lg-12 col-md-12 col-sm-12 ui-mobile'>
+				<div class="row">
+					<div class="col-lg-12">
+						<div id="main2" Align="center" style="width:100%;"> 
 							<!--   Este es el codigo del historial de facturacion  -->	
 							<div id="mainDiv" style="margin: 0px; padding: 0px; width:100%; height: 800px; background-color: #ffffff; font-size:14px; color:#404041;">
-        <table style="width:100%;" border="0" cellpadding="10px" class="table table-striped">
-            <tbody><tr><td colspan="3"><h3>Historial de Facturas</h3></td></tr>
-            <tr>
-                <td style="text-align:center; vertical-align:middle; width: 550px;">
-                    <table align="center" style="text-align:center;margin-left: 0px; margin-right: auto;" border="0" cellpadding="4px" cellspacing="10px">
-                        <tbody><tr>
-                            <td style="vertical-align:middle;">
-								<div class="input-group">
-								<span class="input-group-addon fa fa-calendar" id="sizing-addon2"></span>
-							<input type="text" id="fechadesde" name="fechadesde" class="form-control datepicker" placeholder="Desde " aria-describedby="sizing-addon2" />
+								<table style="width:100%;" border="0" cellpadding="10px" class="table table-striped">
+									<tbody><tr><td colspan="3"><h3>Historial de Facturas</h3></td></tr>
+										<tr>
+											<td style="text-align:center; vertical-align:middle; width: 550px;">
+												<table align="center" style="text-align:center;margin-left: 0px; margin-right: auto;" border="0" cellpadding="4px" cellspacing="10px">
+													<tbody><tr>
+														<td style="vertical-align:middle;">
+															<div class="input-group">
+															<span class="input-group-addon fa fa-calendar" id="sizing-addon2"></span>
+														<input type="text" id="fechadesde" name="fechadesde" class="form-control datepicker" placeholder="Desde " aria-describedby="sizing-addon2" />
+														</div>
+														</td>
+														<td style="vertical-align:middle;">
+															<button type="button" class="btn btn-primary" onclick="verfacturas(); return false;">Ver Facturas</button>
+														</td>
+													</tr>
+												</tbody></table>
+											</td>               
+										</tr>			
+										<tr>
+											<td colspan="2">
+												<div id="detailDiv" style="height:100%; padding-top:20px; margin:0px; font-size:15px;">
+												<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th>Anulada</th><th style="text-align:right;">Total US</th></tr>					
+												
+												<tr><td></td><td></td><td></td><td></td><td style="text-align: left;"><b>TOTAL$</b></td><td style="text-align:right;"><b>2.74</b></td></tr></tbody></table></div>
+											</td>
+										</tr>          
+										<tr style="display: none;">
+											<td colspan="2" style="text-align:center;">
+												<ul class="pagination paginacion-lg" id="paginacion"><li onclick="CambiarPagina(-1);"><span class="enabled" id="atras">«</span></li><li class="active" onclick="CambiarPagina(0);"><span class="enabled">1</span></li><li onclick="CambiarPagina(-2);"><span class="enabled" id="adelante">»</span></li></ul>
+												<input id="totalpags" style="display:none;">
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
-                            </td>
-                            <td style="vertical-align:middle;">
-                                <button type="button" class="btn btn-primary" onclick="verfacturas(); return false;">Ver Facturas</button>
-                            </td>
-
-                        </tr>
-                    </tbody></table>
-                </td>
-                
-            </tr>
-			
-            <tr>
-                <td colspan="2">
-                    <div id="detailDiv" style="height:100%; padding-top:20px; margin:0px; font-size:15px;">
-					<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th>Anulada</th><th style="text-align:right;">Total US</th></tr>					
-					
-					<tr><td></td><td></td><td></td><td></td><td style="text-align: left;"><b>TOTAL$</b></td><td style="text-align:right;"><b>2.74</b></td></tr></tbody></table></div>
-                </td>
-            </tr>
-			
-            
-            <tr style="display: none;">
-                <td colspan="2" style="text-align:center;">
-                    <ul class="pagination paginacion-lg" id="paginacion"><li onclick="CambiarPagina(-1);"><span class="enabled" id="atras">«</span></li><li class="active" onclick="CambiarPagina(0);"><span class="enabled">1</span></li><li onclick="CambiarPagina(-2);"><span class="enabled" id="adelante">»</span></li></ul>
-                    <input id="totalpags" style="display:none;">
-                </td>
-            </tr>
-        </tbody></table>
-</div>
-							<!--  Fin Este es el codigo del historial de facturacion  -->	
-								
-								
-								</div>	
+							<!--  Fin Este es el codigo del historial de facturacion  -->																	
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class='row' id="configurarfact" style="display:none">
+					<div class="row">
+							<div class="col-md-3" >
 							</div>
-						</div>
+							<div class="col-md-6" >
+								<h3 style='color:white'>Datos para la factura</h3>
+							</div>
+					</div>
+					<div class="row">					
+							<div class="col-md-3" >
+							</div>							
+							<div class="col-md-6">							
+								<div id="datosfacturaconfi" Align="center" style="width:100%; display:block;"> 
+									<div class="form-group">
+									<input class="form-control input-lg" type="establecimiento" name="establecimiento" id="establecimiento" placeholder="establecimiento" required="" autocomplete="off">
+									<input class="form-control input-lg" type="serie" name="serie" id="serie" placeholder="serie" required="" autocomplete="off">
+									<input class="form-control input-lg" type="facturano" name="facturano" id="facturano" placeholder="facturano" required="" autocomplete="off">
+									</div> 															
+								</div>														
+								<div id="maincontinuar" Align="center" style="width:100%; display:block;"> 
+									<div class="form-group">
+										<button type="button" class="btn btn-primary" id="btndatosfactura" onclick="ingresafacturaconfi(); return false;">Grabar</button>
+									</div>  
+								</div>									
+							</div>
 					</div>
 		</div>
-   
  </div>
  
 			<div class="modal-backdrop fade in" id='cargandoTabs' style='z-index:1000;display:none;'>
@@ -280,18 +300,26 @@ function envia(donde){
 						 $('.idcliente').val('');
 						
 					}else {
+					var separafact  = msg;
+					var separafactdi = separafact.split("||");					
 					 $('#datos').html(msg);
 					 $("#maincontinuar").hide();
 					 //$("#lbldatos").hide();
 					 $('#datos').show();
 					  $('#datosconsumos').show();
+					  $("#factura_no").val(separafactdi[1]);
+					  $('idcliente').val(separafactdi[0]);
 					}					
 					console.log(msg);
 				});	
 						
 				$("#facturas").show();
 				$("#historial").hide();
+				$("#configurarfact").hide();
 			}else if(donde=='configurar'){
+				$("#facturas").hide();
+				$("#historial").hide();
+				$("#configurarfact").show();
 			}else
 			{                         //**********************este corresponde al historial de las facturas*****************************************************//
 			$.ajax({
@@ -307,10 +335,10 @@ function envia(donde){
 					$('#detailDiv').html('<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th>Anulada</th><th style="text-align:right;">Total US</th></tr>'+msg+'</table>');
 					}					
 					console.log(msg);
-				});	
- 			
+				});				
 				$("#facturas").hide();
 				$("#historial").show();
+				$("#configurarfact").hide();
 			}			
 }
 	
@@ -357,7 +385,7 @@ function envia(donde){
 				});	
 	}
 	
-	function agregafila(){  //******************************agerga una fila al grid de consumos ****************************************
+	function agregafila(){  //******************************agrega una fila al grid de consumos ****************************************
 	
 	var clickID = $("#tablaconsumos tr:last").attr('id').replace('t',''); 
 	var newID = parseInt(clickID)+1;              
@@ -370,6 +398,25 @@ function envia(donde){
     $( "#fechadesde" ).datepicker({ dateFormat: 'yy-mm-dd' });
   });
  
+ 
+ function ingresafacturaconfi(){//***********************ingresa datos de la factura **********************************
+	var establecimiento=$.trim($("#establecimiento").val());
+	var serie=$.trim($("#serie").val());
+	var facturano=$.trim($("#facturano").val());
+	if (establecimiento=="" || serie =="" || facturano=="" ){
+	alert ("Ingrese todos los datos de la factura.");
+	return;
+	} 
+	$.ajax({
+				  method: "POST",
+				  url: "http://practisis.net/practifactura/api.php",
+				  data: { empresahis: miidempresa,dedonde: "ingresadatosfactura",establecimiento:establecimiento,serie:serie,facturano:facturano}
+				})
+				  .done(function( msg ) {					
+						$("#factura_no").val(msg);
+										
+				});	
+	}
 	
 		var url=document.URL; 
 		var miidempresa= url.substring(url.indexOf("id=")+3);

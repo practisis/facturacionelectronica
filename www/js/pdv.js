@@ -76,6 +76,7 @@ function validar(){
   var subci = parseFloat(document.getElementById('subci').value);
   var iva = parseFloat(document.getElementById('iva').value);
   var total = parseFloat(document.getElementById('total').value);
+  var errordi=0;
   
   if ($("#idcliente").length > 0 ){
   var idcliente = $('#idcliente').val();
@@ -100,33 +101,39 @@ function validar(){
       if(tiva=='subt'){
         var quien = ww.substr(4);
         //alert(quien);
-        if(document.getElementById('subt'+quien).value != ''){
-          var descuento = 0;
-          var cantidad = document.getElementById('cant'+quien).value;
-          var producto = document.getElementById('prod'+quien).value;
-          var tiva = document.getElementById('iva'+quien).checked;
-          var precio = document.getElementById('prec'+quien).value;
-          var descuentoaux = parseFloat(document.getElementById('desc'+quien).value);
-          var precion = document.getElementById('precn'+quien).value;
-          var prodsubtotal = document.getElementById('subt'+quien).value;
+			if(document.getElementById('subt'+quien).value != ''){
+			  var descuento = 0;
+			  var cantidad = document.getElementById('cant'+quien).value;
+			  var producto = document.getElementById('prod'+quien).value;
+			  var tiva = document.getElementById('iva'+quien).checked;
+			  var precio = document.getElementById('prec'+quien).value;
+			  var descuentoaux = parseFloat(document.getElementById('desc'+quien).value);
+			  var precion = document.getElementById('precn'+quien).value;
+			  var prodsubtotal = document.getElementById('subt'+quien).value;
 
-          if(document.getElementById('desc'+quien).value !=''){
-            descuento = 1-(descuentoaux/100);
-          }else{
-            descuento = 1;
-          }
-          if(tiva == true){
-            var textoiva = 'i';
-          }else{
-            var textoiva = '';
-          }
-
-
-          consumos += idcliente+'||'+cantidad+'||'+producto+'||'+precio+'||'+descuento+'||'+textoiva+'||'+tiva+'@@';
-
+			  if(document.getElementById('desc'+quien).value !=''){
+				descuento = 1-(descuentoaux/100);
+			  }else{
+				descuento = 1;
+			  }
+			  if(tiva == true){
+				var textoiva = 'i';
+			  }else{
+				var textoiva = '';
+			  }
+			  consumos += idcliente+'||'+cantidad+'||'+producto+'||'+precio+'||'+descuento+'||'+textoiva+'||'+tiva+'@@';
+			}else{
+				if(document.getElementById('cant'+quien).value != ''){
+				errordi=errordi+1;
+				}
+			}
         }
       }
-      }
+	  
+	  if (errordi>0){		
+			alert("No se puede grabar la factura. Por favor revise los datos.");
+			return false;		
+	  }
 
   /*if(establecimiento == ''){
       $('.alert-danger').not('#uploaderrors').slideUp();
