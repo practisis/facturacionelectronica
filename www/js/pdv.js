@@ -86,8 +86,8 @@ function validar(){
 
   sutotal = subsi+subci;
   sutotalneto = sutotal;
-  var establecimiento ='';// document.getElementById('establecimiento').value;
-  var caja = ''; //document.getElementById('caja').value;
+  var establecimiento ='001';// document.getElementById('establecimiento').value;
+  var caja = '002'; //document.getElementById('caja').value;
   var factura_no = document.getElementById('factura_no').value;
   facturacion = idcliente+'|'+total+'|'+sutotal+'|'+establecimiento+'|'+caja+'|'+factura_no+'|'+sutotalneto+'|'+subci+'|'+iva;
 	
@@ -107,8 +107,8 @@ function validar(){
 			  var producto = document.getElementById('prod'+quien).value;
 			  var tiva = document.getElementById('iva'+quien).checked;
 			  var precio = document.getElementById('prec'+quien).value;
-			  var descuentoaux = parseFloat(document.getElementById('desc'+quien).value);
-			  var precion = document.getElementById('precn'+quien).value;
+			  var descuentoaux = 0;//parseFloat(document.getElementById('desc'+quien).value);
+			  var precion = document.getElementById('prec'+quien).value;//document.getElementById('precn'+quien).value;
 			  var prodsubtotal = document.getElementById('subt'+quien).value;
 
 			  if(document.getElementById('desc'+quien).value !=''){
@@ -129,7 +129,7 @@ function validar(){
 			}
         }
       }
-	  
+	 
 	  if (errordi>0){		
 			alert("No se puede grabar la factura. Por favor revise los datos.");
 			return false;		

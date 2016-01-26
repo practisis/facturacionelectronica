@@ -51,45 +51,63 @@
 		<div class='row' id="facturas" style="display:block">
 					<div class='col-lg-12 col-md-12 col-sm-12 ui-mobile'>
 						<div class="row">
+						</div>
+						<div class="row">
 							<div class="col-md-3" >
 							</div>
 							<div class="col-md-6">						
-								<div id="main" Align="center" style="width:100%;"> 
-								 <div class="form-group">
-									<input class="form-control input-lg" type="cedula" name="cedula" id="cedula" placeholder="Cédula" required="" autocomplete="off">
-									<button type="button" class="btn btn-info" onclick="envia('factura'); return false;">Consulta</button>
-								</div>  
+								<div id="main" Align="center" style="width:100%;  margin-top:10px;"> 
+									<div class="input-group">
+										<span class="input-group-addon" id="sizing-addon4" style="width: 50%;">Número de Cédula</span>
+										<input class="form-control input-lg" type="cedula" name="cedula" id="cedula" placeholder="Cédula" required="" autocomplete="off">
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-primary btn-lg" onclick="envia('factura'); return false;">Consulta</button>
+										</div>									
+									</div>  
 								</div>	
 							</div>
-						</div>
-						
-						<div class="row" id="lbldatos" style="width:100%; display:none;">
 							<div class="col-md-3" >
 							</div>
-							<div class="form-group">
-								<a data-toggle="modal" data-target="#recuperarPass" style=" color:white; text-decoration:none !important;">  Ingrese los Datos para continuar con su factura. </a> 
-							</div>
+							
 						</div>
+						
 						
 						<input class="idcliente" type="hidden">
 							
 						<div class="row">
 							<div class="col-md-3" >
 							</div>
-							<div class="col-md-6">							
-								<div id="datos" Align="center" style="width:100%; display:none;"> 
-									<div class="form-group">
-									<input class="form-control input-lg" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off">
-									<input class="form-control input-lg" type="apellido" name="apellido" id="apellido" placeholder="Apellido" required="" autocomplete="off">
-									<input class="form-control input-lg" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off">
-									<input class="form-control input-lg" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off">															
-									</div> 															
-								</div>														
-								<div id="maincontinuar" Align="center" style="width:100%; display:none;"> 
-									<div class="form-group">
-										<button type="button" class="btn btn-primary" id="btningresadatosc" onclick="ingresadatos(); return false;">Continuar</button>
-									</div>  
-								</div>									
+							<div class="col-md-6">	
+								<div class="form-group form-group-lg">
+									<div  id="lbldatosfactura" style=" color:white; text-decoration:none; width:100%; margin-top:10px; display:none; !important;">
+										<label for="basic-url">Datos de la Factura.</label>	
+									</div>
+									<div id="datos" Align="center" style="width:100%; display:none;"> 
+										<div class="input-group" style="width: 100%;">
+											<span class="input-group-addon" id="sizing-addon4" style="width: 50%;">Apellido y Nombre</span>
+											<input class="form-control input-lg" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off">
+										</div>
+										<div class="input-group" style="width: 100%;">
+											<span class="input-group-addon" id="sizing-addon4" style="width: 50%;">Direccion</span>
+											<input class="form-control input-lg" type="apellido" name="apellido" id="apellido" placeholder="Dirección" required="" autocomplete="off">
+										</div>
+										<div class="input-group" style="width: 100%;">
+											<span class="input-group-addon" id="sizing-addon4" style="width: 50%;">E-mail</span>
+											<input class="form-control input-lg" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off">
+										</div>
+										<div class="input-group" style="width: 100%;">
+											<span class="input-group-addon" id="sizing-addon4" style="width: 50%;">Teléfono</span>
+											<input class="form-control input-lg" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off">															
+										</div> 															
+									</div>														
+									<div id="maincontinuar" Align="center" style="width:100%; display:none;"> 
+										<div class="form-group">
+											<button type="button" class="btn btn-primary" id="btningresadatosc" onclick="ingresadatos(); return false;">Grabar</button>
+										</div>  
+									</div>	
+								</div>
+							</div>
+							<div class="col-md-3" >
 							</div>
 						</div>
 						<div id="datosconsumos" style="display: none;">
@@ -121,11 +139,11 @@
 													<table id="detallefactura" class="table table-bordered table-hover">
 														<tr>
 														<th width='10%'>Cant.</th>
-														<th width='20%'>Producto</th>
+														<th width='50%'>Producto</th>
 														<th width='5%'>Iva</th>
 														<th width='15%'>Precio</th>
-														<th width='15%'>Des. %</th>
-														<th width='15%'>Precio Neto</th>
+														<th  style="display:none;">Des. %</th>
+														<th  style="display:none;">Precio Neto</th>
 														<th width='15%'>Subtotal</th>
 														<th width='10%'><i></i></th>											
 														</tr>
@@ -135,11 +153,11 @@
 													<table id="tablaconsumos" class="table table-bordered table-hover">
 													  <tr id="t1">
 														<td width='10%'><input id="cant1" name="cant1" type="text" onblur="ingresa(1);" class="form-control" style="height: 25px;"></td>
-														<td width='20%'><input id="prod1" name="prod1" type="text" onblur="ingresa(1);" class="form-control" style="height: 25px;"></td>
+														<td width='50%'><input id="prod1" name="prod1" type="text" onblur="ingresa(1);" class="form-control" style="height: 25px;"></td>
 														<td width='5%' style="text-align: center;"><input id="iva1" name="iva1" onchange="ingresa(1);" type="checkbox" checked="checked"></td>
 														<td width='15%'><input id="prec1" name="prec1" type="text" onblur="ingresa(1);" class="form-control" style="height: 25px;text-align: right;"></td>
-														<td width='15%'><input id="desc1" name="desc1" type="text" onblur="ingresa(1);" class="form-control" style="height: 25px;text-align: right;"></td>
-														<td width='15%'><input id="precn1" name="precn1" type="text" class="form-control" style="height: 25px;text-align: right;" readonly="readonly"></td>
+														<td style="display:none;"><input id="desc1" name="desc1" type="text" onblur="ingresa(1);" class="form-control" style="height: 25px;text-align: right;"></td>
+														<td style="display:none;"><input id="precn1" name="precn1" type="text" class="form-control" style="height: 25px;text-align: right;" readonly="readonly"></td>
 														<td width='15%'><input id="subt1" name="subt1" type="text" class="form-control" style="height: 25px;text-align: right;" readonly="readonly"></td>
 														<th width='10%'><i class="fa fa-plus" onclick="agregafila();" id="agregarFila"></i></th>
 													  </tr>																						  
@@ -206,14 +224,20 @@
 											<td style="text-align:center; vertical-align:middle; width: 550px;">
 												<table align="center" style="text-align:center;margin-left: 0px; margin-right: auto;" border="0" cellpadding="4px" cellspacing="10px">
 													<tbody><tr>
-														<td style="vertical-align:middle;">
-															<div class="input-group">
-															<span class="input-group-addon fa fa-calendar" id="sizing-addon2"></span>
-														<input type="text" id="fechadesde" name="fechadesde" class="form-control datepicker" placeholder="Desde " aria-describedby="sizing-addon2" />
-														</div>
+														<td style="text-align:center; vertical-align:middle;">
+															<div class="form-group">
+																<div class="input-group date">																
+																	<input type="text" id="fechadesde" name="fechadesde" class="form-control datepicker" placeholder="Desde " aria-describedby="sizing-addon2" />
+																	<span class="input-group-addon">
+																	<span class=" fa fa-calendar"></span>
+																	</span>
+																</div>															
+															</div>										
 														</td>
-														<td style="vertical-align:middle;">
-															<button type="button" class="btn btn-primary" onclick="verfacturas(); return false;">Ver Facturas</button>
+														<td style="text-align:center; vertical-align:middle;">
+															<div class="form-group">
+																<button type="button" class="btn btn-primary" onclick="verfacturas(); return false;">Ver Facturas</button>
+															</div>
 														</td>
 													</tr>
 												</tbody></table>
@@ -222,7 +246,7 @@
 										<tr>
 											<td colspan="2">
 												<div id="detailDiv" style="height:100%; padding-top:20px; margin:0px; font-size:15px;">
-												<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th>Anulada</th><th style="text-align:right;">Total US</th></tr>					
+												<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th style="text-align:right;">Total US</th></tr>					
 												
 												<tr><td></td><td></td><td></td><td></td><td style="text-align: left;"><b>TOTAL$</b></td><td style="text-align:right;"><b>2.74</b></td></tr></tbody></table></div>
 											</td>
@@ -256,9 +280,18 @@
 							<div class="col-md-6">							
 								<div id="datosfacturaconfi" Align="center" style="width:100%; display:block;"> 
 									<div class="form-group">
-									<input class="form-control input-lg" type="establecimiento" name="establecimiento" id="establecimiento" placeholder="establecimiento" required="" autocomplete="off">
-									<input class="form-control input-lg" type="serie" name="serie" id="serie" placeholder="serie" required="" autocomplete="off">
-									<input class="form-control input-lg" type="facturano" name="facturano" id="facturano" placeholder="facturano" required="" autocomplete="off">
+										<div class="input-group" style="width: 100%;">
+											<span class="input-group-addon" id="sizing-addon4" style="width: 50%;">Establecimiento</span>
+											<input class="form-control input-lg" type="establecimiento" name="establecimiento" id="establecimiento" placeholder="establecimiento" required="" autocomplete="off">
+										</div>
+										<div class="input-group" style="width: 100%;">
+											<span class="input-group-addon" id="sizing-addon4" style="width: 50%;">Serie</span>
+											<input class="form-control input-lg" type="serie" name="serie" id="serie" placeholder="serie" required="" autocomplete="off">
+										</div>
+										<div class="input-group" style="width: 100%;">
+											<span class="input-group-addon" id="sizing-addon4" style="width: 50%;">Número Factura</span>
+											<input class="form-control input-lg" type="facturano" name="facturano" id="facturano" placeholder="facturano" required="" autocomplete="off">
+										</div>
 									</div> 															
 								</div>														
 								<div id="maincontinuar" Align="center" style="width:100%; display:block;"> 
@@ -292,22 +325,25 @@ function envia(donde){
 				})
 				  .done(function( msg ) {
 					if (msg=="no"){
-						$('#datos').html('<div class="form-group"><input class="form-control input-lg" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"><input class="form-control input-lg" type="apellido" name="apellido" id="apellido" placeholder="Apellido" required="" autocomplete="off"><input class="form-control input-lg" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off" ><input class="form-control input-lg" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div> ');
+						//$('#datos').html('<div class="form-group"><input class="form-control input-lg" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"><input class="form-control input-lg" type="apellido" name="apellido" id="apellido" placeholder="Apellido" required="" autocomplete="off"><input class="form-control input-lg" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off" ><input class="form-control input-lg" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div> ');						
+						$('#datos').html('<div class="form-group"><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 20%;">Apellido/Nombre</span><input class="form-control input-lg" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 20%;">Dirección</span><input class="form-control input-lg" type="apellido" name="apellido" id="apellido" placeholder="Dirección" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 20%;">E-mail</span><input class="form-control input-lg" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 20%;">Teléfono</span><input class="form-control input-lg" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div></div> ');
 						$("#maincontinuar").show();
-						$("#lbldatos").show();
+						$("#btningresadatosc").html("Grabar");
+						$("#lbldatosfactura").show();
 						 $('#datos').show();
 						 $('#datosconsumos').hide();
-						 $('.idcliente').val('');
-						
+						 $('.idcliente').val('');												
 					}else {
 					var separafact  = msg;
 					var separafactdi = separafact.split("||");					
 					 $('#datos').html(msg);
-					 $("#maincontinuar").hide();
-					 //$("#lbldatos").hide();
+					 $("#maincontinuar").show();
+					 $("#btningresadatosc").html("Actualizar");
+					 
+					$("#lbldatosfactura").show();
 					 $('#datos').show();
 					  $('#datosconsumos').show();
-					  $("#factura_no").val(separafactdi[1]);
+					  $("#factura_no").val($('#lanumfactura').val());
 					  $('idcliente').val(separafactdi[0]);
 					}					
 					console.log(msg);
@@ -316,10 +352,30 @@ function envia(donde){
 				$("#facturas").show();
 				$("#historial").hide();
 				$("#configurarfact").hide();
+				
 			}else if(donde=='configurar'){
 				$("#facturas").hide();
 				$("#historial").hide();
 				$("#configurarfact").show();
+				$.ajax({          //************************ este codigo consulta los datos de la factura*********************
+				  method: "POST",
+				  url: "http://practisis.net/practifactura/api.php",
+				  data: {dedonde: "consultadatosfactura",empresahis: miidempresa }
+				})
+				  .done(function( msg ) {
+					if (msg=="no"){
+						alert ("Hubo un problema. Recargue la pagina.");
+					}else {
+						//alert (msg);
+						var separafact  = msg;
+						var separafactdi = separafact.split("||");	
+						$("#establecimiento").val(separafactdi[0]);
+						$("#serie").val(separafactdi[1]);
+						$("#facturano").val(separafactdi[2]);
+					}					
+					console.log(msg);
+				});				
+				
 			}else
 			{                         //**********************este corresponde al historial de las facturas*****************************************************//
 			$.ajax({
@@ -332,7 +388,7 @@ function envia(donde){
 						alert ("Hubo un problema. Recargue la pagina.");
 					}else {
 					 
-					$('#detailDiv').html('<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th>Anulada</th><th style="text-align:right;">Total US</th></tr>'+msg+'</table>');
+					$('#detailDiv').html('<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th style="text-align:right;">Total US</th></tr>'+msg+'</table>');
 					}					
 					console.log(msg);
 				});				
@@ -355,13 +411,14 @@ function envia(donde){
 						alert ("Hubo un problema. Recargue la pagina.");
 					}else {
 					 
-					$('#detailDiv').html('<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th>Anulada</th><th style="text-align:right;">Total US</th></tr>'+msg+'</table>');
+					$('#detailDiv').html('<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th style="text-align:right;">Total US</th></tr>'+msg+'</table>');
 					}					
 					console.log(msg);
 				});	
 	}
 	
 	function ingresadatos(){//***********************ingresa datos del cliente si no estan en la base **********************************
+	var hayidcliente=$('#idcliente').val();
 	var micedula=$.trim($("#cedula").val());
 	var email=$.trim($("#email").val());
 	var apellido=$.trim($("#apellido").val());
@@ -370,18 +427,21 @@ function envia(donde){
 	if (micedula=="" || email =="" || nombre=="" || apellido =="" || telefono =="" ){
 	alert ("Ingrese el usuario y el password.");
 	return;
-	} 
+	}
+	var opcion=0;
+	if ($.trim($("#btningresadatosc").text())=="Actualizar"){
+		opcion=1; 	
+	}
+		
 	$.ajax({
 				  method: "POST",
-				  url: "http://practisis.net/practifactura/api.php",
-	
-				  data: { user: "", pass: "",empresahis: miidempresa,dedonde: "ingresacliente",cedula:micedula,nombre:nombre,apellido:apellido,email:email,telefono:telefono }
+				  url: "http://practisis.net/practifactura/api.php",	
+				  data: {idcliente:hayidcliente,opcion:opcion,empresahis: miidempresa,dedonde: "ingresacliente",cedula:micedula,nombre:nombre,apellido:apellido,email:email,telefono:telefono }
 				})
 				  .done(function( msg ) {
 					
 						$('.idcliente').val(msg);
-						$('#datosconsumos').show();
-					
+						$('#datosconsumos').show();					
 				});	
 	}
 	
@@ -389,7 +449,7 @@ function envia(donde){
 	
 	var clickID = $("#tablaconsumos tr:last").attr('id').replace('t',''); 
 	var newID = parseInt(clickID)+1;              
-	$('#tablaconsumos tbody').append(' <tr id="t'+newID+'"><td><input id="cant'+newID+'" name="cant'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 25px;"></td><td><input id="prod'+newID+'" name="prod'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 25px;"></td><td style="text-align: center;"><input id="iva'+newID+'" name="iva'+newID+'" onchange="ingresa('+newID+');" type="checkbox" checked="checked"></td><td><input id="prec'+newID+'" name="prec'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 25px;text-align: right;"></td><td><input id="desc'+newID+'" name="desc'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 25px;text-align: right;"></td><td><input id="precn'+newID+'" name="precn'+newID+'" type="text" class="form-control" style="width: 100%;height: 25px;text-align: right;" readonly="readonly"></td><td><input id="subt'+newID+'" name="subt'+newID+'" type="text" class="form-control" style="width: 100%;height: 25px;text-align: right;" readonly="readonly"></td></tr>');
+	$('#tablaconsumos tbody').append(' <tr id="t'+newID+'"><td><input id="cant'+newID+'" name="cant'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 25px;"></td><td><input id="prod'+newID+'" name="prod'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 25px;"></td><td style="text-align: center;"><input id="iva'+newID+'" name="iva'+newID+'" onchange="ingresa('+newID+');" type="checkbox" checked="checked"></td><td><input id="prec'+newID+'" name="prec'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 25px;text-align: right;"></td><td style="display:none;"><input id="desc'+newID+'" name="desc'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 25px;text-align: right;"></td><td style="display:none;"><input id="precn'+newID+'" name="precn'+newID+'" type="text" class="form-control" style="width: 100%;height: 25px;text-align: right;" readonly="readonly"></td><td><input id="subt'+newID+'" name="subt'+newID+'" type="text" class="form-control" style="width: 100%;height: 25px;text-align: right;" readonly="readonly"></td></tr>');
 					
 	}
 	 
