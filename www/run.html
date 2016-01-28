@@ -246,7 +246,7 @@
 										<tr>
 											<td colspan="2">
 												<div id="detailDiv" style="height:100%; padding-top:20px; margin:0px; font-size:15px;">
-												<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th style="text-align:right;">Total US</th></tr>					
+												<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th>Estado</th><th style="text-align:right;">Total US</th></tr>
 												
 												<tr><td></td><td></td><td></td><td></td><td style="text-align: left;"><b>TOTAL$</b></td><td style="text-align:right;"><b>2.74</b></td></tr></tbody></table></div>
 											</td>
@@ -378,13 +378,13 @@ function envia(donde){
 					}else {
 						//alert (msg);
 						var separafact  = msg;
-						var separafactdi = separafact.split("||");	
+						var separafactdi = separafact.split("||");
 						$("#establecimiento").val(separafactdi[0]);
 						$("#serie").val(separafactdi[1]);
 						$("#facturano").val(separafactdi[2]);
-					}					
+					}
 					console.log(msg);
-				});				
+				});
 				
 			}else
 			{                         //**********************este corresponde al historial de las facturas*****************************************************//
@@ -397,21 +397,39 @@ function envia(donde){
 					if (msg=="no"){
 						alert ("Hubo un problema. Recargue la pagina.");
 					}else {
-					 
-					$('#detailDiv').html('<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th style="text-align:right;">Total US</th></tr>'+msg+'</table>');
-					}					
+
+					$('#detailDiv').html('<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th>Estado</th><th style="text-align:right;">Total US</th><th style="text-align:center;">Opciones</th></tr>'+msg+'</table>');
+					}
 					console.log(msg);
-				});	
+				});
 				var d = new Date();
 				 mes = '' + (d.getMonth()+1);
 				dia = '' + d.getDate();
 				if (mes.length < 2) mes = '0' + mes;
-				if (dia.length < 2) dia = '0' + dia;				
+				if (dia.length < 2) dia = '0' + dia;
 				$("#fechadesde").val(d.getFullYear() + '-' + mes + '-' + dia );
 				$("#facturas").hide();
 				$("#historial").show();
 				$("#configurarfact").hide();
 			}			
+}
+//*****************************************Ver RIDE***************************************
+function verride(que,quien){
+  $.ajax({
+    method: "POST",
+    url: "http://www.practifactura.com/"+que,
+    data: { f: quien}
+  })
+    .done(function( msg ) {
+  	if (msg=="no"){
+  		alert ("Hubo un problema. Recargue la pagina.");
+  	}else {
+
+  	$('#detailDiv').html(msg);
+  	}
+  	//console.log(msg);
+  });
+
 }
 	
 	function verfacturas(){//************************************consulta las facturas por fecha *******************************
@@ -427,7 +445,7 @@ function envia(donde){
 						alert ("Hubo un problema. Recargue la pagina.");
 					}else {
 					 
-					$('#detailDiv').html('<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th style="text-align:right;">Total US</th></tr>'+msg+'</table>');
+					$('#detailDiv').html('<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th>Estado</th><th style="text-align:right;">Total US</th><th style="text-align:center;">Opciones</th></tr>'+msg+'</table>');
 					}					
 					console.log(msg);
 				});	
@@ -451,7 +469,7 @@ function envia(donde){
 		
 	$.ajax({
 				  method: "POST",
-				  url: "http://practisis.net/practifactura/api.php",	
+				  url: "http://practisis.net/practifactura/api.php",
 				  data: {idcliente:hayidcliente,opcion:opcion,empresahis: miidempresa,dedonde: "ingresacliente",cedula:micedula,nombre:nombre,apellido:apellido,email:email,telefono:telefono }
 				})
 				  .done(function( msg ) {
