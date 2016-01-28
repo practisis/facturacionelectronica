@@ -26,8 +26,16 @@ function ingresa(quien){
       }
       subtotal = cant*prec;
 
-      document.getElementById('precn'+quien).value=prec.toFixed(2);
+	   document.getElementById('precn'+quien).value=prec.toFixed(2);
       document.getElementById('subt'+quien).value=subtotal.toFixed(2);
+	  
+	   var cambiacant=cant.toString().replace(",",".");
+		var cambiaprec=prec.toString().replace(",",".");
+		cant=cambiacant;
+		prec=parseFloat(cambiaprec);
+	  document.getElementById('cant'+quien).value=cant;
+      document.getElementById('prec'+quien).value=prec;
+	  
       totales();
     }
   }
