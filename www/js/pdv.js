@@ -73,10 +73,14 @@ function totales(){
     document.getElementById('subci').value=totciva.toFixed(2);
     document.getElementById('iva').value=valortotaliva.toFixed(2);
     document.getElementById('total').value=total.toFixed(2);
+    document.getElementById('subsixx').value=totsiva.toFixed(2);
+    document.getElementById('subcixx').value=totciva.toFixed(2);
+    document.getElementById('ivaxx').value=valortotaliva.toFixed(2);
+    document.getElementById('totalxx').value=total.toFixed(2);
 
 }
 function validar(){
-
+  $("#fadeCloud").show();
   var facturacion = '';
   var sutotal = 0;
   var sutotalneto = 0;
@@ -174,7 +178,7 @@ function validar(){
 		url: "http://practisis.net/practifactura/api.php",
 		data: 'empresahis='+miidempresa+'&que=1&facturacion='+facturacion+'&consumos='+consumos,
 		success: function(response){
-		  alert(response);
+		  //alert(response);
           var res = response.split("|");
               if(res[0] == 'ok'){
                 $('.alert-danger').not('#uploaderrors').slideUp();
@@ -183,7 +187,7 @@ function validar(){
                 $('html,body').animate({
                 	scrollTop : 0
                 });
-                setTimeout(function(){ location.reload(true); }, 3000);
+                setTimeout(function(){ location.reload(true); }, 2000);
               }else{
                 $('.alert-danger').not('#uploaderrors').slideUp();
                 $('.alert-danger').html('<b>Hubo un error!</b><br/>Vuelva a intentar.');

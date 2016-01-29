@@ -15,14 +15,14 @@
 	<link rel="stylesheet" href="css/estilotemp.css">
 	<link href="css/fonts.css" rel="stylesheet" type="text/css">
 	<link href="css/formated.css" rel="stylesheet" type="text/css">
-    <script src="js/bootstrap.min.js"></script>	
+    <script src="js/bootstrap.min.js"></script>
 	<script src="js/pdv.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-	
-	 
-	
+
+
+
 	</head>
-    <body>       
+    <body>
 <div id="fadeCloud" style="display:none;width:100%;height:100%;position:absolute;left:0px;top:0px;background:rgba(255,255,255,0.7);z-index:90000;">
 	<div style="height:50%">&nbsp;</div>
 		<div  style="text-align:center;" >
@@ -31,7 +31,7 @@
 </div>
 
 
-	
+
 			<nav class="navbar navbar-inverse" style='position:fixed;width:100%;top:-3px;left:0px;z-index:20000;'>
 
 				<div class="navbar-header">
@@ -57,10 +57,10 @@
 <div style="height:50px;"></div>
 <div class="container-fluid">
 		<div class='row' id="facturas" style="display:block;height: auto;">
-					<div id="auxcontenido1" class='col-lg-12 col-md-12 col-sm-12 ui-mobile' style="height: 100%;">
+					<div id="auxcontenido1" class='col-lg-12 col-md-12 col-sm-12 ui-mobile'>
 
 						<div class="row" style="height: 100%;">
-							<div id="auxborder" class="col-xs-12 col-sm-4" style="border-right: 2px solid #616161;height: 100%;z-index: 100;">
+							<div id="auxborder" class="col-xs-12 col-sm-4" style="border-right: 2px solid #616161;z-index: 100;">
                                 <div class="row">
 							        <div class="col-xs-12">
 
@@ -69,7 +69,7 @@
         										<span class="input-group-addon" id="sizing-addon4" style="width: 85px;"># Cédula</span>
         										<input class="form-control input-md" type="cedula" name="cedula" id="cedula" placeholder="Cédula" required="" autocomplete="off">
         										<div class="input-group-btn">
-        											<button type="button" class="btn btn-primary btn-md" onclick="envia('factura'); return false;">Consulta</button>
+        											<button type="button" class="btn btn-primary btn-md" onclick="consultar(); return false;">Consulta</button>
         										</div>
         									</div>
                                             <input class="idcliente" type="hidden">
@@ -159,14 +159,14 @@
         											<div id="cabecera" class="table-responsive">
         													<table id="detallefactura" class="table table-bordered table-hover">
         														<tr>
-        														<th width='10%'>Cant.</th>
-        														<th width='40%'>Producto</th>
-        														<th width='10%'>Iva</th>
-        														<th width='15%'>Precio</th>
-        														<th  style="display:none;">Des. %</th>
-        														<th  style="display:none;">Precio Neto</th>
-        														<th width='15%'>Subtotal</th>
-        														<th width='10%'><i></i></th>
+        														<td width='10%'>Cant.</td>
+        														<td width='40%'>Producto</td>
+        														<td width='10%'>Iva</td>
+        														<td width='15%'>Precio</td>
+        														<td  style="display:none;">Des. %</td>
+        														<td  style="display:none;">Precio Neto</td>
+        														<td width='15%'>Subtotal</td>
+        														<td width='10%'><i></i></td>
         														</tr>
         													</table>
         											</div>
@@ -180,8 +180,19 @@
         														<td style="display:none;"><input id="desc1" name="desc1" type="text" onblur="ingresa(1);" class="form-control input-md" style="height: 35px;text-align: right;"></td>
         														<td style="display:none;"><input id="precn1" name="precn1" type="text" class="form-control input-md" style="height: 35px;text-align: right;" readonly="readonly"></td>
         														<td width='15%'><input id="subt1" name="subt1" type="text" class="form-control input-md" style="height: 35px;text-align: right;" readonly="readonly"></td>
-        														<th width='10%'><i class="fa fa-plus" onclick="agregafila();" id="agregarFila1"></i></th>
+        														<th width='10%'><span style="color: #CC0000;"><i class="glyphicon glyphicon-trash" onclick="eliminafila(1);" id="agregarFila2"></i></span></th>
         													  </tr>
+        													</table>
+        											</div>
+                                                    <div class="table-responsive" style="border: none;border-color: #FFFFFF;!important;">
+        													<table class="table" style="border: none;border-color: #FFFFFF;!important;">
+        														<tr>
+        														<td width='10%'></td>
+        														<td width='40%'></td>
+        														<td width='10%'></td>
+        														<td colspan="2" width='30%' style="text-align: right;">Agregar Producto</td>
+        														<td width='10%'><span style="color: #5CB85C;font-size: 25px;"><i class="glyphicon glyphicon-plus-sign" onclick="agregafila();" id="agregarFila1"></i></span></td>
+        														</tr>
         													</table>
         											</div>
         									    </div>
@@ -195,8 +206,8 @@
       										<p style="text-align: right"><input type="button" name="pagar" id="pagar" onclick="validar();" class="btn btn-success btn-md" value="Facturar"></p>
       									</div>
       								</div>
-                                    <div id="datostotalesaux1" class='row' style="display: none;">
-      									<div class="col-xs-12">
+                                    <div class='row' style="display: block;">
+      									<div id="datostotalesaux1" class="col-xs-12" style="display: none;">
 
                                               <div id="datostotales">
                                                     <label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Totales</label>
@@ -205,25 +216,25 @@
         												<div class='col-ms-3'>
         													<div class="input-group">
         														<span class="input-group-addon" id="sizing-addon4" style="width: 50%;text-align: left;">Sub Total sin IVA</span>
-        														<input type="text" name="subsi" id="subsi" class="form-control" style="text-align: right;" aria-describedby="sizing-addon4" value="0.00" readonly="readonly"/>
+        														<input type="text" name="subsixx" id="subsixx" class="form-control" style="text-align: right;" aria-describedby="sizing-addon4" value="0.00" readonly="readonly"/>
         													</div>
         												</div>
         												<div class='col-ms-3'>
         													<div class="input-group">
         														<span class="input-group-addon" id="sizing-addon3" style="width: 50%;text-align: left;">Sub Total con IVA</span>
-        														<input type="text" name="subci" id="subci" class="form-control" style="text-align: right;" aria-describedby="sizing-addon3" value="0.00" readonly="readonly"/>
+        														<input type="text" name="subcixx" id="subcixx" class="form-control" style="text-align: right;" aria-describedby="sizing-addon3" value="0.00" readonly="readonly"/>
         													</div>
         												</div>
         												<div class='col-ms-3'>
         													<div class="input-group">
         														<span class="input-group-addon" id="sizing-addon4" style="width: 50%;text-align: left;">IVA</span>
-        														<input type="text" name="iva" id="iva" class="form-control" style="text-align: right;" aria-describedby="sizing-addon4" value="0.00" readonly="readonly"/>
+        														<input type="text" name="ivaxx" id="ivaxx" class="form-control" style="text-align: right;" aria-describedby="sizing-addon4" value="0.00" readonly="readonly"/>
         													</div>
         												</div>
         												<div class='col-ms-3'>
         													<div class="input-group">
         														<span class="input-group-addon" id="sizing-addon3" style="width: 50%;text-align: left;">TOTAL</span>
-        														<input type="text" name="total" id="total" class="form-control" style="text-align: right;" aria-describedby="sizing-addon3" value="0.00" readonly="readonly"/>
+        														<input type="text" name="totalxx" id="totalxx" class="form-control" style="text-align: right;" aria-describedby="sizing-addon3" value="0.00" readonly="readonly"/>
         													</div>
         												</div>
         											</div>
@@ -245,40 +256,40 @@
 			<div class='col-lg-12 col-md-12 col-sm-12 ui-mobile'>
 				<div class="row">
 					<div class="col-lg-12">
-						<div id="main2" Align="center" style="width:100%; text-align:left;"> 
+						<div id="main2" Align="center" style="width:100%; text-align:left;">
 								<h3 style='color:#404041'>Historial de Facturación</h3>
 						</div>
-													
-							
+
+
 									<form class="form-inline">
 									<div class="form-group">
-																<div class="input-group date"  style="max-width:180px">																
+																<div class="input-group date"  style="max-width:180px">
 																	<input type="text" id="fechadesde" name="fechadesde" class="form-control datepicker" readonly placeholder="Desde " aria-describedby="sizing-addon2"/>
 																	<span class="input-group-addon">
 																	<span class=" fa fa-calendar"></span>
 																	</span>
-																</div>															
-							</div>	
-							
+																</div>
+							</div>
+
 							<div class="form-group">
 									<button type="button" class="btn btn-primary" onclick="verfacturas(); return false;">Ver Facturas</button>
 				  		   </div>
 									</form>
-							
+
 						<br/>
-						
-							<!--   Este es el codigo del historial de facturacion  -->	
+
+							<!--   Este es el codigo del historial de facturacion  -->
 							<div id="mainDiv" style="margin: 0px; padding: 0px; width:100%; height: 800px; background-color: #ffffff; font-size:14px; color:#404041;">
 								<table style="width:100%;" border="0" cellpadding="10px" class="table table-striped">
-									<tbody>			
+									<tbody>
 										<tr>
 											<td colspan="2">
 												<div id="detailDiv" style="height:100%; padding-top:20px; margin:0px; font-size:15px;">
 												<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th>Estado</th><th style="text-align:right;">Total US</th></tr>
-												
+
 												<tr><td></td><td></td><td></td><td></td><td style="text-align: left;"><b>TOTAL$</b></td><td style="text-align:right;"><b>2.74</b></td></tr></tbody></table></div>
 											</td>
-										</tr>          
+										</tr>
 										<tr style="display: none;">
 											<td colspan="2" style="text-align:center;">
 												<ul class="pagination paginacion-lg" id="paginacion"><li onclick="CambiarPagina(-1);"><span class="enabled" id="atras">«</span></li><li class="active" onclick="CambiarPagina(0);"><span class="enabled">1</span></li><li onclick="CambiarPagina(-2);"><span class="enabled" id="adelante">»</span></li></ul>
@@ -289,12 +300,12 @@
 								</table>
 							</div>
 							<!--  Fin Este es el codigo del historial de facturacion  -->
-							</div>							
-						</div>	
+							</div>
+						</div>
 					</div>
 		</div>
-			
-	
+
+
 		<div class='row' id="configurarfact" style="display:none">
 					<div class="row">
 							<div class="col-md-3" >
@@ -305,12 +316,12 @@
 							<div class="col-md-3" >
 							</div>
 					</div>
-					<div class="row">					
-							
+					<div class="row">
+
 							<div class="col-md-3" >
-							</div>	
-							<div class="col-md-6">							
-								
+							</div>
+							<div class="col-md-6">
+
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">Establecimiento</span>
@@ -365,20 +376,20 @@
 											<input class="form-control" type="text" name="telefono" id="telefono" placeholder="texto" value="" required="" autocomplete="off">
 										</div>
 									</div>
-										
-																					
-								<div id="maincontinuar" Align="center" style="width:100%; display:block;"> 
+
+
+								<div id="maincontinuar" Align="center" style="width:100%; display:block;">
 									<div class="form-group" style="text-align:right; padding-right:10px">
 										<button type="button" class="btn btn-success btn-lg" id="btndatosfactura" onclick="ingresafacturaconfi(); return false;">Grabar</button>
-									</div>  
-								</div>									
+									</div>
+								</div>
 							</div>
 							<div class="col-md-3" >
-							</div>	
-							
+							</div>
+
 					</div>
 		</div>
-    
+
  </div>
 			<div class="modal-backdrop fade in" id='cargandoTabs' style='z-index:1000;display:none;'>
 				<table width='100%' height='100%'>
@@ -393,49 +404,31 @@
 	//codigo javascript de funcionalidad
 function envia(donde){
 			if (donde=='factura'){ //*****************************consulto la cedula si existe ***********************
-			var cedula=$.trim($("#cedula").val());
-			var pasaporte = cedula.substring(0, 1);
-			if (pasaporte=='P' || pasaporte=='p'){
-			}else{
-				var valcedula=validacedula();
-				if ($.trim(valcedula)=='false'){
-					alert("La cedula es incorrecta.");
-					return;
-				}
-			}
 
-				$.ajax({
-				  method: "POST",
-				  url: "http://practisis.net/practifactura/api.php",
-				  data: { cedulaconsulta: cedula,dedonde:"cedulac",empresahis: miidempresa }
-				})
-				  .done(function( msg ) {
-					if (msg=="no"){
-						//$('#datos').html('<div class="form-group"><input class="form-control input-lg" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"><input class="form-control input-lg" type="apellido" name="apellido" id="apellido" placeholder="Apellido" required="" autocomplete="off"><input class="form-control input-lg" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off" ><input class="form-control input-lg" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div> ');
-						$('#datos').html('<div class="form-group"><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Nombre</span><input class="form-control input-md" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Dirección</span><input class="form-control input-md" type="apellido" name="apellido" id="apellido" placeholder="Dirección" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">E-mail</span><input class="form-control input-md" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Teléfono</span><input class="form-control input-md" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div></div> ');
-						$("#maincontinuar").show();
-						$("#btningresadatosc").html("Grabar");
-						$("#lbldatosfactura").show();
-						 $('#datos').show();
-						 $('#datosconsumos').hide();
-                         $('#datostotales').hide();
-						 $('.idcliente').val('');
-					}else {
-					var separafact  = msg;
-					var separafactdi = separafact.split("||");
-					 $('#datos').html(msg);
-					 $("#maincontinuar").show();
-					 $("#btningresadatosc").html("Actualizar");
+    		$("#lbldatosfactura").hide();
+            $('#cedula').val('');
+    		$('#datos').hide();
+    		$('#datosconsumos').hide();
+            $('#datostotales').hide();
+    		$('.idcliente').val('');
+            $("#maincontinuar").hide();
+            $('#cant1').val('');
+            $('#prod1').val('');
+            $('#iva1').val('');
+            $('#prec1').val('');
+            $('#desc1').val('');
+            $('#precn1').val('');
+            $('#subt1').val('');
 
-					$("#lbldatosfactura").show();
-					 $('#datos').show();
-					  $('#datosconsumos').show();
-                      $('#datostotales').show();
-					  $("#factura_no").val($('#lanumfactura').val());
-					  $('idcliente').val(separafactdi[0]);
-					}
-					console.log(msg);
-				});
+            var clickID = $("#tablaconsumos tr:last").attr('id').replace('t','');
+            if(clickID>1){
+              for(var i=1;i<=clickID;i++){
+                if(i!=1){
+                    $('#t'+i).remove();
+                }
+              }
+		      totales();
+            }
 
 				$("#facturas").show();
 				$("#historial").hide();
@@ -463,7 +456,7 @@ function envia(donde){
 					}
 					console.log(msg);
 				});
-				
+
 			}else
 			{                         //**********************este corresponde al historial de las facturas*****************************************************//
 			$.ajax({
@@ -489,7 +482,7 @@ function envia(donde){
 				$("#facturas").hide();
 				$("#historial").show();
 				$("#configurarfact").hide();
-			}			
+			}
 }
 //*****************************************Ver RIDE***************************************
 function verride(que,quien){
@@ -509,14 +502,14 @@ function verride(que,quien){
   });
 
 }
-	
+
 	function verfacturas(){//************************************consulta las facturas por fecha *******************************
 	$("#fadeCloud").show();
 	var lafecha=$( "#fechadesde" ).val();
 	$.ajax({
 				  method: "POST",
 				  url: "http://practisis.net/practifactura/api.php",
-	
+
 				  data: { user: "", pass: "",dedonde: "historial",empresahis: miidempresa,fecha:lafecha }
 				})
 				  .done(function( msg ) {
@@ -524,13 +517,13 @@ function verride(que,quien){
 					if (msg=="no"){
 						alert ("Hubo un problema. Recargue la pagina.");
 					}else {
-					 
+
 					$('#detailDiv').html('<table align="center" class="table table-hover table-striped"><tbody><tr><th>Fecha</th><th>Cliente</th><th>RUC</th><th># Factura</th><th>Estado</th><th style="text-align:right;">Total US</th><th style="text-align:center;">Opciones</th></tr>'+msg+'</table>');
-					}					
+					}
 					console.log(msg);
-				});	
+				});
 	}
-	
+
 	function ingresadatos(){//***********************ingresa datos del cliente si no estan en la base **********************************
 	var hayidcliente=$('#idcliente').val();
 	var micedula=$.trim($("#cedula").val());
@@ -544,39 +537,49 @@ function verride(que,quien){
 	}
 	var opcion=0;
 	if ($.trim($("#btningresadatosc").text())=="Actualizar"){
-		opcion=1; 	
+		opcion=1;
 	}
-		
+
 	$.ajax({
 				  method: "POST",
 				  url: "http://practisis.net/practifactura/api.php",
 				  data: {idcliente:hayidcliente,opcion:opcion,empresahis: miidempresa,dedonde: "ingresacliente",cedula:micedula,nombre:nombre,apellido:apellido,email:email,telefono:telefono }
 				})
 				  .done(function( msg ) {
-					
+
 						$('.idcliente').val(msg);
 						$('#datosconsumos').show();
                         $('#datostotales').show();
-				});	
+				});
 	}
-	
-	function agregafila(){  //******************************agrega una fila al grid de consumos ****************************************	
-	var clickID = $("#tablaconsumos tr:last").attr('id').replace('t',''); 
-	var newID = parseInt(clickID)+1;              
-	$('#tablaconsumos tbody').append(' <tr id="t'+newID+'"><td><input id="cant'+newID+'" name="cant'+newID+'" type="number" onkeyup=\'if(event.keyCode==188)$(this).val($(this).val().replace(",","."))\' onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;"></td><td><input id="prod'+newID+'" name="prod'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;"></td><td style="text-align: center;"><input id="iva'+newID+'" name="iva'+newID+'" onchange="ingresa('+newID+');" type="checkbox" checked="checked"></td><td><input id="prec'+newID+'" name="prec'+newID+'" type="number" onkeyup=\'if(event.keyCode==188)$(this).val($(this).val().replace(",","."))\' onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;text-align: right;"></td><td style="display:none;"><input id="desc'+newID+'" name="desc'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;text-align: right;"></td><td style="display:none;"><input id="precn'+newID+'" name="precn'+newID+'" type="text" class="form-control" style="width: 100%;height: 35px;text-align: right;" readonly="readonly"></td><td><input id="subt'+newID+'" name="subt'+newID+'" type="text" class="form-control" style="width: 100%;height: 35px;text-align: right;" readonly="readonly"></td><td width="10%"><i class="fa fa-minus" onclick="eliminafila('+newID+');" id="agregarFila'+newID+'"></i></td></tr>');					
+
+	function agregafila(){  //******************************agrega una fila al grid de consumos ****************************************
+	var clickID = $("#tablaconsumos tr:last").attr('id').replace('t','');
+	var newID = parseInt(clickID)+1;
+	$('#tablaconsumos tbody').append(' <tr id="t'+newID+'"><td><input id="cant'+newID+'" name="cant'+newID+'" type="number" onkeyup=\'if(event.keyCode==188)$(this).val($(this).val().replace(",","."))\' onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;"></td><td><input id="prod'+newID+'" name="prod'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;"></td><td style="text-align: center;"><input id="iva'+newID+'" name="iva'+newID+'" onchange="ingresa('+newID+');" type="checkbox" checked="checked"></td><td><input id="prec'+newID+'" name="prec'+newID+'" type="number" onkeyup=\'if(event.keyCode==188)$(this).val($(this).val().replace(",","."))\' onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;text-align: right;"></td><td style="display:none;"><input id="desc'+newID+'" name="desc'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;text-align: right;"></td><td style="display:none;"><input id="precn'+newID+'" name="precn'+newID+'" type="text" class="form-control" style="width: 100%;height: 35px;text-align: right;" readonly="readonly"></td><td><input id="subt'+newID+'" name="subt'+newID+'" type="text" class="form-control" style="width: 100%;height: 35px;text-align: right;" readonly="readonly"></td><td width="10%"><span style="color: #CC0000;"><i class="glyphicon glyphicon-trash" onclick="eliminafila('+newID+');" id="agregarFila'+newID+'"></i></span></td></tr>');
 	}
-	
-	function eliminafila(lafila){  //******************************elimina una fila al grid de consumos ****************************************			
-		$('#t'+lafila).remove();	
-		totales();		
+
+	function eliminafila(lafila){  //******************************elimina una fila al grid de consumos ****************************************
+        if(lafila==1){
+          $('#cant1').val('');
+          $('#prod1').val('');
+          $('#iva1').val('');
+          $('#prec1').val('');
+          $('#desc1').val('');
+          $('#precn1').val('');
+          $('#subt1').val('');
+        }else{
+		  $('#t'+lafila).remove();
+        }
+		totales();
 	}
-	 
+
   $(function() {
-  
+
     $( "#fechadesde" ).datepicker({ dateFormat: 'yy-mm-dd' });
   });
- 
- 
+
+
  function ingresafacturaconfi(){//***********************ingresa datos de la factura **********************************
  $("#fadeCloud").show();
 	var establecimiento=$.trim($("#establecimiento").val());
@@ -585,7 +588,7 @@ function verride(que,quien){
 	if (establecimiento=="" || serie =="" || facturano=="" ){
 	alert ("Ingrese todos los datos de la factura.");
 	return;
-	} 
+	}
 	$.ajax({
 				  method: "POST",
 				  url: "http://practisis.net/practifactura/api.php",
@@ -594,10 +597,10 @@ function verride(que,quien){
 				  .done(function( msg ) {
 						$("#fadeCloud").hide();
 						$("#factura_no").val(msg);
-										
-				});	
+
+				});
 	}
-	
+
 	function validacedula () {
 		numero = $.trim($("#cedula").val());
 		if(cedula=='9999999999999')
@@ -719,33 +722,94 @@ function verride(que,quien){
 		}
 		return true;
 	}
-	
-	
-		var url=document.URL; 
+
+
+		var url=document.URL;
 		var miidempresa= url.substring(url.indexOf("id=")+3);
 		alert (miidempresa);
 
-if(parseInt(screen.width)>500){
-var alto = parseInt(screen.height)-160;
+//alert($(window).height());
+if(parseInt($(window).width())>700){
+var alto = parseInt($(window).height())-50;
 document.getElementById('facturas').style.height=alto+'px';
 //alert('El alto de la resolucion de pantalla es de '+alto+'pixeles');
 }
-   </script>
-<style>
-@media screen and (max-width: 500px) {
-  div#datostotalesaux1 {
-    display: block;
-  }
-  div#datostotalesaux {
-    display: none;
-    background-color: #CC0000;
-  }
-  div#auxcontenido1{
-    height: auto;
-     background-color: #CC0000;
-  }
+if ($(window).width()<=700){
+  //Código de ejemplo...
+  $("#datostotalesaux").css("display","none");
+  $("#datostotalesaux1").css("display","block");
+  $("#auxcontenido1").css("height","auto");
+  $("#auxborder").css("border-right","none");
+  $("#auxborder").css("height","auto");
+}else{
+  $("#datostotalesaux").css("display","block");
+  $("#datostotalesaux1").css("display","none");
+  $("#auxcontenido1").css("height",alto);
+  $("#auxborder").css("border-right","2px solid #616161");
+  $("#auxborder").css("height",alto);
 }
-</style>
-   
+$(window).resize(function() {
+  if ($(window).width()<=700){
+  //Código de ejemplo...
+    $("#datostotalesaux").css("display","none");
+    $("#datostotalesaux1").css("display","block");
+    $("#auxcontenido1").css("height","auto");
+    $("#auxborder").css("border-right","none");
+    $("#auxborder").css("height","auto");
+  }else{
+    $("#datostotalesaux").css("display","block");
+    $("#datostotalesaux1").css("display","none");
+    $("#auxcontenido1").css("height",alto);
+    $("#auxborder").css("border-right","2px solid #616161");
+    $("#auxborder").css("height",alto);
+  }
+});
+function consultar(){
+  var cedula=$.trim($("#cedula").val());
+			var pasaporte = cedula.substring(0, 1);
+			if (pasaporte=='P' || pasaporte=='p'){
+			}else{
+				var valcedula=validacedula();
+				if ($.trim(valcedula)=='false'){
+					alert("La cedula es incorrecta.");
+					return;
+				}
+			}
+
+				$.ajax({
+				  method: "POST",
+				  url: "http://practisis.net/practifactura/api.php",
+				  data: { cedulaconsulta: cedula,dedonde:"cedulac",empresahis: miidempresa }
+				})
+				  .done(function( msg ) {
+					if (msg=="no"){
+						//$('#datos').html('<div class="form-group"><input class="form-control input-lg" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"><input class="form-control input-lg" type="apellido" name="apellido" id="apellido" placeholder="Apellido" required="" autocomplete="off"><input class="form-control input-lg" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off" ><input class="form-control input-lg" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div> ');
+						$('#datos').html('<div class="form-group"><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Nombre</span><input class="form-control input-md" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Dirección</span><input class="form-control input-md" type="apellido" name="apellido" id="apellido" placeholder="Dirección" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">E-mail</span><input class="form-control input-md" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Teléfono</span><input class="form-control input-md" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div></div> ');
+						$("#maincontinuar").show();
+						$("#btningresadatosc").html("Grabar");
+						$("#lbldatosfactura").show();
+						 $('#datos').show();
+						 $('#datosconsumos').hide();
+                         $('#datostotales').hide();
+						 $('.idcliente').val('');
+					}else {
+					var separafact  = msg;
+					var separafactdi = separafact.split("||");
+					 $('#datos').html(msg);
+					 $("#maincontinuar").show();
+					 $("#btningresadatosc").html("Actualizar");
+
+					$("#lbldatosfactura").show();
+					 $('#datos').show();
+					  $('#datosconsumos').show();
+                      $('#datostotales').show();
+					  $("#factura_no").val($('#lanumfactura').val());
+					  $('idcliente').val(separafactdi[0]);
+					}
+					console.log(msg);
+				});
+}
+</script>
+
   </body>
 </html>
