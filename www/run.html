@@ -56,11 +56,11 @@
 
 <div style="height:50px;"></div>
 <div class="container-fluid">
-		<div class='row' id="facturas" style="display:block">
-					<div class='col-lg-12 col-md-12 col-sm-12 ui-mobile'>
+		<div class='row' id="facturas" style="display:block;height: auto;">
+					<div id="auxcontenido1" class='col-lg-12 col-md-12 col-sm-12 ui-mobile' style="height: 100%;">
 
-						<div class="row">
-							<div class="col-xs-12 col-sm-5">
+						<div class="row" style="height: 100%;">
+							<div id="auxborder" class="col-xs-12 col-sm-4" style="border-right: 2px solid #616161;height: 100%;z-index: 100;">
                                 <div class="row">
 							        <div class="col-xs-12">
 
@@ -82,48 +82,48 @@
 							        <div class="col-xs-12">
 
                                         <div class="form-group form-group-md">
-        									<div  id="lbldatosfactura" style=" color:white; text-decoration:none; width:100%; margin-top:10px; display:none; !important;">
+        									<div  id="lbldatosfactura" style=" color:#000000; text-decoration:none; width:100%; margin-top:10px; display:none; !important;">
                                                 <label for="basic-url">Datos de la Factura.</label>
         									</div>
         									<div id="datos" Align="center" style="width:100%; display:none;">
 
         									</div>
-        									<div id="maincontinuar" Align="center" style="width:100%; display:none;">
+        									<div id="maincontinuar" Align="right" style="width:100%; display:none;">
         										<div class="form-group">
-        											<button type="button" class="btn btn-success btn-lg" id="btningresadatosc" onclick="ingresadatos(); return false;">Grabar</button>
+        											<button type="button" class="btn btn-success btn-md" id="btningresadatosc" onclick="ingresadatos(); return false;">Grabar</button>
         										</div>
         									</div>
         								</div>
 
                                    </div>
 
-							        <div class="col-xs-12">
+							        <div id="datostotalesaux" class="col-xs-12">
 
                                         <div id="datostotales" style="display: none;">
-                                              <label for="basic-url" style=" color:white; text-decoration:none; width:100%;">Totales</label>
+                                              <label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Totales</label>
   										  <div class="panel-body" style="margin-top: -15px;">
   											<div class='row'>
   												<div class='col-ms-3'>
   													<div class="input-group">
-  														<span class="input-group-addon" id="sizing-addon4" style="width: 50%;">Sub Total sin IVA</span>
+  														<span class="input-group-addon" id="sizing-addon4" style="width: 50%;text-align: left;">Sub Total sin IVA</span>
   														<input type="text" name="subsi" id="subsi" class="form-control" style="text-align: right;" aria-describedby="sizing-addon4" value="0.00" readonly="readonly"/>
   													</div>
   												</div>
   												<div class='col-ms-3'>
   													<div class="input-group">
-  														<span class="input-group-addon" id="sizing-addon3" style="width: 50%;">Sub Total con IVA</span>
+  														<span class="input-group-addon" id="sizing-addon3" style="width: 50%;text-align: left;">Sub Total con IVA</span>
   														<input type="text" name="subci" id="subci" class="form-control" style="text-align: right;" aria-describedby="sizing-addon3" value="0.00" readonly="readonly"/>
   													</div>
   												</div>
   												<div class='col-ms-3'>
   													<div class="input-group">
-  														<span class="input-group-addon" id="sizing-addon4" style="width: 50%;">IVA</span>
+  														<span class="input-group-addon" id="sizing-addon4" style="width: 50%;text-align: left;">IVA</span>
   														<input type="text" name="iva" id="iva" class="form-control" style="text-align: right;" aria-describedby="sizing-addon4" value="0.00" readonly="readonly"/>
   													</div>
   												</div>
   												<div class='col-ms-3'>
   													<div class="input-group">
-  														<span class="input-group-addon" id="sizing-addon3" style="width: 50%;">TOTAL</span>
+  														<span class="input-group-addon" id="sizing-addon3" style="width: 50%;text-align: left;">TOTAL</span>
   														<input type="text" name="total" id="total" class="form-control" style="text-align: right;" aria-describedby="sizing-addon3" value="0.00" readonly="readonly"/>
   													</div>
   												</div>
@@ -135,7 +135,7 @@
                                 </div>
 							</div>
 
-							<div class="col-sm-7">
+							<div class="col-sm-8" style="height: 100%;">
 
                                 <div id="datosconsumos" style="display: none;">
         							<div style="display: none;">
@@ -143,8 +143,8 @@
         							<textarea id="consumos" name="consumos"></textarea>
         							</div>
         							<div class='row'>
-        								<div class='col-md-9' style="padding-top: 10px;">
-        										<label for="basic-url" style=" color:white; text-decoration:none; width:100%;">Totales</label>
+        								<div class='col-md-12' style="padding-top: 10px;">
+        										<label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Factura</label>
         									    <div class="panel-body" style="height: 100%;background-color: #FFFFFF;">
         													<table style="width: 100%;">
         														<tr>
@@ -189,20 +189,57 @@
         							</div>
                                     <br>
       								<div class='row'>
-      									<div class="col-md-4" >
+      									<div class="col-md-8" >
       									</div>
       									<div class='col-md-4'>
-      										<p style="text-align: right"><input type="button" name="pagar" id="pagar" onclick="validar();" class="btn btn-info btn-lg" value="Facturar"></p>
+      										<p style="text-align: right"><input type="button" name="pagar" id="pagar" onclick="validar();" class="btn btn-success btn-md" value="Facturar"></p>
       									</div>
+      								</div>
+                                    <div id="datostotalesaux1" class='row' style="display: none;">
+      									<div class="col-xs-12">
+
+                                              <div id="datostotales">
+                                                    <label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Totales</label>
+        										  <div class="panel-body" style="margin-top: -15px;">
+        											<div class='row'>
+        												<div class='col-ms-3'>
+        													<div class="input-group">
+        														<span class="input-group-addon" id="sizing-addon4" style="width: 50%;text-align: left;">Sub Total sin IVA</span>
+        														<input type="text" name="subsi" id="subsi" class="form-control" style="text-align: right;" aria-describedby="sizing-addon4" value="0.00" readonly="readonly"/>
+        													</div>
+        												</div>
+        												<div class='col-ms-3'>
+        													<div class="input-group">
+        														<span class="input-group-addon" id="sizing-addon3" style="width: 50%;text-align: left;">Sub Total con IVA</span>
+        														<input type="text" name="subci" id="subci" class="form-control" style="text-align: right;" aria-describedby="sizing-addon3" value="0.00" readonly="readonly"/>
+        													</div>
+        												</div>
+        												<div class='col-ms-3'>
+        													<div class="input-group">
+        														<span class="input-group-addon" id="sizing-addon4" style="width: 50%;text-align: left;">IVA</span>
+        														<input type="text" name="iva" id="iva" class="form-control" style="text-align: right;" aria-describedby="sizing-addon4" value="0.00" readonly="readonly"/>
+        													</div>
+        												</div>
+        												<div class='col-ms-3'>
+        													<div class="input-group">
+        														<span class="input-group-addon" id="sizing-addon3" style="width: 50%;text-align: left;">TOTAL</span>
+        														<input type="text" name="total" id="total" class="form-control" style="text-align: right;" aria-describedby="sizing-addon3" value="0.00" readonly="readonly"/>
+        													</div>
+        												</div>
+        											</div>
+        										  </div>
+                                              </div>
+
+                                         </div>
       								</div>
         						</div>
 
 							</div>
 
+							</div>
+
 						</div>
 
-						
-					</div>
 		</div>
 		<div class='row' id="historial" style="display:none">
 			<div class='col-lg-12 col-md-12 col-sm-12 ui-mobile'>
@@ -346,7 +383,7 @@
 			<div class="modal-backdrop fade in" id='cargandoTabs' style='z-index:1000;display:none;'>
 				<table width='100%' height='100%'>
 					<tr>
-						<td valign='middle' align='center'> 
+						<td valign='middle' align='center'>
 							<img src='img/loader.gif' style='width:200px;'/>
 						</td>
 					</tr>
@@ -357,7 +394,7 @@
 function envia(donde){
 			if (donde=='factura'){ //*****************************consulto la cedula si existe ***********************
 			var cedula=$.trim($("#cedula").val());
-			var pasaporte = cedula.substring(0, 1); 
+			var pasaporte = cedula.substring(0, 1);
 			if (pasaporte=='P' || pasaporte=='p'){
 			}else{
 				var valcedula=validacedula();
@@ -366,7 +403,7 @@ function envia(donde){
 					return;
 				}
 			}
-				
+
 				$.ajax({
 				  method: "POST",
 				  url: "http://practisis.net/practifactura/api.php",
@@ -374,36 +411,36 @@ function envia(donde){
 				})
 				  .done(function( msg ) {
 					if (msg=="no"){
-						//$('#datos').html('<div class="form-group"><input class="form-control input-lg" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"><input class="form-control input-lg" type="apellido" name="apellido" id="apellido" placeholder="Apellido" required="" autocomplete="off"><input class="form-control input-lg" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off" ><input class="form-control input-lg" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div> ');						
-						$('#datos').html('<div class="form-group"><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;">Nombre</span><input class="form-control input-md" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;">Dirección</span><input class="form-control input-md" type="apellido" name="apellido" id="apellido" placeholder="Dirección" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;">E-mail</span><input class="form-control input-md" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;">Teléfono</span><input class="form-control input-md" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div></div> ');
+						//$('#datos').html('<div class="form-group"><input class="form-control input-lg" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"><input class="form-control input-lg" type="apellido" name="apellido" id="apellido" placeholder="Apellido" required="" autocomplete="off"><input class="form-control input-lg" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off" ><input class="form-control input-lg" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div> ');
+						$('#datos').html('<div class="form-group"><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Nombre</span><input class="form-control input-md" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Dirección</span><input class="form-control input-md" type="apellido" name="apellido" id="apellido" placeholder="Dirección" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">E-mail</span><input class="form-control input-md" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Teléfono</span><input class="form-control input-md" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div></div> ');
 						$("#maincontinuar").show();
 						$("#btningresadatosc").html("Grabar");
 						$("#lbldatosfactura").show();
 						 $('#datos').show();
 						 $('#datosconsumos').hide();
                          $('#datostotales').hide();
-						 $('.idcliente').val('');												
+						 $('.idcliente').val('');
 					}else {
 					var separafact  = msg;
-					var separafactdi = separafact.split("||");					
+					var separafactdi = separafact.split("||");
 					 $('#datos').html(msg);
 					 $("#maincontinuar").show();
 					 $("#btningresadatosc").html("Actualizar");
-					 
+
 					$("#lbldatosfactura").show();
 					 $('#datos').show();
 					  $('#datosconsumos').show();
                       $('#datostotales').show();
 					  $("#factura_no").val($('#lanumfactura').val());
 					  $('idcliente').val(separafactdi[0]);
-					}					
+					}
 					console.log(msg);
-				});	
-						
+				});
+
 				$("#facturas").show();
 				$("#historial").hide();
 				$("#configurarfact").hide();
-				
+
 			}else if(donde=='configurar'){
 				$("#facturas").hide();
 				$("#historial").hide();
@@ -686,10 +723,29 @@ function verride(que,quien){
 	
 		var url=document.URL; 
 		var miidempresa= url.substring(url.indexOf("id=")+3);
-		alert (miidempresa); 
-		
-	
-   </script>	
+		alert (miidempresa);
+
+if(parseInt(screen.width)>500){
+var alto = parseInt(screen.height)-160;
+document.getElementById('facturas').style.height=alto+'px';
+//alert('El alto de la resolucion de pantalla es de '+alto+'pixeles');
+}
+   </script>
+<style>
+@media screen and (max-width: 500px) {
+  div#datostotalesaux1 {
+    display: block;
+  }
+  div#datostotalesaux {
+    display: none;
+    background-color: #CC0000;
+  }
+  div#auxcontenido1{
+    height: auto;
+     background-color: #CC0000;
+  }
+}
+</style>
    
   </body>
 </html>
