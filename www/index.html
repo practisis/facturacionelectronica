@@ -63,6 +63,7 @@
       </div> <!--End row -->
 </div>
 	<script>
+	var errNet='Problemas de conexión \n Por favor Verifica tu internet.';
 	function mostrarSignIn () {
 	location.href="login.html"; 		
 	}
@@ -86,23 +87,28 @@
 	alert ("El password es incorrecto. Confirme que el password sea el mismo  ");
 	return;
 	} 
-	
+	if(fHayInternet()) {  
 		$.ajax({
-  method: "POST",
-  url: "http://practifactura.com/registro/registro.php",
-  data: { email: email, pass: pass,empresa:empresa,nombre:nombre,celular:celular,pais:pais,versiones:versiones }
-})
-  .done(function( msg ) {
-    //alert( "Data Saved: " + msg );
-	if (msg=="si"){
-		location.href="run.html";
-	}else {
-		alert ("Usted ya tiene una cuenta.");
+  		method: "POST",
+  		url: "http://practifactura.com/registro/registro.php",
+  		data: { email: email, pass: pass,empresa:empresa,nombre:nombre,celular:celular,pais:pais,versiones:versiones }
+		})
+  		.done(function( msg ) {
+	    //alert( "Data Saved: " + msg );
+		if (msg=="si"){
+			location.href="run.html";
+		}else {
+			alert ("Usted ya tiene una cuenta.");
+		}
+		
+		console.log(msg);
+  		});	
+  		}else{
+  			alert(errNet); return;
+  		}
 	}
-	
-	console.log(msg);
-  });	
-	}
+
+	function fHayInternet(){ return window.navigator.onLine; }
 	//***********************************************
 	</script>
 	
