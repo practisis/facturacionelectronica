@@ -61,12 +61,14 @@
       </div> <!--End row -->
 	</div>
 	<script>
+	var errNet='Problemas de conexión \n Por favor Verifica tu internet.';
 	function nuevaCuenta () {
 	location.href="index.html"; 	
 	}
 	
 	// consulta los datos *****************
 	function validateToken () {
+	if(!fHayInternet()){ alert(errNet); return;  }
 	var usuario=$("#user2").val();
 	var password=$("#pass2").val();
 	$("#fadeCloud").show();
@@ -87,6 +89,7 @@
 	if (msg=="no"){
 		alert ("El usuario o la contraseña están incorrectos. ");
 	}else {
+		localStorage.setItem("empresa", msg);
 		location.href="run.html?id="+msg;
 	}
 	
@@ -97,7 +100,7 @@
 	
 	
 	
-	
+	function fHayInternet(){ return window.navigator.onLine; }
 	
 	//***********************************************
 	</script>
