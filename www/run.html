@@ -48,6 +48,7 @@
 						<li onclick="envia('factura')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-line-chart'></span>&nbsp;Facturar<span class="sr-only">(current)</span></a></li>
 						<li onclick="envia('historial')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-shopping-cart'></span>&nbsp;Historial<span class="sr-only">(current)</span></a></li>
 						<li onclick="envia('configurar')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-shopping-cart'></span>&nbsp;Configurar<span class="sr-only">(current)</span></a></li>
+            <li onclick="envia('firma')"><a href="javascript:void(0);"><span style='display:inline;' class='glyphicon glyphicon-pencil'></span>&nbsp;Firma Electrónica<span class="sr-only">(current)</span></a></li>
 					</ul>
 
 				</div>
@@ -361,19 +362,19 @@
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">E-mail</span>
-											<input class="form-control" type="text" name="emailconfi" id="emailconfi" placeholder="email@empresa.com" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="email" id="email" placeholder="email@empresa.com" value="" required="" autocomplete="off">
 										</div>
 									</div>
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">Dirección</span>
-											<input class="form-control" type="text" name="direccion" id="direccion" placeholder="Dirección" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="direccion" id="direccion" placeholder="23-01-2016" value="" required="" autocomplete="off">
 										</div>
 									</div>
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">Teléfono</span>
-											<input class="form-control" type="text" name="telefonoconfi" id="telefonoconfi" placeholder="Teléfono" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="telefono" id="telefono" placeholder="texto" value="" required="" autocomplete="off">
 										</div>
 									</div>
 
@@ -390,6 +391,38 @@
 					</div>
 		</div>
 
+    <div id="firma" class="row" style="display:none;">
+      <div class="col-xs-4"></div>
+        <div class="col-xs-4">
+          <br><br>
+            <a class="btn btn-success"  id="uploadFactura">
+            <table width="100%" id="textoUpload" >
+                <tr>
+                    <td valign="center" width="20%">
+                        <h1 class='glyphicon glyphicon-upload'></h1>
+                    </td>
+                    <td valign="center">
+                      <h4> Por favor seleccione un archivo  </h4>
+                    </td>
+                  </tr>
+            </table>
+
+              <table width='100%' height='100%' id="loadGifUpload" style='display:none;'>
+                <tr>
+                    <td valign="center" align="center" width="20%">
+                        <img src='img/loader.gif' width="50" />
+                    </td>
+                    <td>
+                        <h4 style='margin-left:15px;'> Subiendo Archivo </h4>
+                    </td>
+                </tr>
+              </table>
+            </a>
+
+        </div>
+        <div class="col-xs-4"></div>
+    </div>
+
  </div>
 			<div class="modal-backdrop fade in" id='cargandoTabs' style='z-index:1000;display:none;'>
 				<table width='100%' height='100%'>
@@ -402,7 +435,9 @@
 			</div>
 	<script>
 	//codigo javascript de funcionalidad
+  var errNet='Problemas de conexión \n Por favor Verifica tu internet.';
 function envia(donde){
+    $("#firma").css("display" , "none"); /*Josue Desorder*/
 			if (donde=='factura'){ //*****************************consulto la cedula si existe ***********************
 
     		$("#lbldatosfactura").hide();
@@ -435,9 +470,12 @@ function envia(donde){
 				$("#configurarfact").hide();
 
 			}else if(donde=='configurar'){
-				$("#facturas").hide();
+				if(!fHayInternet()) {  alert(errNet); return; }
+        $("#facturas").hide();
 				$("#historial").hide();
 				$("#configurarfact").show();
+
+
 				$.ajax({          //************************ este codigo consulta los datos de la factura*********************
 				  method: "POST",
 				  url: "http://practisis.net/practifactura/api.php",
@@ -457,8 +495,13 @@ function envia(donde){
 					console.log(msg);
 				});
 
-			}else
-			{                         //**********************este corresponde al historial de las facturas*****************************************************//
+			 }else if(donde=='firma'){
+          $("#facturas").hide();
+          $("#historial").hide();
+          $("#configurarfact").hide();
+          $("#firma").show();
+			}else{                         //**********************este corresponde al historial de las facturas*****************************************************//
+        if(!fHayInternet()) {  alert(errNet); return; }
 			$.ajax({
 				  method: "POST",
 				  url: "http://practisis.net/practifactura/api.php",
@@ -486,6 +529,7 @@ function envia(donde){
 }
 //*****************************************Ver RIDE***************************************
 function verride(que,quien){
+  if(!fHayInternet()) {  alert(errNet); return; }
   $.ajax({
     method: "POST",
     url: "http://www.practifactura.com/"+que,
@@ -504,6 +548,7 @@ function verride(que,quien){
 }
 
 	function verfacturas(){//************************************consulta las facturas por fecha *******************************
+    if(!fHayInternet()) {  alert(errNet); return; }
 	$("#fadeCloud").show();
 	var lafecha=$( "#fechadesde" ).val();
 	$.ajax({
@@ -525,6 +570,7 @@ function verride(que,quien){
 	}
 
 	function ingresadatos(){//***********************ingresa datos del cliente si no estan en la base **********************************
+    if(!fHayInternet()) {  alert(errNet); return; }
 	var hayidcliente=$('#idcliente').val();
 	var micedula=$.trim($("#cedula").val());
 	var email=$.trim($("#email").val());
@@ -581,31 +627,19 @@ function verride(que,quien){
 
 
  function ingresafacturaconfi(){//***********************ingresa datos de la factura **********************************
+  if(!fHayInternet()) {  alert(errNet); return; }
  $("#fadeCloud").show();
 	var establecimiento=$.trim($("#establecimiento").val());
 	var serie=$.trim($("#serie").val());
 	var facturano=$.trim($("#facturano").val());
-	var nombre=$.trim($("#nombre").val());
-	var ruc=$.trim($("#ruc").val());
-	var logo=$.trim($("#logo").val());
-	var emailconfi=$.trim($("#emailconfi").val());
-	var direccion=$.trim($("#direccion").val());
-	var telefonoconfi=$.trim($("#telefonoconfi").val());
-	
-	if (establecimiento=="" || serie =="" || facturano=="" || nombre=="" || ruc =="" || direccion ==""){ 
+	if (establecimiento=="" || serie =="" || facturano=="" ){
 	alert ("Ingrese todos los datos de la factura.");
-	$("#fadeCloud").hide();
 	return;
 	}
-	/*if (emailconfi=="" || logo=="" =="" || telefonoconfi==""){  
-	alert ("Ingrese todos los datos de la factura.");
-	$("#fadeCloud").hide();
-	return;
-	}*/
 	$.ajax({
 				  method: "POST",
 				  url: "http://practisis.net/practifactura/api.php",
-				  data: { empresahis: miidempresa,dedonde: "ingresadatosfactura",establecimiento:establecimiento,serie:serie,facturano:facturano,nombre:nombre,ruc:ruc,logo:logo,direccion:direccion,telefonoconfi:telefonoconfi}//,emailconfi:emailconfi}
+				  data: { empresahis: miidempresa,dedonde: "ingresadatosfactura",establecimiento:establecimiento,serie:serie,facturano:facturano}
 				})
 				  .done(function( msg ) {
 						$("#fadeCloud").hide();
@@ -739,7 +773,7 @@ function verride(que,quien){
 
 		var url=document.URL;
 		var miidempresa= url.substring(url.indexOf("id=")+3);
-		alert (miidempresa);
+		//alert (miidempresa);
 
 //alert($(window).height());
 if(parseInt($(window).width())>700){
@@ -778,6 +812,7 @@ $(window).resize(function() {
   }
 });
 function consultar(){
+  if(!fHayInternet()) {  alert(errNet); return; }
   var cedula=$.trim($("#cedula").val());
 			var pasaporte = cedula.substring(0, 1);
 			if (pasaporte=='P' || pasaporte=='p'){
@@ -820,8 +855,13 @@ function consultar(){
 					  $('idcliente').val(separafactdi[0]);
 					}
 					console.log(msg);
+
 				});
 }
+function fHayInternet(){ return window.navigator.onLine; }
+$("#uploadFactura").click(function(){
+  /*Multipart file por hacer*/
+});
 </script>
 
   </body>
