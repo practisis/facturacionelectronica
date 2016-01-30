@@ -361,19 +361,19 @@
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">E-mail</span>
-											<input class="form-control" type="text" name="email" id="email" placeholder="email@empresa.com" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="emailconfi" id="emailconfi" placeholder="email@empresa.com" value="" required="" autocomplete="off">
 										</div>
 									</div>
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">Dirección</span>
-											<input class="form-control" type="text" name="direccion" id="direccion" placeholder="23-01-2016" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="direccion" id="direccion" placeholder="Dirección" value="" required="" autocomplete="off">
 										</div>
 									</div>
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">Teléfono</span>
-											<input class="form-control" type="text" name="telefono" id="telefono" placeholder="texto" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="telefonoconfi" id="telefonoconfi" placeholder="Teléfono" value="" required="" autocomplete="off">
 										</div>
 									</div>
 
@@ -585,14 +585,27 @@ function verride(que,quien){
 	var establecimiento=$.trim($("#establecimiento").val());
 	var serie=$.trim($("#serie").val());
 	var facturano=$.trim($("#facturano").val());
-	if (establecimiento=="" || serie =="" || facturano=="" ){
+	var nombre=$.trim($("#nombre").val());
+	var ruc=$.trim($("#ruc").val());
+	var logo=$.trim($("#logo").val());
+	var emailconfi=$.trim($("#emailconfi").val());
+	var direccion=$.trim($("#direccion").val());
+	var telefonoconfi=$.trim($("#telefonoconfi").val());
+	
+	if (establecimiento=="" || serie =="" || facturano=="" || nombre=="" || ruc =="" || direccion ==""){ 
 	alert ("Ingrese todos los datos de la factura.");
+	$("#fadeCloud").hide();
 	return;
 	}
+	/*if (emailconfi=="" || logo=="" =="" || telefonoconfi==""){  
+	alert ("Ingrese todos los datos de la factura.");
+	$("#fadeCloud").hide();
+	return;
+	}*/
 	$.ajax({
 				  method: "POST",
 				  url: "http://practisis.net/practifactura/api.php",
-				  data: { empresahis: miidempresa,dedonde: "ingresadatosfactura",establecimiento:establecimiento,serie:serie,facturano:facturano}
+				  data: { empresahis: miidempresa,dedonde: "ingresadatosfactura",establecimiento:establecimiento,serie:serie,facturano:facturano,nombre:nombre,ruc:ruc,logo:logo,direccion:direccion,telefonoconfi:telefonoconfi}//,emailconfi:emailconfi}
 				})
 				  .done(function( msg ) {
 						$("#fadeCloud").hide();
