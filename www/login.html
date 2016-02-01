@@ -62,6 +62,7 @@
 	</div>
 	<script>
 	var errNet='Problemas de conexión \n Por favor Verifica tu internet.';
+	if(localStorage.getItem('empresa')) window.top.location='run.html?id='+localStorage.getItem('empresa');
 	function nuevaCuenta () {
 	location.href="index.html"; 	
 	}
