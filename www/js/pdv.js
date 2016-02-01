@@ -81,6 +81,8 @@ function totales(){
 }
 function validar(){
   $("#fadeCloud").show();
+  $('#msjok').fadeIn('fast');
+  //$('#msjinfo').fadeOut('fast');
   var facturacion = '';
   var sutotal = 0;
   var sutotalneto = 0;
@@ -144,6 +146,7 @@ function validar(){
 	 
 	  if (errordi>0){		
 			alert("No se puede grabar la factura. Por favor revise los datos.");
+            $("#fadeCloud").hide();
 			return false;		
 	  }
 
@@ -187,7 +190,10 @@ function validar(){
                 $('html,body').animate({
                 	scrollTop : 0
                 });
-                setTimeout(function(){ location.reload(true); }, 2000);
+                //setTimeout(function(){ location.reload(true); }, 2000);
+                envia('factura');
+                $("#fadeCloud").hide();
+                $('#boton1').tooltip('show');
               }else{
                 $('.alert-danger').not('#uploaderrors').slideUp();
                 $('.alert-danger').html('<b>Hubo un error!</b><br/>Vuelva a intentar.');
@@ -203,4 +209,28 @@ function validar(){
     //document.getElementById('facturacion').value = facturacion;
     //document.getElementById('consumos').value = consumos;
   }
+}
+window.addEventListener('native.keyboardshow', keyboardShowHandler);
+
+function keyboardShowHandler(e){
+	//alert("show");
+	var inp=$(":focus");
+	var padding = 15;
+          var targetPosition = parseInt($(inp).offset().top + padding);
+          var keyboardHeight = parseInt($(window).height())-parseInt(e.keyboardHeight);//get keyboard height
+
+                  //if the input is hidden by the keyboard,scroll to the input
+	//alert(targetPosition+'/'+keyboardHeight);
+          if (targetPosition >= keyboardHeight) {
+              //padding *=5;
+              $('#mybodycontent').css("top",-(targetPosition-keyboardHeight+padding)+"px");
+          }
+}
+
+// This event fires when the keyboard will show
+window.addEventListener('native.keyboardhide', keyboardHideHandler);
+
+function keyboardHideHandler(e){
+	//alert("hide");
+	$('#mybodycontent').css("top","0px");
 }
