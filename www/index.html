@@ -64,6 +64,7 @@
       </div> <!--End row -->
 </div>
 	<script>
+	if(localStorage.getItem('empresa')) window.top.location='run.html?id='+localStorage.getItem('empresa');
 	var errNet='Problemas de conexión \n Por favor Verifica tu internet.';
 	function mostrarSignIn () {
 	location.href="login.html"; 		
