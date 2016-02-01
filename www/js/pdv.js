@@ -28,14 +28,14 @@ function ingresa(quien){
 
 	   document.getElementById('precn'+quien).value=prec.toFixed(2);
       document.getElementById('subt'+quien).value=subtotal.toFixed(2);
-	  
+
 	   var cambiacant=cant.toString().replace(",",".");
 		var cambiaprec=prec.toString().replace(",",".");
 		cant=cambiacant;
 		prec=parseFloat(cambiaprec);
 	  document.getElementById('cant'+quien).value=cant;
       document.getElementById('prec'+quien).value=prec;
-	  
+
       totales();
     }
   }
@@ -52,10 +52,10 @@ function totales(){
   	for ( var i = 0; i < d.length; i++ ) {
       var ww=d[i].id;
       var tiva = ww.substr(0,4);
-      
+
       if(tiva=='subt'){
         var quien = ww.substr(4);
-        
+
         if(document.getElementById('subt'+quien).value != ''){
           var permiso = document.getElementById('iva'+quien).checked;
           if(permiso==true){
@@ -81,6 +81,8 @@ function totales(){
 }
 function validar(){
   $("#fadeCloud").show();
+  $('#msjok').fadeIn('fast');
+  //$('#msjinfo').fadeOut('fast');
   var facturacion = '';
   var sutotal = 0;
   var sutotalneto = 0;
@@ -89,7 +91,7 @@ function validar(){
   var iva = parseFloat(document.getElementById('iva').value);
   var total = parseFloat(document.getElementById('total').value);
   var errordi=0;
-  
+
   if ($("#idcliente").length > 0 ){
   var idcliente = $('#idcliente').val();
   }else{
@@ -102,8 +104,8 @@ function validar(){
   var caja = '002'; //document.getElementById('caja').value;
   var factura_no = document.getElementById('factura_no').value;
   facturacion = idcliente+'|'+total+'|'+sutotal+'|'+establecimiento+'|'+caja+'|'+factura_no+'|'+sutotalneto+'|'+subci+'|'+iva;
-	
-	
+
+
   var d = document.getElementById('tablaconsumos').getElementsByTagName('input');
     var consumos = '';
   	for ( var i = 0; i < d.length; i++ ) {
@@ -141,10 +143,11 @@ function validar(){
 			}
         }
       }
-	 
-	  if (errordi>0){		
+
+	  if (errordi>0){
 			alert("No se puede grabar la factura. Por favor revise los datos.");
-			return false;		
+            $("#fadeCloud").hide();
+			return false;
 	  }
 
   /*if(establecimiento == ''){
@@ -172,10 +175,10 @@ function validar(){
       });
       setTimeout(function(){ $('.alert-danger').not('#uploaderrors').slideUp(); }, 3000);
   }else{
-	
+    //alert('empresahis='+miidempresa+'&que=1&facturacion='+facturacion+'&consumos='+consumos);
     $.ajax({
 		type: 'POST',
-		url: "http://practisis.net/practifactura/api.php",
+		url: "http://practisis.net/practifactura/api2.php",
 		data: 'empresahis='+miidempresa+'&que=1&facturacion='+facturacion+'&consumos='+consumos,
 		success: function(response){
 		  //alert(response);
@@ -187,7 +190,16 @@ function validar(){
                 $('html,body').animate({
                 	scrollTop : 0
                 });
-                setTimeout(function(){ location.reload(true); }, 2000);
+                //setTimeout(function(){ location.reload(true); }, 2000);
+                document.getElementById('msjinfo').style.display='none';
+                setTimeout(function(){ envia('factura'); }, 2000);
+                $('#datos').hide();
+        		$('#datosconsumos').hide();
+                $('#datostotales').hide();
+        		$('.idcliente').val('');
+                $("#maincontinuar").hide();
+                $("#fadeCloud").hide();
+                $('#boton1').tooltip('show');
               }else{
                 $('.alert-danger').not('#uploaderrors').slideUp();
                 $('.alert-danger').html('<b>Hubo un error!</b><br/>Vuelva a intentar.');

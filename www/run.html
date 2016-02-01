@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -48,6 +49,7 @@
 						<li onclick="envia('factura')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-line-chart'></span>&nbsp;Facturar<span class="sr-only">(current)</span></a></li>
 						<li onclick="envia('historial')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-shopping-cart'></span>&nbsp;Historial<span class="sr-only">(current)</span></a></li>
 						<li onclick="envia('configurar')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-shopping-cart'></span>&nbsp;Configurar<span class="sr-only">(current)</span></a></li>
+            <li onclick="envia('firma')"><a href="javascript:void(0);"><span style='display:inline;' class='glyphicon glyphicon-pencil'></span>&nbsp;Firma Electrónica<span class="sr-only">(current)</span></a></li>
 					</ul>
 
 				</div>
@@ -55,35 +57,37 @@
 			</nav>
 
 <div style="height:50px;"></div>
-<div class="container-fluid">
+<div id="mybodycontent" class="container-fluid" style="position: relative;">
 		<div class='row' id="facturas" style="display:block;height: auto;">
 					<div id="auxcontenido1" class='col-lg-12 col-md-12 col-sm-12 ui-mobile'>
 
-						<div class="row" style="height: 100%;">
-							<div id="auxborder" class="col-xs-12 col-sm-4" style="border-right: 2px solid #616161;z-index: 100;">
+						<div class="row panel panel-default" style="height: 100%;">
+
+							<div id="auxborder" class="col-xs-12 col-sm-4 panel-heading" style="border-right: 1px solid #616161;z-index: 100;">
                                 <div class="row">
 							        <div class="col-xs-12">
 
         								<div id="main" Align="center" style="width:100%;  margin-top:10px;">
         									<div class="input-group">
         										<span class="input-group-addon" id="sizing-addon4" style="width: 85px;"># Cédula</span>
-        										<input class="form-control input-md" type="cedula" name="cedula" id="cedula" placeholder="Cédula" required="" autocomplete="off">
+        										<input class="form-control input-md" type="cedula" name="cedula" id="cedula" placeholder="Cédula" value="9999999999999" required="" onclick="vaciar();" autocomplete="off">
         										<div class="input-group-btn">
-        											<button type="button" class="btn btn-primary btn-md" onclick="consultar(); return false;">Consulta</button>
+        											<button id="boton1" type="button" class="btn btn-primary btn-md" onclick="consultar(); return false;" data-toggle="tooltip" data-placement="right" title="Haz Click Aquí!">Consulta</button>
         										</div>
         									</div>
                                             <input class="idcliente" type="hidden">
+                                            <br>
         								</div>
 
                                    </div>
                                 </div>
 
                                 <div class="row">
-							        <div class="col-xs-12">
+							        <div id="rayas" class="col-xs-12" style="border-top: 1px solid #CCCCCC;border-bottom: 0px solid #CCCCCC;">
 
                                         <div class="form-group form-group-md">
         									<div  id="lbldatosfactura" style=" color:#000000; text-decoration:none; width:100%; margin-top:10px; display:none; !important;">
-                                                <label for="basic-url">Datos de la Factura.</label>
+                                                <!--<label for="basic-url">Datos de la Factura.</label> -->
         									</div>
         									<div id="datos" Align="center" style="width:100%; display:none;">
 
@@ -98,36 +102,28 @@
                                    </div>
 
 							        <div id="datostotalesaux" class="col-xs-12">
-
+                                        <br>
                                         <div id="datostotales" style="display: none;">
-                                              <label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Totales</label>
-  										  <div class="panel-body" style="margin-top: -15px;">
-  											<div class='row'>
-  												<div class='col-ms-3'>
-  													<div class="input-group">
-  														<span class="input-group-addon" id="sizing-addon4" style="width: 50%;text-align: left;">Sub Total sin IVA</span>
-  														<input type="text" name="subsi" id="subsi" class="form-control" style="text-align: right;" aria-describedby="sizing-addon4" value="0.00" readonly="readonly"/>
-  													</div>
-  												</div>
-  												<div class='col-ms-3'>
-  													<div class="input-group">
-  														<span class="input-group-addon" id="sizing-addon3" style="width: 50%;text-align: left;">Sub Total con IVA</span>
-  														<input type="text" name="subci" id="subci" class="form-control" style="text-align: right;" aria-describedby="sizing-addon3" value="0.00" readonly="readonly"/>
-  													</div>
-  												</div>
-  												<div class='col-ms-3'>
-  													<div class="input-group">
-  														<span class="input-group-addon" id="sizing-addon4" style="width: 50%;text-align: left;">IVA</span>
-  														<input type="text" name="iva" id="iva" class="form-control" style="text-align: right;" aria-describedby="sizing-addon4" value="0.00" readonly="readonly"/>
-  													</div>
-  												</div>
-  												<div class='col-ms-3'>
-  													<div class="input-group">
-  														<span class="input-group-addon" id="sizing-addon3" style="width: 50%;text-align: left;">TOTAL</span>
-  														<input type="text" name="total" id="total" class="form-control" style="text-align: right;" aria-describedby="sizing-addon3" value="0.00" readonly="readonly"/>
-  													</div>
-  												</div>
-  											</div>
+                                              <!--<label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Totales</label>-->
+  										  <div class="panel-body" style="margin-top: -15px;font-size: 12px;">
+                                            <table>
+                                              <tr>
+                                                <td><span style="text-align: left;">Sub Total sin IVA US$:</span></td>
+                                                <td><input type="text" name="subsi" id="subsi" class="form-control" style="text-align: right;width: 100px;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                              </tr>
+                                              <tr>
+                                                <td><span style=";text-align: left;">Sub Total con IVA US$:</span></td>
+                                                <td><input type="text" name="subci" id="subci" class="form-control" style="text-align: right;width: 100px;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                              </tr>
+                                              <tr>
+                                                <td><span style="text-align: left;">IVA US$:</span></td>
+                                                <td><input type="text" name="iva" id="iva" class="form-control" style="text-align: right;width: 100px;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                              </tr>
+                                              <tr>
+                                                <td><span style="text-align: left;"><b>TOTAL US$:</b></span></td>
+                                                <td><input type="text" name="total" id="total" class="form-control" style="text-align: right;width: 100px;display: inline-block;font-weight: bold;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                              </tr>
+                                            </table>
   										  </div>
                                         </div>
 
@@ -135,24 +131,40 @@
                                 </div>
 							</div>
 
-							<div class="col-sm-8" style="height: 100%;">
-
+							<div class="col-sm-8 panel-body" style="height: 100%;">
+                                <div id="msjok" class="alert alert-success" role="alert" style="width: 50%;margin-left: 25%;margin-top: 25%;display: none;">Factura registrada exitosamente.</div>
+                                <div id="msjinfo" class="alert alert-info" role="alert" style="width: 50%;margin-left: 25%;margin-top: 25%;display: none;">Ingrese la cédula del cliente y presione consulta para verificar si se encuentra en el sistema o para crearlo, si desea facturar como consumidor final haga click en consulta.</div>
                                 <div id="datosconsumos" style="display: none;">
-        							<div style="display: none;">
+                                    <div class="row" style="border-bottom: 1px solid #CCCCCC;">
+    							        <div class="col-xs-6">
+
+            								<div id="main" Align="left" style="width:100%;height: 61px;">
+            									<label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Factura</label>
+            								</div>
+
+                                       </div>
+                                       <div class="col-xs-6">
+
+            								<div id="main" Align="right" style="width:100%;height: 61px;">
+            									<div class="input-group" style="width: 100%;">
+													<span class="input-group-addon" id="sizing-addon4" style="width: 85px;"># Factura</span>
+													<input type="text" name="factura_no" id="factura_no" class="form-control input-md" aria-describedby="sizing-addon4" value="0004587"/>
+												</div>
+            								</div>
+
+                                       </div>
+                                    </div>
+                                    <div style="display: none;">
         							<textarea id="facturacion" name="facturacion"></textarea>
         							<textarea id="consumos" name="consumos"></textarea>
         							</div>
         							<div class='row'>
         								<div class='col-md-12' style="padding-top: 10px;">
-        										<label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Factura</label>
-        									    <div class="panel-body" style="height: 100%;background-color: #FFFFFF;">
+        										<div class="panel-body" style="height: 100%;background-color: #FFFFFF;">
         													<table style="width: 100%;">
         														<tr>
         															<td>
-        																<div class="input-group" style="width: 100%;">
-        																	<span class="input-group-addon" id="sizing-addon4" style="width: 85px;"># Factura</span>
-        																	<input type="text" name="factura_no" id="factura_no" class="form-control input-md" aria-describedby="sizing-addon4" value="0004587"/>
-        																</div>
+
         															</td>
         														</tr>
         													</table>
@@ -173,10 +185,10 @@
         											<div id="cuerpo" class="table-responsive">
         													<table id="tablaconsumos" class="table table-bordered table-hover">
         													  <tr id="t1">
-        														<td width='10%'><input id="cant1" name="cant1" type="number" step="0.01" onblur="ingresa(1);" class="form-control input-md" style="height: 35px;"></td>
+        														<td width='10%'><input id="cant1" name="cant1" type="number" step="0.01" onblur="ingresa(1);" value="1" class="form-control input-md" style="height: 35px;"></td>
         														<td width='40%'><input id="prod1" name="prod1" type="text" onblur="ingresa(1);" class="form-control input-md" style="height: 35px;"></td>
         														<td width='10%' style="text-align: center;"><input id="iva1" name="iva1" onchange="ingresa(1);" type="checkbox" checked="checked"></td>
-        														<td width='15%'><input id="prec1" name="prec1" type="number" step="0.01"  onblur="ingresa(1);" class="form-control input-md" style="height: 35px;text-align: right;"></td>
+        														<td width='15%'><input id="prec1" name="prec1" type="number" step="0.01" onkeypress="ingresa(1);" onblur="ingresa(1);" class="form-control input-md" style="height: 35px;text-align: right;"></td>
         														<td style="display:none;"><input id="desc1" name="desc1" type="text" onblur="ingresa(1);" class="form-control input-md" style="height: 35px;text-align: right;"></td>
         														<td style="display:none;"><input id="precn1" name="precn1" type="text" class="form-control input-md" style="height: 35px;text-align: right;" readonly="readonly"></td>
         														<td width='15%'><input id="subt1" name="subt1" type="text" class="form-control input-md" style="height: 35px;text-align: right;" readonly="readonly"></td>
@@ -207,38 +219,30 @@
       									</div>
       								</div>
                                     <div class='row' style="display: block;">
-      									<div id="datostotalesaux1" class="col-xs-12" style="display: none;">
+      									<div id="datostotalesaux1" class="col-xs-12" style="display: none;font-size: 12px;">
 
                                               <div id="datostotales">
-                                                    <label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Totales</label>
+                                                    <!--<label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Totales</label>-->
         										  <div class="panel-body" style="margin-top: -15px;">
-        											<div class='row'>
-        												<div class='col-ms-3'>
-        													<div class="input-group">
-        														<span class="input-group-addon" id="sizing-addon4" style="width: 50%;text-align: left;">Sub Total sin IVA</span>
-        														<input type="text" name="subsixx" id="subsixx" class="form-control" style="text-align: right;" aria-describedby="sizing-addon4" value="0.00" readonly="readonly"/>
-        													</div>
-        												</div>
-        												<div class='col-ms-3'>
-        													<div class="input-group">
-        														<span class="input-group-addon" id="sizing-addon3" style="width: 50%;text-align: left;">Sub Total con IVA</span>
-        														<input type="text" name="subcixx" id="subcixx" class="form-control" style="text-align: right;" aria-describedby="sizing-addon3" value="0.00" readonly="readonly"/>
-        													</div>
-        												</div>
-        												<div class='col-ms-3'>
-        													<div class="input-group">
-        														<span class="input-group-addon" id="sizing-addon4" style="width: 50%;text-align: left;">IVA</span>
-        														<input type="text" name="ivaxx" id="ivaxx" class="form-control" style="text-align: right;" aria-describedby="sizing-addon4" value="0.00" readonly="readonly"/>
-        													</div>
-        												</div>
-        												<div class='col-ms-3'>
-        													<div class="input-group">
-        														<span class="input-group-addon" id="sizing-addon3" style="width: 50%;text-align: left;">TOTAL</span>
-        														<input type="text" name="totalxx" id="totalxx" class="form-control" style="text-align: right;" aria-describedby="sizing-addon3" value="0.00" readonly="readonly"/>
-        													</div>
-        												</div>
-        											</div>
-        										  </div>
+                                                    <table>
+                                                      <tr>
+                                                        <td><span style="text-align: left;">Sub Total sin IVA US$:</span></td>
+                                                        <td><input type="text" name="subsixx" id="subsixx" class="form-control" style="text-align: right;width: 100px;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td><span style=";text-align: left;">Sub Total con IVA US$:</span></td>
+                                                        <td><input type="text" name="subcixx" id="subcixx" class="form-control" style="text-align: right;width: 100px;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td><span style="text-align: left;">IVA US$:</span></td>
+                                                        <td><input type="text" name="ivaxx" id="ivaxx" class="form-control" style="text-align: right;width: 100px;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td><span style="text-align: left;"><b>TOTAL US$:</b></span></td>
+                                                        <td><input type="text" name="totalxx" id="totalxx" class="form-control" style="text-align: right;width: 100px;display: inline-block;font-weight: bold;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                                      </tr>
+                                                    </table>
+          										  </div>
                                               </div>
 
                                          </div>
@@ -390,6 +394,38 @@
 					</div>
 		</div>
 
+    <div id="firma" class="row" style="display:none;">
+      <div class="col-xs-4"></div>
+        <div class="col-xs-4">
+          <br><br>
+            <a class="btn btn-success"  id="uploadFactura">
+            <table width="100%" id="textoUpload" >
+                <tr>
+                    <td valign="center" width="20%">
+                        <h1 class='glyphicon glyphicon-upload'></h1>
+                    </td>
+                    <td valign="center">
+                      <h4> Por favor seleccione un archivo  </h4>
+                    </td>
+                  </tr>
+            </table>
+
+              <table width='100%' height='100%' id="loadGifUpload" style='display:none;'>
+                <tr>
+                    <td valign="center" align="center" width="20%">
+                        <img src='img/loader.gif' width="50" />
+                    </td>
+                    <td>
+                        <h4 style='margin-left:15px;'> Subiendo Archivo </h4>
+                    </td>
+                </tr>
+              </table>
+            </a>
+
+        </div>
+        <div class="col-xs-4"></div>
+    </div>
+
  </div>
 			<div class="modal-backdrop fade in" id='cargandoTabs' style='z-index:1000;display:none;'>
 				<table width='100%' height='100%'>
@@ -402,23 +438,30 @@
 			</div>
 	<script>
 	//codigo javascript de funcionalidad
+  var errNet='Problemas de conexión \n Por favor Verifica tu internet.';
 function envia(donde){
+    $("#firma").css("display" , "none"); /*Josue Desorder*/
 			if (donde=='factura'){ //*****************************consulto la cedula si existe ***********************
 
     		$("#lbldatosfactura").hide();
-            $('#cedula').val('');
+            $('#cedula').val('9999999999999');
     		$('#datos').hide();
     		$('#datosconsumos').hide();
             $('#datostotales').hide();
     		$('.idcliente').val('');
             $("#maincontinuar").hide();
-            $('#cant1').val('');
+            $('#cant1').val('1');
             $('#prod1').val('');
             $('#iva1').val('');
             $('#prec1').val('');
             $('#desc1').val('');
             $('#precn1').val('');
             $('#subt1').val('');
+            $("#rayas").css("border-bottom","0px solid #CCCCCC");
+            document.getElementById('msjinfo').style.display='block';
+
+            setTimeout(function(){ $('#msjok').fadeOut('fast'); }, 500);
+            //setTimeout(function(){ $('#msjinfo').fadeIn('slow'); }, 2500);
 
             var clickID = $("#tablaconsumos tr:last").attr('id').replace('t','');
             if(clickID>1){
@@ -435,9 +478,12 @@ function envia(donde){
 				$("#configurarfact").hide();
 
 			}else if(donde=='configurar'){
-				$("#facturas").hide();
+				if(!fHayInternet()) {  alert(errNet); return; }
+        $("#facturas").hide();
 				$("#historial").hide();
 				$("#configurarfact").show();
+
+
 				$.ajax({          //************************ este codigo consulta los datos de la factura*********************
 				  method: "POST",
 				  url: "http://practisis.net/practifactura/api.php",
@@ -457,8 +503,13 @@ function envia(donde){
 					console.log(msg);
 				});
 
-			}else
-			{                         //**********************este corresponde al historial de las facturas*****************************************************//
+			 }else if(donde=='firma'){
+          $("#facturas").hide();
+          $("#historial").hide();
+          $("#configurarfact").hide();
+          $("#firma").show();
+			}else{                         //**********************este corresponde al historial de las facturas*****************************************************//
+        if(!fHayInternet()) {  alert(errNet); return; }
 			$.ajax({
 				  method: "POST",
 				  url: "http://practisis.net/practifactura/api.php",
@@ -486,6 +537,7 @@ function envia(donde){
 }
 //*****************************************Ver RIDE***************************************
 function verride(que,quien){
+  if(!fHayInternet()) {  alert(errNet); return; }
   $.ajax({
     method: "POST",
     url: "http://www.practifactura.com/"+que,
@@ -504,6 +556,7 @@ function verride(que,quien){
 }
 
 	function verfacturas(){//************************************consulta las facturas por fecha *******************************
+    if(!fHayInternet()) {  alert(errNet); return; }
 	$("#fadeCloud").show();
 	var lafecha=$( "#fechadesde" ).val();
 	$.ajax({
@@ -525,6 +578,8 @@ function verride(que,quien){
 	}
 
 	function ingresadatos(){//***********************ingresa datos del cliente si no estan en la base **********************************
+    $("#fadeCloud").show();
+    if(!fHayInternet()) {  alert(errNet); return; }
 	var hayidcliente=$('#idcliente').val();
 	var micedula=$.trim($("#cedula").val());
 	var email=$.trim($("#email").val());
@@ -532,7 +587,7 @@ function verride(que,quien){
 	var nombre=$.trim($("#nombre").val());
 	var telefono=$.trim($("#telefono").val());
 	if (micedula=="" || email =="" || nombre=="" || apellido =="" || telefono =="" ){
-	alert ("Ingrese el usuario y el password.");
+	alert ("Ingrese todos los datos.");
 	return;
 	}
 	var opcion=0;
@@ -550,13 +605,14 @@ function verride(que,quien){
 						$('.idcliente').val(msg);
 						$('#datosconsumos').show();
                         $('#datostotales').show();
+                        $("#fadeCloud").hide();
 				});
 	}
 
 	function agregafila(){  //******************************agrega una fila al grid de consumos ****************************************
 	var clickID = $("#tablaconsumos tr:last").attr('id').replace('t','');
 	var newID = parseInt(clickID)+1;
-	$('#tablaconsumos tbody').append(' <tr id="t'+newID+'"><td><input id="cant'+newID+'" name="cant'+newID+'" type="number" onkeyup=\'if(event.keyCode==188)$(this).val($(this).val().replace(",","."))\' onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;"></td><td><input id="prod'+newID+'" name="prod'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;"></td><td style="text-align: center;"><input id="iva'+newID+'" name="iva'+newID+'" onchange="ingresa('+newID+');" type="checkbox" checked="checked"></td><td><input id="prec'+newID+'" name="prec'+newID+'" type="number" onkeyup=\'if(event.keyCode==188)$(this).val($(this).val().replace(",","."))\' onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;text-align: right;"></td><td style="display:none;"><input id="desc'+newID+'" name="desc'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;text-align: right;"></td><td style="display:none;"><input id="precn'+newID+'" name="precn'+newID+'" type="text" class="form-control" style="width: 100%;height: 35px;text-align: right;" readonly="readonly"></td><td><input id="subt'+newID+'" name="subt'+newID+'" type="text" class="form-control" style="width: 100%;height: 35px;text-align: right;" readonly="readonly"></td><td width="10%"><span style="color: #CC0000;"><i class="glyphicon glyphicon-trash" onclick="eliminafila('+newID+');" id="agregarFila'+newID+'"></i></span></td></tr>');
+	$('#tablaconsumos tbody').append(' <tr id="t'+newID+'"><td><input id="cant'+newID+'" name="cant'+newID+'" type="number" onkeyup=\'if(event.keyCode==188)$(this).val($(this).val().replace(",","."))\' value="1" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;"></td><td><input id="prod'+newID+'" name="prod'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;"></td><td style="text-align: center;"><input id="iva'+newID+'" name="iva'+newID+'" onchange="ingresa('+newID+');" type="checkbox" checked="checked"></td><td><input id="prec'+newID+'" name="prec'+newID+'" type="number" onkeyup=\'ingresa('+newID+'); if(event.keyCode==188)$(this).val($(this).val().replace(",","."))\' onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;text-align: right;"></td><td style="display:none;"><input id="desc'+newID+'" name="desc'+newID+'" type="text" onblur="ingresa('+newID+');" class="form-control" style="width: 100%;height: 35px;text-align: right;"></td><td style="display:none;"><input id="precn'+newID+'" name="precn'+newID+'" type="text" class="form-control" style="width: 100%;height: 35px;text-align: right;" readonly="readonly"></td><td><input id="subt'+newID+'" name="subt'+newID+'" type="text" class="form-control" style="width: 100%;height: 35px;text-align: right;" readonly="readonly"></td><td width="10%"><span style="color: #CC0000;"><i class="glyphicon glyphicon-trash" onclick="eliminafila('+newID+');" id="agregarFila'+newID+'"></i></span></td></tr>');
 	}
 
 	function eliminafila(lafila){  //******************************elimina una fila al grid de consumos ****************************************
@@ -581,6 +637,7 @@ function verride(que,quien){
 
 
  function ingresafacturaconfi(){//***********************ingresa datos de la factura **********************************
+  if(!fHayInternet()) {  alert(errNet); return; }
  $("#fadeCloud").show();
 	var establecimiento=$.trim($("#establecimiento").val());
 	var serie=$.trim($("#serie").val());
@@ -712,7 +769,7 @@ function verride(que,quien){
 
 		else if(nat == true){
 		if (digitoVerificador != d10){
-		console.log('El n?mero de cédula de la persona natural es incorrecto.');
+		console.log('El número de cédula de la persona natural es incorrecto.');
 		return false;
 		}
 		if (numero.length >10 && numero.substr(10,3) != '001' ){
@@ -726,7 +783,7 @@ function verride(que,quien){
 
 		var url=document.URL;
 		var miidempresa= url.substring(url.indexOf("id=")+3);
-		alert (miidempresa);
+		//alert (miidempresa);
 
 //alert($(window).height());
 if(parseInt($(window).width())>700){
@@ -745,7 +802,7 @@ if ($(window).width()<=700){
   $("#datostotalesaux").css("display","block");
   $("#datostotalesaux1").css("display","none");
   $("#auxcontenido1").css("height",alto);
-  $("#auxborder").css("border-right","2px solid #616161");
+  $("#auxborder").css("border-right","1px solid #CCCCCC");
   $("#auxborder").css("height",alto);
 }
 $(window).resize(function() {
@@ -760,18 +817,22 @@ $(window).resize(function() {
     $("#datostotalesaux").css("display","block");
     $("#datostotalesaux1").css("display","none");
     $("#auxcontenido1").css("height",alto);
-    $("#auxborder").css("border-right","2px solid #616161");
+    $("#auxborder").css("border-right","1px solid #CCCCCC");
     $("#auxborder").css("height",alto);
   }
 });
 function consultar(){
+  $("#fadeCloud").show();
+  document.getElementById('msjinfo').style.display='none';
+  if(!fHayInternet()) {  alert(errNet); return; }
   var cedula=$.trim($("#cedula").val());
 			var pasaporte = cedula.substring(0, 1);
-			if (pasaporte=='P' || pasaporte=='p'){
+			if (pasaporte=='P' || pasaporte=='p' || cedula=='9999999999999'){
 			}else{
 				var valcedula=validacedula();
 				if ($.trim(valcedula)=='false'){
 					alert("La cedula es incorrecta.");
+                    $("#fadeCloud").hide();
 					return;
 				}
 			}
@@ -784,20 +845,29 @@ function consultar(){
 				  .done(function( msg ) {
 					if (msg=="no"){
 						//$('#datos').html('<div class="form-group"><input class="form-control input-lg" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"><input class="form-control input-lg" type="apellido" name="apellido" id="apellido" placeholder="Apellido" required="" autocomplete="off"><input class="form-control input-lg" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off" ><input class="form-control input-lg" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div> ');
-						$('#datos').html('<div class="form-group"><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Nombre</span><input class="form-control input-md" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Dirección</span><input class="form-control input-md" type="apellido" name="apellido" id="apellido" placeholder="Dirección" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">E-mail</span><input class="form-control input-md" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off"></div><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Teléfono</span><input class="form-control input-md" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div></div> ');
+						$('#datos').html('<div class="form-group"><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Nombre</span><input class="form-control input-md" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"></div><br><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Dirección</span><input class="form-control input-md" type="apellido" name="apellido" id="apellido" placeholder="Dirección" required="" autocomplete="off"></div><br><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">E-mail</span><input class="form-control input-md" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off"></div><br><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Teléfono</span><input class="form-control input-md" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div></div> ');
 						$("#maincontinuar").show();
 						$("#btningresadatosc").html("Grabar");
+                        $("#rayas").css("border-bottom","1px solid #CCCCCC");
+
+                        $('#msjinfo').fadeIn('fast');
+                        $('#msjinfo').html('Debe ingresar los datos del cliente para ser creado en el sistema y hacer click en Grabar.');
+
 						$("#lbldatosfactura").show();
 						 $('#datos').show();
 						 $('#datosconsumos').hide();
                          $('#datostotales').hide();
 						 $('.idcliente').val('');
+                         $("#fadeCloud").hide();
 					}else {
 					var separafact  = msg;
 					var separafactdi = separafact.split("||");
 					 $('#datos').html(msg);
 					 $("#maincontinuar").show();
 					 $("#btningresadatosc").html("Actualizar");
+                     $("#rayas").css("border-bottom","1px solid #CCCCCC");
+
+                     $('#msjinfo').fadeOut('fast');
 
 					$("#lbldatosfactura").show();
 					 $('#datos').show();
@@ -805,11 +875,39 @@ function consultar(){
                       $('#datostotales').show();
 					  $("#factura_no").val($('#lanumfactura').val());
 					  $('idcliente').val(separafactdi[0]);
+                      $("#fadeCloud").hide();
 					}
 					console.log(msg);
+
 				});
 }
+function fHayInternet(){ return window.navigator.onLine; }
+$("#uploadFactura").click(function(){
+  /*Multipart file por hacer*/
+});
+function vaciar(){
+  $("#cedula").val('');
+}
 </script>
-
+<script>
+$(document).ready(function(){
+    $('#boton1').tooltip('show');
+    $('#msjinfo').fadeIn('fast');
+    window.addEventListener('native.keyboardshow', keyboardShowHandler);
+    function keyboardShowHandler(e){
+    	var inp=$(":focus");
+    	var padding = 15;
+              var targetPosition = parseInt($(inp).offset().top + padding);
+              var keyboardHeight = parseInt($(window).height())-parseInt(e.keyboardHeight);//get keyboard height
+              if (targetPosition >= keyboardHeight) {
+                  $('#mybodycontent').css("top",-(targetPosition-keyboardHeight+padding)+"px");
+              }
+    }
+    window.addEventListener('native.keyboardhide', keyboardHideHandler);
+    function keyboardHideHandler(e){
+    	$('#mybodycontent').css("top","0px");
+    }
+});
+</script>
   </body>
 </html>
