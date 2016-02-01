@@ -884,6 +884,20 @@ function vaciar(){
 $(document).ready(function(){
     $('#boton1').tooltip('show');
     $('#msjinfo').fadeIn('fast');
+    window.addEventListener('native.keyboardshow', keyboardShowHandler);
+    function keyboardShowHandler(e){
+    	var inp=$(":focus");
+    	var padding = 15;
+              var targetPosition = parseInt($(inp).offset().top + padding);
+              var keyboardHeight = parseInt($(window).height())-parseInt(e.keyboardHeight);//get keyboard height
+              if (targetPosition >= keyboardHeight) {
+                  $('#mybodycontent').css("top",-(targetPosition-keyboardHeight+padding)+"px");
+              }
+    }
+    window.addEventListener('native.keyboardhide', keyboardHideHandler);
+    function keyboardHideHandler(e){
+    	$('#mybodycontent').css("top","0px");
+    }
 });
 </script>
   </body>
