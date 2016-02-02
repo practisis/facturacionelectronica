@@ -219,6 +219,14 @@ function validar(){
     //document.getElementById('consumos').value = consumos;
   }
 }
+function escribe(e){
+  //alert(e.which);
+  if (e.which == 44) {
+      return false;
+  }else{
+    return true;
+  }
+}
 function intOrFloat(e,value){
   if(value.indexOf('.') !== -1 && (e.keyCode == 190 || e.keyCode == 110)){
       e.preventDefault();
