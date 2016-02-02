@@ -1,4 +1,5 @@
 function ingresa(quien){
+
   var subtotal = 0;
   var cant = parseFloat(document.getElementById('cant'+quien).value);
   var prec = parseFloat(document.getElementById('prec'+quien).value);
@@ -29,12 +30,12 @@ function ingresa(quien){
 	   document.getElementById('precn'+quien).value=prec.toFixed(2);
       document.getElementById('subt'+quien).value=subtotal.toFixed(2);
 
-	   var cambiacant=cant.toString().replace(",",".");
-		var cambiaprec=prec.toString().replace(",",".");
-		cant=cambiacant;
+	   /*var cambiacant=cant.toString().replace(",",".");
+		var cambiaprec=prec.toString().replace(",",".");*/
+		/*cant=cambiacant;
 		prec=parseFloat(cambiaprec);
 	  document.getElementById('cant'+quien).value=cant;
-      document.getElementById('prec'+quien).value=prec;
+      document.getElementById('prec'+quien).value=prec;*/
 
       totales();
     }
@@ -81,7 +82,6 @@ function totales(){
 }
 function validar(){
   $("#fadeCloud").show();
-  $('#msjok').fadeIn('fast');
   //$('#msjinfo').fadeOut('fast');
   var facturacion = '';
   var sutotal = 0;
@@ -144,8 +144,10 @@ function validar(){
         }
       }
 
-	  if (errordi>0){
-			alert("No se puede grabar la factura. Por favor revise los datos.");
+      //alert(consumos+'**'+errordi)
+
+	  if (errordi>0 || consumos==''){
+			alert('Parece que te has equivocado!\nNo se puede grabar la factura.\nPor favor revise los datos, por lo menos debe haber un producto para guardar la factura.');
             $("#fadeCloud").hide();
 			return false;
 	  }
@@ -184,6 +186,7 @@ function validar(){
 		  //alert(response);
           var res = response.split("|");
               if(res[0] == 'ok'){
+                $('#msjok').fadeIn('fast');
                 $('.alert-danger').not('#uploaderrors').slideUp();
                 $('#message-info').html('<b>Factura ingresada con exito.</b><br/>');
                 $('.alert-info').not('#uploaderrors').slideDown();
@@ -216,3 +219,19 @@ function validar(){
     //document.getElementById('consumos').value = consumos;
   }
 }
+function intOrFloat(e,value){
+  if(value.indexOf('.') !== -1 && (e.keyCode == 190 || e.keyCode == 110)){
+      e.preventDefault();
+      }
+
+  if((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105) || e.keyCode == 8 || e.keyCode == 9 || e.keyCode == 37 || e.keyCode == 39 || e.keyCode == 46 || e.keyCode == 190 || e.keyCode == 110 || e.keyCode == 13){
+      return;
+      }
+  else{
+      e.preventDefault();
+      }
+}
+$('.soloFloat').on('keydown',function(event,value){
+   //alert($(this).val());
+intOrFloat(event,$(this).val());
+});

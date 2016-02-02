@@ -46,10 +46,10 @@
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li onclick="envia('factura')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-line-chart'></span>&nbsp;Facturar<span class="sr-only">(current)</span></a></li>
-						<li onclick="envia('historial')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-shopping-cart'></span>&nbsp;Historial<span class="sr-only">(current)</span></a></li>
-						<li onclick="envia('configurar')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-shopping-cart'></span>&nbsp;Configurar<span class="sr-only">(current)</span></a></li>
-            <li onclick="envia('firma')"><a href="javascript:void(0);"><span style='display:inline;' class='glyphicon glyphicon-pencil'></span>&nbsp;Firma Electrónica<span class="sr-only">(current)</span></a></li>
+						<li id="auxfacturar" class="active" onclick="envia('factura')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-line-chart'></span>&nbsp;Facturar<span class="sr-only">(current)</span></a></li>
+						<li id="auxhistorial" onclick="envia('historial')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-shopping-cart'></span>&nbsp;Historial<span class="sr-only">(current)</span></a></li>
+						<li id="auxconfig" onclick="envia('configurar')"><a href="javascript:void(0);"><span style='display:inline;' class='fa fa-shopping-cart'></span>&nbsp;Configurar<span class="sr-only">(current)</span></a></li>
+                        <li id="auxfirma" onclick="envia('firma')"><a href="javascript:void(0);"><span style='display:inline;' class='glyphicon glyphicon-pencil'></span>&nbsp;Firma Electrónica<span class="sr-only">(current)</span></a></li>
 					</ul>
 
 				</div>
@@ -133,7 +133,7 @@
 
 							<div class="col-sm-8 panel-body" style="height: 100%;">
                                 <div id="msjok" class="alert alert-success" role="alert" style="width: 50%;margin-left: 25%;margin-top: 25%;display: none;">Factura registrada exitosamente.</div>
-                                <div id="msjinfo" class="alert alert-info" role="alert" style="width: 50%;margin-left: 25%;margin-top: 25%;display: none;">Ingrese la cédula del cliente y presione consulta para verificar si se encuentra en el sistema o para crearlo, si desea facturar como consumidor final haga click en consulta.</div>
+                                <div id="msjinfo" class="alert alert-info" role="alert" style="width: 50%;margin-left: 25%;margin-top: 25%;display: none;"><b>Para Facturar</b> ingrese la cédula del cliente y presione consulta para verificar si se encuentra en el sistema o para crearlo, si desea facturar como consumidor final haga click en consulta.</div>
                                 <div id="datosconsumos" style="display: none;">
                                     <div class="row" style="border-bottom: 1px solid #CCCCCC;">
     							        <div class="col-xs-6">
@@ -188,7 +188,7 @@
         														<td width='10%'><input id="cant1" name="cant1" type="number" step="0.01" onblur="ingresa(1);" value="1" class="form-control input-md" style="height: 35px;"></td>
         														<td width='40%'><input id="prod1" name="prod1" type="text" onblur="ingresa(1);" class="form-control input-md" style="height: 35px;"></td>
         														<td width='10%' style="text-align: center;"><input id="iva1" name="iva1" onchange="ingresa(1);" type="checkbox" checked="checked"></td>
-        														<td width='15%'><input id="prec1" name="prec1" type="number" step="0.01" onkeypress="ingresa(1);" onblur="ingresa(1);" class="form-control input-md" style="height: 35px;text-align: right;"></td>
+        														<td width='15%'><input id="prec1" name="prec1" type="number" step="0.01" onkeyup="ingresa(1);" onblur="ingresa(1);" class="form-control input-md" style="height: 35px;text-align: right;"></td>
         														<td style="display:none;"><input id="desc1" name="desc1" type="text" onblur="ingresa(1);" class="form-control input-md" style="height: 35px;text-align: right;"></td>
         														<td style="display:none;"><input id="precn1" name="precn1" type="text" class="form-control input-md" style="height: 35px;text-align: right;" readonly="readonly"></td>
         														<td width='15%'><input id="subt1" name="subt1" type="text" class="form-control input-md" style="height: 35px;text-align: right;" readonly="readonly"></td>
@@ -443,6 +443,11 @@ function envia(donde){
     $("#firma").css("display" , "none"); /*Josue Desorder*/
 			if (donde=='factura'){ //*****************************consulto la cedula si existe ***********************
 
+            $('#auxconfig').removeClass('active');
+            $('#auxhistorial').removeClass('active');
+            $('#auxfirma').removeClass('active');
+            $('#auxfacturar').addClass('active');
+
     		$("#lbldatosfactura").hide();
             $('#cedula').val('9999999999999');
     		$('#datos').hide();
@@ -457,7 +462,15 @@ function envia(donde){
             $('#desc1').val('');
             $('#precn1').val('');
             $('#subt1').val('');
-            $("#rayas").css("border-bottom","0px solid #CCCCCC");
+            $('#subsi').val('0.00');
+            $('#subci').val('0.00');
+            $('#iva').val('0.00');
+            $('#total').val('0.00');
+            $('#subsixx').val('0.00');
+            $('#subcixx').val('0.00');
+            $('#ivaxx').val('0.00');
+            $('#totalxx').val('0.00');
+            $("#rayasxx").css("border-bottom","0px solid #CCCCCC");
             document.getElementById('msjinfo').style.display='block';
 
             setTimeout(function(){ $('#msjok').fadeOut('fast'); }, 500);
@@ -478,6 +491,10 @@ function envia(donde){
 				$("#configurarfact").hide();
 
 			}else if(donde=='configurar'){
+			  $('#auxfacturar').removeClass('active');
+              $('#auxhistorial').removeClass('active');
+              $('#auxfirma').removeClass('active');
+			  $('#auxconfig').addClass('active');
 				if(!fHayInternet()) {  alert(errNet); return; }
         $("#facturas").hide();
 				$("#historial").hide();
@@ -504,11 +521,21 @@ function envia(donde){
 				});
 
 			 }else if(donde=='firma'){
+
+              $('#auxfacturar').removeClass('active');
+              $('#auxhistorial').removeClass('active');
+              $('#auxconfig').removeClass('active');
+			  $('#auxfirma').addClass('active');
+
           $("#facturas").hide();
           $("#historial").hide();
           $("#configurarfact").hide();
           $("#firma").show();
-			}else{                         //**********************este corresponde al historial de las facturas*****************************************************//
+			}else{
+			  $('#auxfacturar').removeClass('active');
+              $('#auxfirma').removeClass('active');
+              $('#auxconfig').removeClass('active');
+			  $('#auxhistorial').addClass('active');                         //**********************este corresponde al historial de las facturas*****************************************************//
         if(!fHayInternet()) {  alert(errNet); return; }
 			$.ajax({
 				  method: "POST",
@@ -606,6 +633,7 @@ function verride(que,quien){
 						$('#datosconsumos').show();
                         $('#datostotales').show();
                         $("#fadeCloud").hide();
+                        $('#msjinfo').hide();
 				});
 	}
 
