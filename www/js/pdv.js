@@ -2,13 +2,14 @@ function ingresa(quien){
 
   var subtotal = 0;
   var cant = parseFloat(document.getElementById('cant'+quien).value);
-  var prec = parseFloat(document.getElementById('prec'+quien).value);
+  var prec = parseFloat(document.getElementById('prec'+quien).value.replace(',','.'));
   var iva = document.getElementById('iva'+quien).checked;
   var producto = document.getElementById('prod'+quien).value;
   var precaux = document.getElementById('prec'+quien).value;
   var cantaux = document.getElementById('cant'+quien).value;
   var desc = parseFloat(document.getElementById('desc'+quien).value);
   var descaux = document.getElementById('desc'+quien).value;
+  //alert(prec+'**'+precaux);
 
   if(precaux != '' && cantaux != ''){
     if(producto==''){
@@ -221,11 +222,11 @@ function validar(){
 }
 function escribe(e){
   //alert(e.which);
-  if (e.which == 44) {
+  /*if (e.which == 44 || e.which == 188) {
       return false;
   }else{
     return true;
-  }
+  }*/
 }
 function intOrFloat(e,value){
   if(value.indexOf('.') !== -1 && (e.keyCode == 190 || e.keyCode == 110)){
