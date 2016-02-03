@@ -105,26 +105,28 @@
                                         <br>
                                         <div id="datostotales" style="display: none;">
                                               <!--<label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Totales</label>-->
-  										  <div class="panel-body" style="margin-top: -15px;font-size: 12px;">
-                                            <table>
+                                            <table style="margin-top: -20px;width: 100%;font-size: 12px;">
                                               <tr>
-                                                <td><span style="text-align: left;">Sub Total sin IVA US$:</span></td>
-                                                <td><input type="text" name="subsi" id="subsi" class="form-control" style="text-align: right;width: 100px;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                                <td style="width: 20%;"><span style="text-align: left;">Sub Total US$:</span></td>
+                                                <td style="width: 80%;"><input type="text" name="subt" id="subt" class="form-control" style="text-align: right;width: 100%;display: inline-block;background-color: transparent;border: none;outline:0px;" value="0.00" readonly="readonly"/></td>
                                               </tr>
-                                              <tr>
+                                              <tr style="display: none;">
+                                                <td><span style="text-align: left;">Sub Total sin IVA US$:</span></td>
+                                                <td><input type="text" name="subsi" id="subsi" class="form-control" style="text-align: right;width: 100%;display: inline-block;background-color: transparent;border: none;outline:0px;" value="0.00" readonly="readonly"/></td>
+                                              </tr>
+                                              <tr style="display: none;">
                                                 <td><span style=";text-align: left;">Sub Total con IVA US$:</span></td>
-                                                <td><input type="text" name="subci" id="subci" class="form-control" style="text-align: right;width: 100px;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                                <td><input type="text" name="subci" id="subci" class="form-control" style="text-align: right;width: 100%;display: inline-block;background-color: transparent;border: none;outline:0px;" value="0.00" readonly="readonly"/></td>
                                               </tr>
                                               <tr>
                                                 <td><span style="text-align: left;">IVA US$:</span></td>
-                                                <td><input type="text" name="iva" id="iva" class="form-control" style="text-align: right;width: 100px;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                                <td><input type="text" name="iva" id="iva" class="form-control" style="text-align: right;width: 100%;display: inline-block;background-color: transparent;border: none;outline:0px;" value="0.00" readonly="readonly"/></td>
                                               </tr>
                                               <tr>
                                                 <td><span style="text-align: left;"><b>TOTAL US$:</b></span></td>
-                                                <td><input type="text" name="total" id="total" class="form-control" style="text-align: right;width: 100px;display: inline-block;font-weight: bold;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                                <td><input type="text" name="total" id="total" class="form-control" style="text-align: right;width: 100%;display: inline-block;font-weight: bold;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
                                               </tr>
                                             </table>
-  										  </div>
                                         </div>
 
                                    </div>
@@ -136,15 +138,16 @@
                                 <div id="msjinfo" class="alert alert-info" role="alert" style="width: 50%;margin-left: 25%;margin-top: 25%;display: none;"><b>Para Facturar</b> ingrese la cédula del cliente y presione consulta para verificar si se encuentra en el sistema o para crearlo, si desea facturar como consumidor final haga click en consulta.</div>
                                 <div id="datosconsumos" style="display: none;">
                                     <div class="row" style="border-bottom: 1px solid #CCCCCC;">
-    							        <div class="col-xs-6">
 
+    							        <div class="col-xs-6">
+                                            <div id="aux1" style="width: 100%;height: 20px;display: none;"></div>
             								<div id="main" Align="left" style="width:100%;height: 61px;">
-            									<label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Factura</label>
+            									<label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Detalle Factura</label>
             								</div>
 
                                        </div>
                                        <div class="col-xs-6">
-
+                                            <div id="aux2" style="width: 100%;height: 20px;display: none;"></div>
             								<div id="main" Align="right" style="width:100%;height: 61px;">
             									<div class="input-group" style="width: 100%;">
 													<span class="input-group-addon" id="sizing-addon4" style="width: 85px;"># Factura</span>
@@ -160,7 +163,7 @@
         							</div>
         							<div class='row'>
         								<div class='col-md-12' style="padding-top: 10px;">
-        										<div class="panel-body" style="height: 100%;background-color: #FFFFFF;">
+        										<!--<div class="panel-body" style="height: 100%;background-color: #FFFFFF;">-->
         													<table style="width: 100%;">
         														<tr>
         															<td>
@@ -207,45 +210,48 @@
         														</tr>
         													</table>
         											</div>
-        									    </div>
+        									    <!--</div>-->
         								</div>
         							</div>
-                                    <br>
-      								<div class='row'>
+                                    <div class='row' style="display: block;">
+      									<div id="datostotalesaux1" class="col-xs-12" style="display: none;font-size: 12px;">
+
+                                              <div id="datostotales">
+                                                    <!--<label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Totales</label>-->
+        										    <table style="margin-top: -20px;width: 100%;font-size: 12px;">
+                                                      <tr>
+                                                        <td style="width: 20%;"><span style="text-align: left;">Sub Total US$:</span></td>
+                                                        <td style="width: 80%;"><input type="text" name="subtxx" id="subtxx" class="form-control" style="text-align: right;width: 100%;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                                      </tr>
+                                                      <tr style="display: none;">
+                                                        <td><span style="text-align: left;">Sub Total sin IVA US$:</span></td>
+                                                        <td><input type="text" name="subsixx" id="subsixx" class="form-control" style="text-align: right;width: 100%;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                                      </tr>
+                                                      <tr style="display: none;">
+                                                        <td><span style=";text-align: left;">Sub Total con IVA US$:</span></td>
+                                                        <td><input type="text" name="subcixx" id="subcixx" class="form-control" style="text-align: right;width: 100%;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td><span style="text-align: left;">IVA US$:</span></td>
+                                                        <td><input type="text" name="ivaxx" id="ivaxx" class="form-control" style="text-align: right;width: 100%;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td><span style="text-align: left;"><b>TOTAL US$:</b></span></td>
+                                                        <td><input type="text" name="totalxx" id="totalxx" class="form-control" style="text-align: right;width: 100%;display: inline-block;font-weight: bold;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
+                                                      </tr>
+                                                    </table>
+          										  </div>
+                                              </div>
+
+                                     </div>
+                                     <br>
+                                     <div class='row'>
       									<div class="col-md-8" >
       									</div>
       									<div class='col-md-4'>
       										<p style="text-align: right"><input type="button" name="pagar" id="pagar" onclick="validar();" class="btn btn-success btn-md" value="Facturar"></p>
       									</div>
       								</div>
-                                    <div class='row' style="display: block;">
-      									<div id="datostotalesaux1" class="col-xs-12" style="display: none;font-size: 12px;">
-
-                                              <div id="datostotales">
-                                                    <!--<label for="basic-url" style=" color:#000000; text-decoration:none; width:100%;">Totales</label>-->
-        										  <div class="panel-body" style="margin-top: -15px;">
-                                                    <table>
-                                                      <tr>
-                                                        <td><span style="text-align: left;">Sub Total sin IVA US$:</span></td>
-                                                        <td><input type="text" name="subsixx" id="subsixx" class="form-control" style="text-align: right;width: 100px;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <td><span style=";text-align: left;">Sub Total con IVA US$:</span></td>
-                                                        <td><input type="text" name="subcixx" id="subcixx" class="form-control" style="text-align: right;width: 100px;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <td><span style="text-align: left;">IVA US$:</span></td>
-                                                        <td><input type="text" name="ivaxx" id="ivaxx" class="form-control" style="text-align: right;width: 100px;display: inline-block;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
-                                                      </tr>
-                                                      <tr>
-                                                        <td><span style="text-align: left;"><b>TOTAL US$:</b></span></td>
-                                                        <td><input type="text" name="totalxx" id="totalxx" class="form-control" style="text-align: right;width: 100px;display: inline-block;font-weight: bold;background-color: transparent;border: none;" value="0.00" readonly="readonly"/></td>
-                                                      </tr>
-                                                    </table>
-          										  </div>
-                                              </div>
-
-                                         </div>
       								</div>
         						</div>
 
@@ -826,12 +832,18 @@ if ($(window).width()<=700){
   $("#auxcontenido1").css("height","auto");
   $("#auxborder").css("border-right","none");
   $("#auxborder").css("height","auto");
+  $("#aux1").css("display","block");
+  $("#aux2").css("display","block");
+  $("#rayas").css("border-bottom","none");
 }else{
   $("#datostotalesaux").css("display","block");
   $("#datostotalesaux1").css("display","none");
   $("#auxcontenido1").css("height",alto);
   $("#auxborder").css("border-right","1px solid #CCCCCC");
   $("#auxborder").css("height",alto);
+  $("#aux1").css("display","none");
+  $("#aux2").css("display","none");
+  $("#rayas").css("border-bottom","1px solid #CCCCCC");
 }
 $(window).resize(function() {
   if ($(window).width()<=700){
@@ -841,12 +853,18 @@ $(window).resize(function() {
     $("#auxcontenido1").css("height","auto");
     $("#auxborder").css("border-right","none");
     $("#auxborder").css("height","auto");
+    $("#aux1").css("display","block");
+    $("#aux2").css("display","block");
+    $("#rayas").css("border-bottom","none");
   }else{
     $("#datostotalesaux").css("display","block");
     $("#datostotalesaux1").css("display","none");
     $("#auxcontenido1").css("height",alto);
     $("#auxborder").css("border-right","1px solid #CCCCCC");
     $("#auxborder").css("height",alto);
+    $("#aux1").css("display","none");
+    $("#aux2").css("display","none");
+    $("#rayas").css("border-bottom","1px solid #CCCCCC");
   }
 });
 function consultar(){
@@ -876,7 +894,7 @@ function consultar(){
 						$('#datos').html('<div class="form-group"><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Nombre</span><input class="form-control input-md" type="nombre" name="nombre" id="nombre" placeholder="Nombre" required="" autocomplete="off"></div><br><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Dirección</span><input class="form-control input-md" type="apellido" name="apellido" id="apellido" placeholder="Dirección" required="" autocomplete="off"></div><br><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">E-mail</span><input class="form-control input-md" type="email" name="email" id="email" placeholder="E-mail" required="" autocomplete="off"></div><br><div class="input-group" style="width: 100%;"><span class="input-group-addon" id="sizing-addon4" style="width: 85px;text-align: left;">Teléfono</span><input class="form-control input-md" type="telefono" name="telefono" id="telefono" placeholder="Teléfono" required="" autocomplete="off"></div></div> ');
 						$("#maincontinuar").show();
 						$("#btningresadatosc").html("Grabar");
-                        $("#rayas").css("border-bottom","1px solid #CCCCCC");
+                        //$("#rayas").css("border-bottom","1px solid #CCCCCC");
 
                         $('#msjinfo').fadeIn('fast');
                         $('#msjinfo').html('Debe ingresar los datos del cliente para ser creado en el sistema y hacer click en Grabar.');
@@ -893,7 +911,7 @@ function consultar(){
 					 $('#datos').html(msg);
 					 $("#maincontinuar").show();
 					 $("#btningresadatosc").html("Actualizar");
-                     $("#rayas").css("border-bottom","1px solid #CCCCCC");
+                     //$("#rayas").css("border-bottom","1px solid #CCCCCC");
 
                      $('#msjinfo').fadeOut('fast');
 
