@@ -105,9 +105,9 @@ function validar(){
 
   sutotal = subsi+subci;
   sutotalneto = sutotal;
-  var establecimiento ='001';// document.getElementById('establecimiento').value;
-  var caja = '002'; //document.getElementById('caja').value;
-  var factura_no = document.getElementById('factura_no').value;
+  var establecimiento =document.getElementById('establecimiento').value;
+  var caja = document.getElementById('serie').value;
+  var factura_no = document.getElementById('facturano').value;
   facturacion = idcliente+'|'+total+'|'+sutotal+'|'+establecimiento+'|'+caja+'|'+factura_no+'|'+sutotalneto+'|'+subci+'|'+iva;
 
 
@@ -185,7 +185,7 @@ function validar(){
     //alert('empresahis='+miidempresa+'&que=1&facturacion='+facturacion+'&consumos='+consumos);
     $.ajax({
 		type: 'POST',
-		url: "http://practisis.net/practifactura/api2.php",
+		url: "http://practisis.net/practifactura/api.php",
 		data: 'empresahis='+miidempresa+'&que=1&facturacion='+facturacion+'&consumos='+consumos,
 		success: function(response){
 		  //alert(response);
