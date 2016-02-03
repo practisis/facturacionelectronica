@@ -904,6 +904,26 @@ function consultar(){
 					  $("#factura_no").val($('#lanumfactura').val());
 					  $('idcliente').val(separafactdi[0]);
                       $("#fadeCloud").hide();
+					  
+							$.ajax({          //************************ este codigo consulta los datos de la factura*********************
+							  method: "POST",
+							  url: "http://practisis.net/practifactura/api.php",
+							  data: {dedonde: "consultadatosfactura",empresahis: miidempresa }
+							})
+							  .done(function( msg ) {
+								if (msg=="no"){
+									alert ("Hubo un problema. Recargue la pagina.");
+								}else {
+									//alert (msg);
+									var separafact  = msg;
+									var separafactdi = separafact.split("||");
+									$("#establecimiento").val(separafactdi[0]);
+									$("#serie").val(separafactdi[1]);
+									$("#facturano").val(separafactdi[2]);
+								}
+								console.log(msg);
+							});					  
+							//******************************************fin este codigo consulta los datos de la factura*********************
 					}
 					console.log(msg);
 
