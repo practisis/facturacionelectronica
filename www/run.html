@@ -353,7 +353,7 @@
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">Nombre</span>
-											<input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="nombreemp" id="nombreemp" placeholder="Nombre" value="" required="" autocomplete="off">
 										</div>
 									</div>
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
@@ -371,19 +371,19 @@
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">E-mail</span>
-											<input class="form-control" type="text" name="email" id="email" placeholder="email@empresa.com" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="emailemp" id="emailemp" placeholder="email@empresa.com" value="" required="" autocomplete="off">
 										</div>
 									</div>
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">Dirección</span>
-											<input class="form-control" type="text" name="direccion" id="direccion" placeholder="23-01-2016" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="direccionemp" id="direccionemp" placeholder="Dirección" value="" required="" autocomplete="off">
 										</div>
 									</div>
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">Teléfono</span>
-											<input class="form-control" type="text" name="telefono" id="telefono" placeholder="texto" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="telefonoemp" id="telefonoemp" placeholder="teléfono" value="" required="" autocomplete="off">
 										</div>
 									</div>
 
@@ -522,6 +522,10 @@ function envia(donde){
 						$("#establecimiento").val(separafactdi[0]);
 						$("#serie").val(separafactdi[1]);
 						$("#facturano").val(separafactdi[2]);
+						$("#nombreemp").val(separafactdi[3]);
+						$("#ruc").val(separafactdi[4]);
+						$("#direccionemp").val(separafactdi[5]);
+						$("#telefonoemp").val(separafactdi[6]);
 					}
 					console.log(msg);
 				});
@@ -677,6 +681,10 @@ function verride(que,quien){
 	var establecimiento=$.trim($("#establecimiento").val());
 	var serie=$.trim($("#serie").val());
 	var facturano=$.trim($("#facturano").val());
+	var nombre=$.trim($("#nombreemp").val());
+	var ruc=$.trim($("#ruc").val());
+	var direccion=$.trim($("#direccionemp").val());
+	var telefono=$.trim($("#telefonoemp").val());
 	if (establecimiento=="" || serie =="" || facturano=="" ){
 	alert ("Ingrese todos los datos de la factura.");
 	return;
@@ -684,7 +692,7 @@ function verride(que,quien){
 	$.ajax({
 				  method: "POST",
 				  url: "http://practisis.net/practifactura/api.php",
-				  data: { empresahis: miidempresa,dedonde: "ingresadatosfactura",establecimiento:establecimiento,serie:serie,facturano:facturano}
+				  data: { empresahis: miidempresa,dedonde: "ingresadatosfactura",establecimiento:establecimiento,serie:serie,facturano:facturano,nombre:nombre,ruc:ruc,direccion:direccion,telefono:telefono}
 				})
 				  .done(function( msg ) {
 						$("#fadeCloud").hide();
