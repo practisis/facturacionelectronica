@@ -405,10 +405,9 @@
 		</div>
 
     <div id="firma" class="row" style="display:none;">
-        <!--<div class="embed-responsive embed-responsive-16by9">
+        <div class="embed-responsive embed-responsive-16by9">
           <iframe id="framefirma" class="embed-responsive-item" src=""></iframe>
-        </div>-->
-        <input name="archivo" type="file" id="imagen" />
+        </div>
       <!--<div class="col-xs-4"></div>
         <div class="col-xs-4">
           <br><br>
@@ -585,7 +584,7 @@ function envia(donde){
 
 			 }else if(donde=='firma'){
               //alert(miidempresa);
-             //document.getElementById('framefirma').src='http://practifactura.com/facturaelectronica/subpages/administrador/firmam.php?idemp='+miidempresa;
+             document.getElementById('framefirma').src='http://practifactura.com/facturaelectronica/subpages/administrador/firmam.php?idemp='+miidempresa;
 
               $('#auxcloud').removeClass('active');
               $('#auxfacturar').removeClass('active');
