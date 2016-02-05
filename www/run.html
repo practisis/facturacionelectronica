@@ -60,6 +60,7 @@
 
 <div style="height:50px;"></div>
 <div id="mybodycontent" class="container-fluid" style="position: relative;">
+
 		<div class='row' id="facturas" style="display:block;height: auto;">
 					<div id="auxcontenido1" class='col-lg-12 col-md-12 col-sm-12 ui-mobile'>
 
@@ -261,8 +262,6 @@
 
 							</div>
 
-						</div>
-
 		</div>
 		<div class='row' id="historial" style="display:none">
 			<div class='col-lg-12 col-md-12 col-sm-12 ui-mobile'>
@@ -318,7 +317,7 @@
 		</div>
 
 
-		<div class='row' id="configurarfact" style="display:none">
+		<div class='row' id="configurarfact" style="display:none;">
 					<div class="row">
 							<div class="col-md-3" >
 							</div>
@@ -357,37 +356,37 @@
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">Nombre</span>
-											<input class="form-control" type="text" name="nombreemp" id="nombreemp" placeholder="Nombre" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="nombreemp" id="nombreemp" placeholder="Nombre" value="" autocomplete="off">
 										</div>
 									</div>
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">RUC</span>
-											<input class="form-control" type="text" name="ruc" id="ruc" placeholder="0000000000000" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="ruc" id="ruc" placeholder="0000000000000" value="" autocomplete="off">
 										</div>
 									</div>
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">Logo</span>
-											<input class="form-control" type="text" name="logo" id="logo" placeholder="image.jpg" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="logo" id="logo" placeholder="image.jpg" value="" autocomplete="off">
 										</div>
 									</div>
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">E-mail</span>
-											<input class="form-control" type="text" name="emailemp" id="emailemp" placeholder="email@empresa.com" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="emailemp" id="emailemp" placeholder="email@empresa.com" value="" autocomplete="off">
 										</div>
 									</div>
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">Dirección</span>
-											<input class="form-control" type="text" name="direccionemp" id="direccionemp" placeholder="Dirección" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="direccionemp" id="direccionemp" placeholder="Dirección" value="" autocomplete="off">
 										</div>
 									</div>
 									<div class="form-group" style="padding-left:10px; padding-right:10px">
 										<div class="input-group" style="width: 100%;">
 											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">Teléfono</span>
-											<input class="form-control" type="text" name="telefonoemp" id="telefonoemp" placeholder="teléfono" value="" required="" autocomplete="off">
+											<input class="form-control" type="text" name="telefonoemp" id="telefonoemp" placeholder="teléfono" value="" autocomplete="off">
 										</div>
 									</div>
 
@@ -402,10 +401,14 @@
 							</div>
 
 					</div>
+
 		</div>
 
     <div id="firma" class="row" style="display:none;">
-      <div class="col-xs-4"></div>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe id="framefirma" class="embed-responsive-item" src=""></iframe>
+        </div>
+      <!--<div class="col-xs-4"></div>
         <div class="col-xs-4">
           <br><br>
             <a class="btn btn-success"  id="uploadFactura">
@@ -433,7 +436,7 @@
             </a>
 
         </div>
-        <div class="col-xs-4"></div>
+        <div class="col-xs-4"></div>-->
     </div>
 
 	<div id="cloud" class="row" style="display:none;">
@@ -463,6 +466,7 @@
         </div>
         <div class="col-xs-4"></div>
     </div>
+
  </div>
 			<div class="modal-backdrop fade in" id='cargandoTabs' style='z-index:1000;display:none;'>
 				<table width='100%' height='100%'>
@@ -473,6 +477,19 @@
 					</tr>
 				</table>
 			</div>
+
+            <div class="modal" id='mensaje' style='z-index:1000;display:none;'>
+                <div class="panel panel-danger" style="width: 50%;margin-left: 25%;margin-top: 15%;border: 1px solid #F2DEDE;">
+                  <div class="panel-heading">Alerta</div>
+                  <div class="panel-body">
+                    Para el correcto funcionamiento del sistema, tiene que ingresar todos los datos del sigiente formuladio.
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-success">Aceptar</button>
+                  </div>
+                </div>
+			</div>
+
 	<script>
 	//codigo javascript de funcionalidad
   var errNet='Problemas de conexión \n Por favor Verifica tu internet.';
@@ -480,6 +497,7 @@ function envia(donde){
     $("#firma").css("display" , "none"); /*Josue Desorder*/
 			if (donde=='factura'){ //*****************************consulto la cedula si existe ***********************
 
+            $('#auxcloud').removeClass('active');
             $('#auxconfig').removeClass('active');
             $('#auxhistorial').removeClass('active');
             $('#auxfirma').removeClass('active');
@@ -526,8 +544,10 @@ function envia(donde){
 				$("#facturas").show();
 				$("#historial").hide();
 				$("#configurarfact").hide();
+                $("#cloud").hide();
 
 			}else if(donde=='configurar'){
+			  $('#auxcloud').removeClass('active');
 			  $('#auxfacturar').removeClass('active');
               $('#auxhistorial').removeClass('active');
               $('#auxfirma').removeClass('active');
@@ -536,6 +556,7 @@ function envia(donde){
         $("#facturas").hide();
 				$("#historial").hide();
 				$("#configurarfact").show();
+                $("#cloud").hide();
 
 
 				$.ajax({          //************************ este codigo consulta los datos de la factura*********************
@@ -562,7 +583,10 @@ function envia(donde){
 				});
 
 			 }else if(donde=='firma'){
+              //alert(miidempresa);
+             document.getElementById('framefirma').src='http://practifactura.com/facturaelectronica/subpages/administrador/firmam.php?idemp='+miidempresa;
 
+              $('#auxcloud').removeClass('active');
               $('#auxfacturar').removeClass('active');
               $('#auxhistorial').removeClass('active');
               $('#auxconfig').removeClass('active');
@@ -571,9 +595,15 @@ function envia(donde){
           $("#facturas").hide();
           $("#historial").hide();
           $("#configurarfact").hide();
+          $("#cloud").hide();
           $("#firma").show();
 			}else if(donde=='cloud'){
-				alert('michu');
+			  $('#auxfirma').removeClass('active');
+              $('#auxfacturar').removeClass('active');
+              $('#auxhistorial').removeClass('active');
+              $('#auxconfig').removeClass('active');
+			  $('#auxcloud').addClass('active');
+				//alert('michu');
 				$("#facturas").hide();
 				$("#historial").hide();
 				$("#configurarfact").hide();
@@ -723,8 +753,9 @@ function verride(que,quien){
 	var ruc=$.trim($("#ruc").val());
 	var direccion=$.trim($("#direccionemp").val());
 	var telefono=$.trim($("#telefonoemp").val());
-	if (establecimiento=="" || serie =="" || facturano=="" ){
+	if (establecimiento=="" || serie =="" || facturano=="" || ruc=="" ){
 	alert ("Ingrese todos los datos de la factura.");
+    $("#fadeCloud").hide();
 	return;
 	}
 	$.ajax({
@@ -1024,7 +1055,8 @@ $(document).ready(function(){
 							  .done(function( msg ) {
 							  
 								if (msg=="0" || $.trim(msg)==''){
-									alert ("Hubo un problema. Recargue la pagina.");
+									//alert ("Hubo un problema. Recargue la pagina5.");
+                                    $('#mensaje').modal('show');
 									$("#auxfacturar").hide();
 									$("#auxfirma").hide();
 									$("#auxhistorial").hide();
