@@ -73,12 +73,12 @@ function totales(){
     valortotaliva = totciva*valoriva;
     total = totciva+totsiva+valortotaliva;
     subtotal = totciva+totsiva;
-    document.getElementById('subt').value=subtotal.toFixed(2);
+    //document.getElementById('subt').value=subtotal.toFixed(2);
     document.getElementById('subsi').value=totsiva.toFixed(2);
     document.getElementById('subci').value=totciva.toFixed(2);
     document.getElementById('iva').value=valortotaliva.toFixed(2);
     document.getElementById('total').value=total.toFixed(2);
-    document.getElementById('subtxx').value=subtotal.toFixed(2);
+    //document.getElementById('subtxx').value=subtotal.toFixed(2);
     document.getElementById('subsixx').value=totsiva.toFixed(2);
     document.getElementById('subcixx').value=totciva.toFixed(2);
     document.getElementById('ivaxx').value=valortotaliva.toFixed(2);
