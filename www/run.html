@@ -55,7 +55,7 @@
     					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style='display:inline;' class='fa fa-cog'></span>&nbsp;Config<span class="caret"></span></a>
     					  <ul class="dropdown-menu">
                            <li id="auxconfig" onclick='envia("configurar");'><a href="javascript:void(0);"><span style='display:inline;' class='glyphicon glyphicon-user'></span>&nbsp;Mi Perfil</a></li>
-    					   <li id="auxfirma" onclick="envia('firma')"><a href="javascript:void(0);"><span style='display:inline;' class='glyphicon glyphicon-pencil'></span>&nbsp;Firma Electrónica</a></li>
+    					   <!--<li id="auxfirma" onclick="envia('firma')"><a href="javascript:void(0);"><span style='display:inline;' class='glyphicon glyphicon-pencil'></span>&nbsp;Firma Electrónica</a></li>-->
     					  </ul>
     					</li>
     				</ul>
@@ -245,10 +245,8 @@
                                      <div class="table-responsive" style="border: none;border-color: #FFFFFF;!important;">
 											<table class="table" style="border: none;border-color: #FFFFFF;!important;">
 												<tr>
-												<td width='10%'></td>
-												<td width='40%'></td>
-												<td colspan="2" width='25%' style="text-align: right;vertical-align: middle;font-size: 20px;"><b>TOTAL US$:</b></td>
-                                                      <td width='15%'><input type="text" name="total" id="total" class="form-control input-md" style="height: 35px;text-align: right;width: 100%;display: inline-block;font-weight: bold;background-color: transparent;border: none;font-size: 20px;" readonly="readonly" value="0.00"/></td>
+												<td colspan="3" width='65%' style="text-align: right;vertical-align: middle;font-size: 30px;"><b>TOTAL US$:</b></td>
+                                                <td colspan="2" width='25%'><input type="text" name="total" id="total" class="form-control input-md" style="height: 60px;text-align: right;width: 100%;display: inline-block;font-weight: bold;background-color: transparent;border: none;font-size: 30px;" readonly="readonly" value="0.00"/></td>
 												<td width='10%'></td>
 												</tr>
 											</table>
@@ -411,38 +409,7 @@
 		</div>
 
     <div id="firma" class="row" style="display:none;">
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe id="framefirma" class="embed-responsive-item" src=""></iframe>
-        </div>
-      <!--<div class="col-xs-4"></div>
-        <div class="col-xs-4">
-          <br><br>
-            <a class="btn btn-success"  id="uploadFactura">
-            <table width="100%" id="textoUpload" >
-                <tr>
-                    <td valign="center" width="20%">
-                        <h1 class='glyphicon glyphicon-upload'></h1>
-                    </td>
-                    <td valign="center">
-                      <h4> Por favor seleccione un archivo  </h4>
-                    </td>
-                  </tr>
-            </table>
 
-              <table width='100%' height='100%' id="loadGifUpload" style='display:none;'>
-                <tr>
-                    <td valign="center" align="center" width="20%">
-                        <img src='img/loader.gif' width="50" />
-                    </td>
-                    <td>
-                        <h4 style='margin-left:15px;'> Subiendo Archivo </h4>
-                    </td>
-                </tr>
-              </table>
-            </a>
-
-        </div>
-        <div class="col-xs-4"></div>-->
     </div>
 
 	<div id="cloud" class="row" style="display:none;">
@@ -451,9 +418,39 @@
           <br><br>
            <div class='row' id='cuentaactiva' style='display:block;'>
     		<div class='col-lg-12'>
-    			<div style='margin-top:10px; margin-bottom:10px;'>Ingresa a tu cuenta PractiFactura en la nube</div>
+    			<div style='margin-top:10px; margin-bottom:10px;text-align: center;'>Ingresa a tu cuenta PractiFactura en la nube</div>
     			<center><a id="linklogin" href="http://practifactura.com/login.php" target="_blank" ><input class="btn btn-md btn-primary btn-center" type="button"  value="Ir a la nube" /></a></center>
-    			<div class='alert alert-success' style='margin-top:20px; margin-bottom:20px;'>Su cuenta se encuentra activa por <b><span id='dias'></span></b> dias.</div>
+    			<div class='alert alert-success' style='margin-top:20px; margin-bottom:20px;text-align: center;'>Su cuenta se encuentra activa por <b><span id='dias'></span></b> dias.</div>
+                <div id="firmano" class='alert alert-danger' style='margin-top:10px; margin-bottom:10px;text-align: center;display: none;'>
+                  No tienes registrada tu firma electrónica,
+                  <br>
+                  para que tus documentos tengan validez tributaria,
+                  <br>
+                  haz click en sube tu firma.
+                  <br><br>
+                  <center><a id="linkfirmano" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Sube tu Firma" /></a></center>
+                </div>
+                <div id="firmasi" class='alert alert-success' style='margin-top:10px; margin-bottom:10px;text-align: center;display: none;'>
+                  Para poder cambiar tu firma electrónica,
+                  <br>
+                  haz click en cambia tu firma.
+                  <br><br>
+                  <center><a id="linkfirmasi" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Cambia tu Firma" /></a></center>
+                </div>
+                <div id="logono" class='alert alert-danger' style='margin-top:10px; margin-bottom:10px;text-align: center;display: none;'>
+                  No tienes registrado tu logo,
+                  <br>
+                  haz click en sube tu logo.
+                  <br><br>
+                  <center><a id="linklogono" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Sube tu Logo" /></a></center>
+                </div>
+                <div id="logosi" class='alert alert-success' style='margin-top:10px; margin-bottom:10px;text-align: center;display: none;'>
+                  Para poder cambiar tu logo,
+                  <br>
+                  haz click en cambia tu logo.
+                  <br><br>
+                  <center><a id="linklogosi" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Cambia tu Logo" /></a></center>
+                </div>
     		</div>
     	  </div>
     	  <div class='row'  id="bloqueo" style="display: none;">
@@ -584,7 +581,7 @@ function envia(donde){
 
 			 }else if(donde=='firma'){
               //alert(miidempresa);
-             document.getElementById('framefirma').src='http://practifactura.com/facturaelectronica/subpages/administrador/firmam.php?idemp='+miidempresa;
+             //document.getElementById('framefirma').src='http://practifactura.com/facturaelectronica/subpages/administrador/firmam.php?idemp='+miidempresa;
 
               $('#auxcloud').removeClass('active');
               $('#auxfacturar').removeClass('active');
@@ -609,6 +606,45 @@ function envia(donde){
 				$("#configurarfact").hide();
 				$("#firma").hide();
 				$('#cloud').show();
+                var cadena = Base64.encode(miidempresa);
+                //***********************firma*********************
+                  $.ajax({
+    				  method: "POST",
+    				  url: "http://practisis.net/practifactura/api.php",
+    				  data: {dedonde: "firma",empresa: miidempresa }
+    			  })
+    			  .done(function( msg ) {
+    			    var res = msg.split("|");
+    					if (res[0]=="si"){
+    						$("#firmano").fadeOut('fast');
+                            $("#firmasi").fadeIn('slow');
+                            document.getElementById('linkfirmasi').href='http://practifactura.com/facturaelectronica/subpages/administrador/firmam.php?idemp='+cadena;
+    					}else{
+    						$("#firmasi").fadeOut('fast');
+                            $("#firmano").fadeIn('slow');
+                            document.getElementById('linkfirmano').href='http://practifactura.com/facturaelectronica/subpages/administrador/firmam.php?idemp='+cadena;
+    					}
+    					console.log(msg);
+    			  });
+                  //***********************logo*********************
+                  $.ajax({
+    				  method: "POST",
+    				  url: "http://practisis.net/practifactura/api.php",
+    				  data: {dedonde: "logo",empresa: miidempresa }
+    			  })
+    			  .done(function( msg ) {
+    			    var res = msg.split("|");
+    					if (res[0]=="si"){
+    						$("#logono").fadeOut('fast');
+                            $("#logosi").fadeIn('slow');
+                            document.getElementById('linklogosi').href='http://practifactura.com/facturaelectronica/subpages/administrador/logom.php?idemp='+cadena;
+    					}else{
+    						$("#logosi").fadeOut('fast');
+                            $("#logono").fadeIn('slow');
+                            document.getElementById('linklogono').href='http://practifactura.com/facturaelectronica/subpages/administrador/logom.php?idemp='+cadena;
+    					}
+    					console.log(msg);
+    			  });
 
               //***********************licencia*********************
               $.ajax({
