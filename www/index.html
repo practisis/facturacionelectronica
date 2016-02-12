@@ -39,11 +39,16 @@
 
             <div class="form-group">
               <input class="form-control input" type="email" name="email" id="newEmail" placeholder="E-mail" required="" autocomplete="off">
-            </div>          
+            </div>
 
-         <div class="form-group">
+            <div class="form-group">
+              <input class="form-control input" type="ruc" name="ruc" id="newRuc" placeholder="RUC" required="" autocomplete="off">
+            </div>
+
+            <div class="form-group">
               <input type="password" name="pass" id="newPass"  class="form-control input" placeholder="Ingresa una contraseña" required="" autocomplete="off">
             </div>
+
              <div class="form-group">
               <input type="password" name="pass" id="newConfirm"  class="form-control input" placeholder="Confirma tu contraseña" required="" autocomplete="off">
             </div>
@@ -79,6 +84,7 @@
 	function registrarUser () {
 	$("#fadeCloud").show();
 	var email=$.trim($("#newEmail").val());
+    var ruc=$.trim($("#newRuc").val());
 	var pass=$.trim($("#newPass").val());
 	var confirm=$.trim($("#newConfirm").val());
 	var empresa=$.trim($("#newEmpresa").val());
@@ -87,20 +93,52 @@
 	var pais=1;
 	var versiones=9;
 
-	if (email=="" || empresa =="" || pass =="" ){
+	if (email=="" || empresa =="" || pass =="" || ruc ==""){
 	alert ("Ingrese todos los datos. Estos son obligatorios.");
+    $("#fadeCloud").hide();
 	return;
-	} 
+	}
+
+    var dto = ruc.length;
+    var valor;
+    var acu=0;
+    if(ruc!=""){
+     for (var i=0; i<dto; i++){
+     valor = ruc.substring(i,i+1);
+     if(valor==0||valor==1||valor==2||valor==3||valor==4||valor==5||valor==6||valor==7||valor==8||valor==9){
+      acu = acu+1;
+     }
+     }
+     if(acu==dto){
+      while(ruc.substring(10,13)!=001){
+       alert('Los tres últimos dígitos no tienen el código del RUC 001.');
+       $("#fadeCloud").hide();
+       return;
+      }
+      while(ruc.substring(0,2)>24){
+       alert('Los dos primeros dígitos no pueden ser mayores a 24.');
+       $("#fadeCloud").hide();
+       return;
+      }
+      //alert('El RUC está escrito correctamente');
+      }
+     else{
+     alert("ERROR: Por favor no ingrese texto");
+     $("#fadeCloud").hide();
+     return;
+     }
+    }
 	
 	if (pass!=confirm ){
 	alert ("El password es incorrecto. Confirme que el password sea el mismo  ");
+    $("#fadeCloud").hide();
 	return;
 	} 
 	if(fHayInternet()) {
 		$.ajax({
   		method: "POST",
   		url: "http://practifactura.com/registro/registroPractiFactura.php",
-  		data: { email: email, pass: pass,empresa:empresa,nombre:nombre,celular:celular,pais:pais,versiones:versiones }
+  		data: { email: email, pass: pass,empresa:empresa,nombre:nombre,celular:celular,pais:pais,versiones:versiones,ruc:ruc }
 		})
   		.done(function( msg ) {
 	    //alert( "Data Saved: " + msg );
