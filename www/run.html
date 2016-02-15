@@ -11,12 +11,13 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="cordova.js"></script>
-	<script type="text/javascript" src="css/jquery.mobile-1.4.2.min.js"></script>
-	<script type="text/javascript" src="css/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.4.2.min.js"></script>
 	<link rel="stylesheet" href="css/estilotemp.css">
 	<link href="css/fonts.css" rel="stylesheet" type="text/css">
 	<link href="css/formated.css" rel="stylesheet" type="text/css">
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <link href="css/bootstrap-switch.css" rel="stylesheet" type="text/css">
 	<script src="js/pdv.js"></script>
     <script type="text/javascript" charset="utf-8" src="plugins/org.apache.cordova.inappbrowser/www/inappbrowser.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -52,6 +53,7 @@
                         <li id="auxcloud" onclick="envia('cloud')"><a href="javascript:void(0);"><span style='display:inline;' class='glyphicon glyphicon-cloud'></span>&nbsp;Cloud<span class="sr-only">(current)</span></a></li>
 					</ul>
                     <ul class="nav navbar-nav navbar-right">
+                        <li id="mesaje"></li>
     					<li class="dropdown">
     					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style='display:inline;' class='fa fa-cog'></span>&nbsp;Config<span class="caret"></span></a>
     					  <ul class="dropdown-menu">
@@ -409,6 +411,12 @@
 											<input class="form-control" type="text" name="telefonoemp" id="telefonoemp" placeholder="teléfono" value="" autocomplete="off">
 										</div>
 									</div>
+                                    <div class="form-group" style="padding-left:10px; padding-right:10px">
+										<div class="input-group" style="width: 100%;">
+											<span class="input-group-addon" id="sizing-addon4" style="text-align:left; width: 160px;">Producción</span>
+                                            <input type="checkbox" name="produccion" id="produccion" data-on-text="Si" data-off-text="No">
+										</div>
+									</div>
 
 
 								<div id="maincontinuar" Align="center" style="width:100%; display:block;">
@@ -594,6 +602,13 @@ function envia(donde){
                         document.getElementById('logoempresa').src='http://practifactura.com/logos/'+separafactdi[7];
                         $("#vernombreempresa").html(separafactdi[3]);
                         $("#verbdd").html(separafactdi[8]);
+                        if(separafactdi[9]=='true'){
+                            $('input[name="produccion"]').bootstrapSwitch('state',true);
+                            //alert(separafactdi[9]);
+                        }else{
+                            $('input[name="produccion"]').bootstrapSwitch('state',false);
+                            //alert(separafactdi[9]);
+                        }
 					}
 					console.log(msg);
 				});
@@ -828,6 +843,7 @@ function verride(que,quien){
 	var ruc=$.trim($("#ruc").val());
 	var direccion=$.trim($("#direccionemp").val());
 	var telefono=$.trim($("#telefonoemp").val());
+    var produccion = document.getElementById("produccion").checked;
 	if (establecimiento=="" || serie =="" || facturano=="" || ruc=="" ){
 	alert ("Ingrese todos los datos de la factura.");
     $("#fadeCloud").hide();
@@ -836,7 +852,7 @@ function verride(que,quien){
 	$.ajax({
 				  method: "POST",
 				  url: "http://practisis.net/practifactura/api.php",
-				  data: { empresahis: miidempresa,dedonde: "ingresadatosfactura",establecimiento:establecimiento,serie:serie,facturano:facturano,nombre:nombre,ruc:ruc,direccion:direccion,telefono:telefono}
+				  data: { empresahis: miidempresa,dedonde: "ingresadatosfactura",establecimiento:establecimiento,serie:serie,facturano:facturano,nombre:nombre,ruc:ruc,direccion:direccion,telefono:telefono,produccion:produccion}
 				})
 				  .done(function( msg ) {
 						$("#fadeCloud").hide();
@@ -853,7 +869,26 @@ function verride(que,quien){
 									$("#auxfacturar").removeClass();
 									$("#auxfacturar").addClass('active');
 									$("#auxconfig").removeClass();
-						
+
+                                    $.ajax({
+        							  method: "POST",
+        							  url: "http://practisis.net/practifactura/api.php",
+        							  data: {dedonde: "consultasiesnueva",empresahis: miidempresa }
+        							})
+        							  .done(function( msg ) {
+
+                                      var res = msg.split("||");
+
+                                      if(res[1]==1 && res[2]==0){
+                                        $("#mesaje").html('<a href="javascript:void(0);"><b>Ambiente:</b> Pruebas - Sin Firma</a>');
+                                      }else if(res[1]==1 && res[2]==1){
+                                        $("#mesaje").html('<a href="javascript:void(0);"><b>Ambiente:</b> Pruebas</a>');
+                                      }else if(res[1]==0){
+                                        $("#mesaje").html('<a href="javascript:void(0);"><b>Ambiente:</b> Producción</a>');
+                                      }
+        								console.log(msg);
+        							});
+
 
 				});
 	}
@@ -1122,6 +1157,7 @@ function vaciar(){
 }
 
 $(document).ready(function(){
+$("[name='produccion']").bootstrapSwitch();
 //***********************licencia*********************
 $.ajax({
 method: "POST",
@@ -1145,8 +1181,18 @@ if (res[0]=="block"){
 							  data: {dedonde: "consultasiesnueva",empresahis: miidempresa }
 							})
 							  .done(function( msg ) {
-							  
-								if (msg=="0" || $.trim(msg)==''){
+
+                              var res = msg.split("||");
+
+                              if(res[1]==1 && res[2]==0){
+                                $("#mesaje").html('<a href="javascript:void(0);"><b>Ambiente:</b> Pruebas - Sin Firma</a>');
+                              }else if(res[1]==1 && res[2]==1){
+                                $("#mesaje").html('<a href="javascript:void(0);"><b>Ambiente:</b> Pruebas</a>');
+                              }else if(res[1]==0){
+                                $("#mesaje").html('<a href="javascript:void(0);"><b>Ambiente:</b> Producción</a>');
+                              }
+
+								if (res[0]=="0" || $.trim(res[0])==''){
 									//alert ("Hubo un problema. Recargue la pagina5.");
                                     $('#mensaje').modal('show');
 									$("#auxfacturar").hide();
@@ -1159,7 +1205,7 @@ if (res[0]=="block"){
 									$("#bienvenido").show();
 									$("#configurarfact").show();
 								}else {
-									
+
 									$("#auxfacturar").show();
 									$("#auxfirma").show();
 									$("#auxhistorial").show();
@@ -1169,11 +1215,11 @@ if (res[0]=="block"){
 									$("#firma").show();
 									$("#configurarfact").hide();
 									$("#bienvenido").hide();
-									
+
 								}
 								console.log(msg);
-							});					  
-	
+							});
+
 	
 	
 	$('#boton1').tooltip('show');
