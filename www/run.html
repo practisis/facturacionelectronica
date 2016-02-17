@@ -322,7 +322,7 @@
 						</div>
 					</div>
 
-                    <div id="myModal" class="modal fade" role="dialog" style="margin-top: 50px;position: absolute;">
+                    <div id="myModal" class="modal fade" role="dialog" style="margin-top: 25px;position: absolute;">
                     <div class="modal-dialog">
 
                       <div class="modal-content">
@@ -1324,7 +1324,9 @@ function reeviar(){
         if(res[0]=='ok'){
           alert('Reenviado exitosamente.');
           $("#fadeCloud").hide();
-          envia('factura');
+          document.getElementById('emailaux').value='';
+          $('#myModal').modal('hide');
+          envia('historial');
           //location.reload(true);
         }else{
           alert('Usted ha ingresado un correo que no existe.');
