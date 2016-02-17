@@ -152,7 +152,7 @@ function validar(){
       //alert(consumos+'**'+errordi)
 
 	  if (errordi>0 || consumos==''){
-			alert('Parece que te has equivocado!\nNo se puede grabar la factura.\nPor favor revise los datos, por lo menos debe haber un producto para guardar la factura.');
+			alert('Parece que te has equivocado!\nNo se puede grabar la factura.\nPor favor revise los datos, por lo menos debe haber un producto para guardar la factura y no existir lineas de productos vacias.');
             $("#fadeCloud").hide();
 			return false;
 	  }
