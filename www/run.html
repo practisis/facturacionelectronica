@@ -322,7 +322,7 @@
 						</div>
 					</div>
 
-                    <div id="myModal" class="modal fade" role="dialog" style="margin-top: 100px;">
+                    <div id="myModal" class="modal fade" role="dialog" style="margin-top: 50px;position: absolute;">
                     <div class="modal-dialog">
 
                       <div class="modal-content">
@@ -1303,6 +1303,7 @@ function vermas(id,doc,error,ambi){
   document.getElementById('ambiente').value=ambi;
 }
 function reeviar(){
+  $("#fadeCloud").show();
   var idf = document.getElementById('idfact').value;
   var emailaux = document.getElementById('emailaux').value;
   var ambi = document.getElementById('ambiente').value;
@@ -1310,6 +1311,7 @@ function reeviar(){
 
   if(!filtro.test(emailaux) || emailaux==''){
     alert('Email invalido.');
+    $("#fadeCloud").hide();
   }else{
     var ajaxree=objetoAjax();
     var linkurl = 'http://practifactura.com/'+ambi+'empresas/reenvio.php';
@@ -1321,9 +1323,12 @@ function reeviar(){
         var res = respp.split("|");
         if(res[0]=='ok'){
           alert('Reenviado exitosamente.');
-          location.reload(true);
+          $("#fadeCloud").hide();
+          envia('factura');
+          //location.reload(true);
         }else{
           alert('Usted ha ingresado un correo que no existe.');
+          $("#fadeCloud").hide();
         }
 
       }
