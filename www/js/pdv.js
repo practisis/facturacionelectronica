@@ -1,4 +1,4 @@
-function ingresa(quien){
+function ingresavalorfact(quien){
 
   var subtotal = 0;
   var cant = parseFloat(document.getElementById('cant'+quien).value);
