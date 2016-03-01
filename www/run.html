@@ -495,7 +495,8 @@
                   haz click en sube tu firma.
                   <br><br>
                   <center>
-                    <a id="linkfirmano" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Sube tu Firma" /></a>
+                    <!--<a id="linkfirmano" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Sube tu Firma" /></a>-->
+                    <a id="linkfirmano" onclick="verfirmaweb();"><input class="btn btn-md btn-success btn-center" type="button"  value="Sube tu Firma" /></a>
                   </center>
                 </div>
                 <div id="firmasi" class='alert alert-success' style='margin-top:10px; margin-bottom:10px;text-align: center;display: none;'>
@@ -504,7 +505,8 @@
                   haz click en cambia tu firma.
                   <br><br>
                   <center>
-                    <a id="linkfirmasi" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Cambia tu Firma" /></a>
+                    <!--<a id="linkfirmasi" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Cambia tu Firma" /></a>-->
+                    <a id="linkfirmasi" onclick="verfirmaweb();"><input class="btn btn-md btn-success btn-center" type="button"  value="Cambia tu Firma" /></a>
                   </center>
                 </div>
                 <div id="logono" class='alert alert-danger' style='margin-top:10px; margin-bottom:10px;text-align: center;display: none;'>
@@ -704,11 +706,11 @@ function envia(donde){
     					if (res[0]=="si"){
     						$("#firmano").fadeOut('fast');
                             $("#firmasi").fadeIn('slow');
-                            document.getElementById('linkfirmasi').href='http://practifactura.com/facturaelectronica/subpages/administrador/firmam.php?idemp='+cadena;
+                            //document.getElementById('linkfirmasi').href='http://practifactura.com/facturaelectronica/subpages/administrador/firmam.php?idemp='+cadena;
     					}else{
     						$("#firmasi").fadeOut('fast');
                             $("#firmano").fadeIn('slow');
-                            document.getElementById('linkfirmano').href='http://practifactura.com/facturaelectronica/subpages/administrador/firmam.php?idemp='+cadena;
+                            //document.getElementById('linkfirmano').href='http://practifactura.com/facturaelectronica/subpages/administrador/firmam.php?idemp='+cadena;
     					}
     					console.log(msg);
     			  });
@@ -789,6 +791,10 @@ function envia(donde){
 function verlogo(){
   var cadena = Base64.encode(miidempresa);
   navigator.app.loadUrl('http://practifactura.com/facturaelectronica/subpages/administrador/logom.php?idemp='+cadena, { openExternal:true });
+}
+function verfirmaweb(){
+  var cadena = Base64.encode(miidempresa);
+  navigator.app.loadUrl('http://practifactura.com/facturaelectronica/subpages/administrador/firmam.php?idemp='+cadena, { openExternal:true });
 }
 //*****************************************Ver RIDE***************************************
 function verride(que,quien){
