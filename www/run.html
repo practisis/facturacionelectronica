@@ -482,9 +482,9 @@
     		<div class='col-lg-12'>
     			<div style='margin-top:10px; margin-bottom:10px;text-align: center;'>Ingresa a tu cuenta PractiFactura en la nube</div>
     			<center>
-                    <a id="linklogin" href="#" onClick="window.open('http://practifactura.com/login.php', '_system', 'location=no');" target="_blank" ><input class="btn btn-md btn-primary btn-center" type="button"  value="Ir a la nube" /></a>
-                    <a onclick="navigator.app.loadUrl('https://google.com/', { openExternal:true });">Link</a>
-                    <a href="#" onclick="window.open('http://www.kidzout.com', '_system');">prueba</a>
+                    <!--<a id="linklogin" href="#" onClick="window.open('http://practifactura.com/login.php', '_system', 'location=no');" target="_blank" ><input class="btn btn-md btn-primary btn-center" type="button"  value="Ir a la nube" /></a>-->
+                    <a id="linklogin" onclick="navigator.app.loadUrl('http://practifactura.com/login.php', { openExternal:true });"><input class="btn btn-md btn-primary btn-center" type="button"  value="Ir a la nube" /></a>
+                    <!--<a href="#" onclick="window.open('http://www.kidzout.com', '_system');">prueba</a>-->
                 </center>
     			<div class='alert alert-success' style='margin-top:20px; margin-bottom:20px;text-align: center;'>Su cuenta se encuentra activa por <b><span id='dias'></span></b> dias.</div>
                 <div id="firmano" class='alert alert-danger' style='margin-top:10px; margin-bottom:10px;text-align: center;display: none;'>
@@ -495,7 +495,7 @@
                   haz click en sube tu firma.
                   <br><br>
                   <center>
-                  <a id="linkfirmano" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Sube tu Firma" /></a>
+                    <a id="linkfirmano" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Sube tu Firma" /></a>
                   </center>
                 </div>
                 <div id="firmasi" class='alert alert-success' style='margin-top:10px; margin-bottom:10px;text-align: center;display: none;'>
@@ -503,21 +503,29 @@
                   <br>
                   haz click en cambia tu firma.
                   <br><br>
-                  <center><a id="linkfirmasi" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Cambia tu Firma" /></a></center>
+                  <center>
+                    <a id="linkfirmasi" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Cambia tu Firma" /></a>
+                  </center>
                 </div>
                 <div id="logono" class='alert alert-danger' style='margin-top:10px; margin-bottom:10px;text-align: center;display: none;'>
                   No tienes registrado tu logo,
                   <br>
                   haz click en sube tu logo.
                   <br><br>
-                  <center><a id="linklogono" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Sube tu Logo" /></a></center>
+                  <center>
+                    <!--<a id="linklogono" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Sube tu Logo" /></a>-->
+                    <a id="linklogosi" onclick="verlogo();"><input class="btn btn-md btn-success btn-center" type="button"  value="Sube tu Logo" /></a>
+                  </center>
                 </div>
                 <div id="logosi" class='alert alert-success' style='margin-top:10px; margin-bottom:10px;text-align: center;display: none;'>
                   Para poder cambiar tu logo,
                   <br>
                   haz click en cambia tu logo.
                   <br><br>
-                  <center><a id="linklogosi" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Cambia tu Logo" /></a></center>
+                  <center>
+                    <!--<a id="linklogosi" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Cambia tu Logo" /></a>-->
+                    <a id="linklogosi" onclick="verlogo();"><input class="btn btn-md btn-success btn-center" type="button"  value="Cambia tu Logo" /></a>
+                  </center>
                 </div>
     		</div>
     	  </div>
@@ -715,11 +723,11 @@ function envia(donde){
     					if (res[0]=="si"){
     						$("#logono").fadeOut('fast');
                             $("#logosi").fadeIn('slow');
-                            document.getElementById('linklogosi').href='http://practifactura.com/facturaelectronica/subpages/administrador/logom.php?idemp='+cadena;
+                            //document.getElementById('linklogosi').href='http://practifactura.com/facturaelectronica/subpages/administrador/logom.php?idemp='+cadena;
     					}else{
     						$("#logosi").fadeOut('fast');
                             $("#logono").fadeIn('slow');
-                            document.getElementById('linklogono').href='http://practifactura.com/facturaelectronica/subpages/administrador/logom.php?idemp='+cadena;
+                            //document.getElementById('linklogono').href='http://practifactura.com/facturaelectronica/subpages/administrador/logom.php?idemp='+cadena;
     					}
     					console.log(msg);
     			  });
@@ -777,6 +785,11 @@ function envia(donde){
 			}
 }
 
+//*****************************************ver links**************************************
+function verlogo(){
+  var cadena = Base64.encode(miidempresa);
+  navigator.app.loadUrl('http://practifactura.com/facturaelectronica/subpages/administrador/logom.php?idemp='+cadena, { openExternal:true });
+}
 //*****************************************Ver RIDE***************************************
 function verride(que,quien){
   if(!fHayInternet()) {  alert(errNet); return; }
