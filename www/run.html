@@ -481,7 +481,11 @@
            <div class='row' id='cuentaactiva' style='display:block;'>
     		<div class='col-lg-12'>
     			<div style='margin-top:10px; margin-bottom:10px;text-align: center;'>Ingresa a tu cuenta PractiFactura en la nube</div>
-    			<center><a id="linklogin" href="#" onClick="window.open('http://practifactura.com/login.php', '_system', 'location=no');" target="_blank" ><input class="btn btn-md btn-primary btn-center" type="button"  value="Ir a la nube" /></a></center>
+    			<center>
+                    <a id="linklogin" href="#" onClick="window.open('http://practifactura.com/login.php', '_system', 'location=no');" target="_blank" ><input class="btn btn-md btn-primary btn-center" type="button"  value="Ir a la nube" /></a>
+                    <a onclick="navigator.app.loadUrl('https://google.com/', { openExternal:true });">Link</a>
+                    <a href="#" onclick="window.open('http://www.kidzout.com', '_system');">prueba</a>
+                </center>
     			<div class='alert alert-success' style='margin-top:20px; margin-bottom:20px;text-align: center;'>Su cuenta se encuentra activa por <b><span id='dias'></span></b> dias.</div>
                 <div id="firmano" class='alert alert-danger' style='margin-top:10px; margin-bottom:10px;text-align: center;display: none;'>
                   No tienes registrada tu firma electrónica,
@@ -492,7 +496,6 @@
                   <br><br>
                   <center>
                   <a id="linkfirmano" href="" target="_blank" ><input class="btn btn-md btn-success btn-center" type="button"  value="Sube tu Firma" /></a>
-                  <a href="#" onclick="window.open('http://www.kidzout.com', '_system');">prueba</a>
                   </center>
                 </div>
                 <div id="firmasi" class='alert alert-success' style='margin-top:10px; margin-bottom:10px;text-align: center;display: none;'>
